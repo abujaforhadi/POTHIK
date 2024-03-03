@@ -81,7 +81,7 @@ session_start();
 	<header id="header">
         <div class="strip d-flex justify-content-between px-4 py-1 bg-light">
             <p class="font-rale font-size-12 text-black-50 m-0">
-                <marquee behavior="" direction="" style="color: Green;">Welcome to POTHIK'</marquee>
+                <marquee behavior="" direction="" style="color: Green;">Welcome to POTHIK</marquee>
             </p>
             <div class="font-rale font-size-14">
                
@@ -125,7 +125,7 @@ session_start();
 	<div id="box">
 		
 		<form method="post">
-			<div style="font-size: 20px;margin: 10px;color: green;">Login</div>
+			<div style="font-size: 20px;margin: 10px;color: blue;">Login</div>
 
 			<input id="text" type="text" name="user_name"placeholder="User name" required><br><br>
 			<input id="text" type="password" name="password" placeholder="Password" required><br><br>
@@ -139,7 +139,7 @@ session_start();
                 <input  type="submit" value="Login">
               </a>
             </div><br>
-			<div style="font-size: 15px;text-align: center;color: white;">Don't have an account? </div>
+			<div style="font-size: 15px;text-align: center;color: blue;">Don't have an account? </div>
 
 			<div class="btn">
 			  <a href="signup.php">

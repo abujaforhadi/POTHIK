@@ -143,7 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <div id="box">
 
         <form method="post">
-            <div style="font-size: 30px;margin: 10px;color: #ab705c;">Signup</div>
+            <div style="font-size: 30px;margin: 10px;color: black;">Signup</div>
 
             <input id="text" type="text" name="user_name" placeholder="User name" required><br><br>
             <input id="text" type="email" name="email" placeholder="Email" required><br><br>
@@ -164,7 +164,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <br>
 
 
-          <div style="font-size: 15px;color: white;text-align: center;">Have an account? </div>
+          <div style="font-size: 15px;color: blue;text-align: center;">Have an account? </div>
 
             <div class="btn">
 

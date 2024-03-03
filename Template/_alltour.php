@@ -37,7 +37,6 @@
                 </div>
                 <hr class="m-0">
 
-                <!---    product price       -->
                 <table class="my-3">
                     
                     <tr class="font-rale font-size-14">

@@ -99,7 +99,7 @@
     height: 25px;
     border-radius: 5px;
     padding: 4px;
-    border: solid thin #aaa;
+    border: solid thin #e61212;
     width: 100%;
 }
 
@@ -115,9 +115,9 @@
 #box{
     font-size: large;
 
-    background-color: rgba(202, 192, 192, 0.277);
-    margin: auto;
+    background-color: rgb(250, 253, 255);
+    margin: 70px ;
     width: 300px;
-    padding: 20px;
+    padding: 10px;
 }
 

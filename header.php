@@ -67,7 +67,7 @@ $user_data = check_login($con);
                         <a class="nav-link" href="./topPlace.php"><i class="fa-solid fa-location-dot"></i> Tour Places</a></a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="./landing_page.php"><i class="fa-solid fa-van-shuttle"></i>Transportation</a>
+                        <a class="nav-link" href="./bus.php"><i class="fa-solid fa-van-shuttle"></i>Transportation</a>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="./blog.php"><i class="fa-solid fa-blog"></i> Blog & Reviews</a>

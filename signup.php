@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-include("database/connection.php");
-include("database/functions.php");
+include ("database/connection.php");
+include ("database/functions.php");
 
 
 
@@ -14,28 +14,28 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $number = $_POST['number'];
     $nid = $_POST['nid'];
     $address = $_POST['address'];
-    
 
 
-    if (!empty($user_name) && !empty($password) && !is_numeric($user_name)  ) {
 
-       if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-         //save to database
-         $user_id = random_num(5);
-         $v_code=bin2hex(random_bytes(4));
- 
-         $query = "INSERT INTO `users`(`user_id`, `user_name`, `email`, `password`, `number`, `nid`, `address`, `verification_code`, `is_verify`) values ('$user_id','$user_name','$email','$password','$number','$nid','$address','$v_code','0')";
- 
-         mysqli_query($con, $query);
-             header("Location: login.php");
-             die;
-        
-       } else {
-        echo "Please enter valid Email!";
-           }
-       
-       
-        
+    if (!empty($user_name) && !empty($password) && !is_numeric($user_name)) {
+
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            //save to database
+            $user_id = random_num(5);
+            $v_code = bin2hex(random_bytes(4));
+
+            $query = "INSERT INTO `users`(`user_id`, `user_name`, `email`, `password`, `number`, `nid`, `address`, `verification_code`, `is_verify`) values ('$user_id','$user_name','$email','$password','$number','$nid','$address','$v_code','0')";
+
+            mysqli_query($con, $query);
+            header("Location: login.php");
+            die;
+
+        } else {
+            echo "Please enter valid Email!";
+        }
+
+
+
     } else {
         echo "Please enter some valid information!";
     }
@@ -73,23 +73,23 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <link rel="stylesheet" href="style1.css">
     <style>
         body {
-    min-height: 100vh;
-    background: url(https://live.staticflickr.com/2738/4195504888_edb9cc9fb6_b.jpg) ;
-    background-size: cover;
-    background-position: center;
-}
+            min-height: 100vh;
+            background: url(https://live.staticflickr.com/2738/4195504888_edb9cc9fb6_b.jpg);
+            background-size: cover;
+            background-position: center;
+        }
     </style>
 
 </head>
 
 <body>
     <header id="header">
-    <div class="strip d-flex justify-content-between px-4 py-1 bg-light">
+        <div class="strip d-flex justify-content-between px-4 py-1 bg-light">
             <p class="font-rale font-size-12 text-black-50 m-0">
                 <marquee behavior="" direction="" style="color: Green;">Welcome to POTHIK'</marquee>
             </p>
             <div class="font-rale font-size-14">
-               
+
             </div>
         </div>
 
@@ -140,43 +140,47 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 
 
-    <div id="box">
-
-        <form method="post">
-            <div style="font-size: 30px;margin: 10px;color: black;">Signup</div>
-
-            <input id="text" type="text" name="user_name" placeholder="User name" required><br><br>
-            <input id="text" type="email" name="email" placeholder="Email" required><br><br>
-            <input id="text" type="password" name="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"required><br><br>
-            <input id="text" type="text" name="number" placeholder="Phone number" pattern="[01][0-9].{9}" title="Start with 01" required><br><br>
-            <input id="text" type="nid" name="nid" placeholder="NID number" minlength="11" maxlength="19" required><br><br>
-            <input id="text" type="address" name="address" placeholder="Address"><br><br>
-
-            <div class="btn">
-                <a href="login.php">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <input type="submit" value="Signup">
-                </a>
+    <div class="container">
+        <div class="row justify-content-end">
+            <div class="col-md-4">
+                <div id="box">
+                    <form method="post">
+                        <div style="font-size: 30px; margin: 10px; color: black;">Signup</div>
+                        <input id="text" type="text" name="user_name" placeholder="User name" required><br><br>
+                        <input id="text" type="email" name="email" placeholder="Email" required><br><br>
+                        <input id="text" type="password" name="password" placeholder="Password"
+                            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                            title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+                            required><br><br>
+                        <input id="text" type="text" name="number" placeholder="Phone number" pattern="[01][0-9]{9}"
+                            title="Start with 01" required><br><br>
+                        <input id="text" type="text" name="nid" placeholder="NID number" minlength="11" maxlength="19"
+                            required><br><br>
+                        <input id="text" type="text" name="address" placeholder="Address"><br><br>
+                        <div class="btn">
+                            <a href="login.php">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <input type="submit" value="Signup">
+                            </a>
+                        </div>
+                        <br>
+                        <div style="font-size: 15px; color: blue; text-align: center;">Have an account?</div>
+                        <div class="btn">
+                            <a href="login.php">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <input type="button" value="LogIn">
+                            </a>
+                        </div><br><br>
+                    </form>
+                </div>
             </div>
-            <br>
-
-
-          <div style="font-size: 15px;color: blue;text-align: center;">Have an account? </div>
-
-            <div class="btn">
-
-                <a href="login.php">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <input type="button" value="LogIn">
-                </a>
-            </div><br><br>
-        </form>
+        </div>
     </div>
 </body>
 

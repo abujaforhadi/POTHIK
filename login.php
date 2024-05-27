@@ -122,35 +122,38 @@ session_start();
 
     </header>
 
-	<div id="box">
-		
-		<form method="post">
-			<div style="font-size: 20px;margin: 10px;color: blue;">Login</div>
+	<div class="container">
+    <div class="row justify-content-end">
+        <div class="col-md-4">
+            <div id="box">
+                <form method="post">
+                    <div style="font-size: 20px; margin: 10px; color: blue;">Login</div>
+                    <input id="text" type="text" name="user_name" placeholder="User name" required><br><br>
+                    <input id="text" type="password" name="password" placeholder="Password" required><br><br>
+                    <div class="btn">
+                        <a href="index.php">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <input type="submit" value="Login">
+                        </a>
+                    </div><br>
+                    <div style="font-size: 15px; text-align: center; color: blue;">Don't have an account?</div>
+                    <div class="btn">
+                        <a href="signup.php">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <input type="button" value="Signup">
+                        </a>
+                    </div><br><br>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
-			<input id="text" type="text" name="user_name"placeholder="User name" required><br><br>
-			<input id="text" type="password" name="password" placeholder="Password" required><br><br>
-
-			<div class="btn">
-			  <a href="index.php">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <input  type="submit" value="Login">
-              </a>
-            </div><br>
-			<div style="font-size: 15px;text-align: center;color: blue;">Don't have an account? </div>
-
-			<div class="btn">
-			  <a href="signup.php">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <input  type="button" value="Signup">
-              </a>
-            </div><br><br>
-		</form>
-	</div>
 </body>
 </html>

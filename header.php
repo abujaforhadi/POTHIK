@@ -57,46 +57,35 @@ $user_data = check_login($con);
 
         <!-- Primary Navigation -->
         <nav class="navbar navbar-expand-lg navbar-dark color-second-bg">
-            <a class="navbar-brand" href="./index.php"> POTHIK</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav m-auto font-rubik">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="./topPlace.php"><i class="fa-solid fa-location-dot"></i> Tour Places</a></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="./bus.php"><i class="fa-solid fa-van-shuttle"></i>Transportation</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="./blog.php"><i class="fa-solid fa-blog"></i> Blog & Reviews</a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="#"><i class="fa-solid fa-house-medical-flag"></i> Medical</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="./home.php"><i class="fa-solid fa-hotel"></i> Residence</a>
-                    </li>
-                    
-                    <li class="nav-item active">
-                        
-                        <a class="nav-link" href="./logout.php"><i class="fa-solid fa-user-plus"></i><?php echo $user_data['user_name']; ?> (Logout)</a></a>
-                    </li>
-                    
-                </ul>
-                <!-- <form action="#" class="font-size-14 font-rale">
-                    <a href="cart.php" class="py-2 rounded-pill color-primary-bg">
-                        <span class="font-size-16 px-2 text-white">
-                            <script src="https://cdn.lordicon.com/fudrjiwc.js"></script>
-                            <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="hover" style="width:40px;height:40px">
-                            </lord-icon></i>
-                        </span>
-                        <span class="px-3 py-2 rounded-pill text-dark bg-light"><?php echo count($product->getData('cart')); ?></span>
-                    </a>
-                </form> -->
-            </div>
-        </nav>
+    <a class="navbar-brand" href="./index.php">POTHIK</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon">
+            <i class="fas fa-bars"></i>
+        </span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav m-auto font-rubik">
+            <li class="nav-item active">
+                <a class="nav-link" href="./topPlace.php"><i class="fa-solid fa-location-dot"></i> Tour Places</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="./bus.php"><i class="fa-solid fa-van-shuttle"></i> Transportation</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="./blog.php"><i class="fa-solid fa-blog"></i> Blog & Reviews</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="fa-solid fa-house-medical-flag"></i> Medical</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="./home.php"><i class="fa-solid fa-hotel"></i> Residence</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="./logout.php"><i class="fa-solid fa-user-plus"></i> <?php echo $user_data['user_name']; ?> (Logout)</a>
+            </li>
+        </ul>
+    </div>
+</nav>
         <!-- !Primary Navigation -->
 
     </header>

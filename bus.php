@@ -20,7 +20,8 @@ include('header.php');
     <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
     <style>
         body{
-            min-height: 100vh;    
+            min-height: 100vh;
+    
             background-size: cover;
             background-position: center;
         }
@@ -46,10 +47,8 @@ include('header.php');
             width: max-content;
             margin: 100px auto;
             font-size: 20px;
-            border: 1px solid gray;
-            color: black;
-            border-radius: 10px;
-
+            border: 1px solid red;
+            color: white;
 
         }
 
@@ -95,13 +94,11 @@ include('header.php');
             width: max-content;
             margin: auto;
             font-size: 20px;
-            border: 1px solid gray;
+            border: 1px solid red;
             margin-bottom: 25px;
             position: relative;
             top: -58px;
             background-color: white;
-            border-radius: 10px;
-
         }
 
         th {
@@ -135,98 +132,100 @@ include('header.php');
     <center>
         <h1>Ticket Reservations</h1>
     </center>
-    <div class="left">
+
+
     <form action="" method="post" class="firstform">
-From: <select name="src_name" id="src_id">
-    <option value="Dhaka">Dhaka</option>
-    <option value="Bogura">Bogura</option>
-    <option value="CoxsBazar">Cox's Bazar</option>
-    <option value="Chittagong">Chittagong</option>
-    <option value="Sylhet">Sylhet</option>
-    <option value="Rangpur">Rangpur</option>
-    <option value="Rajshahi">Rajshahi</option>
-    <option value="Rangamati">Rangamati</option>
-    <option value="Khagrachari">Khagrachari</option>
-    <option value="Khulna">Khulna</option>
 
-</select><br>
-To: <select name="to_name" id="to_id">
-    <option value="Dhaka">Dhaka</option>
-    <option value="CoxsBazar" select>Cox's Bazar</option>
-    <option value="Chittagong">Chittagong</option>
-    <option value="Sylhet">Sylhet</option>
-    <option value="Rangpur">Rangpur</option>
-    <option value="Bogura">Bogura</option>
-    <option value="Rajshahi">Rajshahi</option>
-    <option value="Rangamati">Rangamati</option>
-    <option value="Khagrachari">Khagrachari</option>
-    <option value="Khulna">Khulna</option>
+        from: <select name="src_name" id="src_id">
+            <option value="Dhaka">Dhaka</option>
+            <option value="Bogura">Bogura</option>
+            <option value="CoxsBazar">Cox's Bazar</option>
+            <option value="Chittagong">Chittagong</option>
+            <option value="Sylhet">Sylhet</option>
+            <option value="Rangpur">Rangpur</option>
+            <option value="Rajshahi">Rajshahi</option>
+            <option value="Rangamati">Rangamati</option>
+            <option value="Khagrachari">Khagrachari</option>
+            <option value="Khulna">Khulna</option>
 
-</select><br><br>
-Date of journey: <input type="date" name="date_name" id="date_id" required>
-<br><br>
+        </select><br>
+        to: <select name="to_name" id="to_id">
+            <option value="Dhaka">Dhaka</option>
+            <option value="CoxsBazar" select>Cox's Bazar</option>
+            <option value="Chittagong">Chittagong</option>
+            <option value="Sylhet">Sylhet</option>
+            <option value="Rangpur">Rangpur</option>
+            <option value="Bogura">Bogura</option>
+            <option value="Rajshahi">Rajshahi</option>
+            <option value="Rangamati">Rangamati</option>
+            <option value="Khagrachari">Khagrachari</option>
+            <option value="Khulna">Khulna</option>
 
+        </select><br><br>
+        Date of journey: <input type="date" name="date_name" id="date_id" required>
+        <br><br>
+        
 
-<input name="submit" type="submit" value="GET DETAILS" class="submit">
-</div>
+        <input name="submit" type="submit" value="GET DETAILS" class="submit">
+        </div>
 
-</form>
-
-
-
-<br><br>
-<form action="passenger info.php" method="post" class="secondform" >
-<?php
-if (isset($_POST['submit'])) {
-    $frm = $_POST['src_name'];
-    $to = $_POST['to_name'];
-
-    $_SESSION["frm"] = $_POST['src_name'];
-    $_SESSION["to"] = $_POST['to_name'];
-    $_SESSION["dt"] = $_POST['date_name'];
-
-    $db = mysqli_connect('localhost', 'root', '', 'travel') or die("Could not connect to Database");
-
-    $querry = "SELECT * FROM bus_details WHERE source='$frm' AND destination='$to'";
+    </form>
 
 
-    if ($result = mysqli_query($db, $querry) or die("Could not execute querry")) {
-        print('<table style="border: 2px solid blue;">
-<tr>
-<th>BUS NAME</th>
-<th>FARE</th>
-<th>VACANT SEATS</th>
-<th>SELECT</th>
-</tr>');
 
-        while ($row = mysqli_fetch_row($result)) {
-            print('<tr>
-<td>' . $row[0] . '</td>
-<td align="center"><input type="hidden" value="' . $row[3] . '" name="fair_name">' . $row[3] . '</td>
-<td align="center">' . $row[4] . '</td>
-<td align="center"><input type="radio" name="radio_name" value="' . $row[0] . '"></td>
-</tr> ');
+    <br><br>
+    <form action="passenger info.php" method="post" class="secondform" >
+        <?php
+        if (isset($_POST['submit'])) {
+            $frm = $_POST['src_name'];
+            $to = $_POST['to_name'];
+
+            $_SESSION["frm"] = $_POST['src_name'];
+            $_SESSION["to"] = $_POST['to_name'];
+            $_SESSION["dt"] = $_POST['date_name'];
+
+            $db = mysqli_connect('localhost', 'root', '', 'travel') or die("Could not connect to Database");
+
+            $querry = "SELECT * FROM bus_details WHERE source='$frm' AND destination='$to'";
+
+
+            if ($result = mysqli_query($db, $querry) or die("Could not execute querry")) {
+                print('<table style="border: 2px solid blue;">
+    <tr>
+        <th>BUS NAME</th>
+        <th>FARE</th>
+        <th>VACANT SEATS</th>
+        <th>SELECT</th>
+    </tr>');
+
+                while ($row = mysqli_fetch_row($result)) {
+                    print('<tr>
+        <td>' . $row[0] . '</td>
+        <td align="center"><input type="hidden" value="' . $row[3] . '" name="fair_name">' . $row[3] . '</td>
+        <td align="center">' . $row[4] . '</td>
+        <td align="center"><input type="radio" name="radio_name" value="' . $row[0] . '"></td>
+    </tr> ');
+                }
+                print('</table>');
+            }
         }
-        print('</table>');
-    }
-}
-?>
-<br><br>
-<!-- <form action="passenger info.php" method="post"> -->
-<input type="submit" value="Submit" class="lastbutton">
-<!-- </form> -->
-</form>
-    </div>
-    <div class="right">
-        <img src="assets/background.jpg" alt="bus" style="width: 50%; height: 50%;">
-
-
-    </div>
-
-
-    
+        ?>
+        <br><br>
+        <!-- <form action="passenger info.php" method="post"> -->
+        <input type="submit" value="Submit" class="lastbutton">
+        <!-- </form> -->
+    </form>
 </body>
+<script type="text/javascript">
+    var array = ["01-10-2024", "01-12-2024"];
 
+    $("input").datepicker({
+        beforeShowDay: function(date) {
+            var string = jQuery.datepicker.formatDate('mm-dd-yy', date);
+            return [array.indexOf(string) == -1]
+        }
+    });
+</script>
 
 </html>
 

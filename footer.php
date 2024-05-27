@@ -2,46 +2,89 @@
 <!-- !start #main-site -->
 
 <!-- start #footer -->
-<footer id="footer" class="bg-dark text-white py-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-12">
-                <h4 class="font-rubik font-size-20">Travel Guider</h4>
-                            </div>
-            <div class="col-lg-4 col-12">
-                <h4 class="font-rubik font-size-20">Upcoming event</h4>
-                <form class="form-row">
-                    <div class="col">
-                        <input type="text" class="form-control" placeholder="Email *">
+<style>
+        /* Scroll Up Button Styles */
+        .scroll-up-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            width: 50px;
+            height: 50px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: opacity 0.3s;
+        }
+
+        .scroll-up-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <!-- Your existing content -->
+
+    <footer id="footer" class="bg-dark text-white py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-12">
+                    <h4 class="font-rubik font-size-20">Travel Guider</h4>
+                </div>
+                <div class="col-lg-4 col-12">
+                    <h4 class="font-rubik font-size-20">Upcoming event</h4>
+                    <form class="form-row">
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Email *">
+                        </div>
+                        <div class="col">
+                            <button type="submit" class="btn btn-primary mb-2">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-2 col-12">
+                    <h4 class="font-rubik font-size-20">Information</h4>
+                    <div class="d-flex flex-column flex-wrap">
+                        <a href="#" class="font-rale font-size-14 text-white-50 pb-1">About Us</a>
+                        <a href="#" class="font-rale font-size-14 text-white-50 pb-1">Privacy Policy</a>
+                        <a href="#" class="font-rale font-size-14 text-white-50 pb-1">Terms & Conditions</a>
                     </div>
-                    <div class="col">
-                        <button type="submit" class="btn btn-primary mb-2">Subscribe</button>
-                    </div>
-                </form>
-            </div>
-            <div class="col-lg-2 col-12">
-                <h4 class="font-rubik font-size-20">Information</h4>
-                <div class="d-flex flex-column flex-wrap">
-                    <a href="#" class="font-rale font-size-14 text-white-50 pb-1">About Us</a>
-                    <a href="#" class="font-rale font-size-14 text-white-50 pb-1">Privacy Policy</a>
-                    <a href="#" class="font-rale font-size-14 text-white-50 pb-1">Terms & Conditions</a>
+                </div>
+                <div class="col-lg-2 col-12">
+                    <!-- Unused column, keep for future content -->
                 </div>
             </div>
-            <div class="col-lg-2 col-12">
-                <!-- <h4 class="font-rubik font-size-20">Account</h4>
-                <div class="d-flex flex-column flex-wrap">
-                    <a href="#" class="font-rale font-size-14 text-white-50 pb-1">My Account</a>
-                    <a href="#" class="font-rale font-size-14 text-white-50 pb-1">Order History</a>
-                    <a href="#" class="font-rale font-size-14 text-white-50 pb-1">Wish List</a>
-                    <a href="#" class="font-rale font-size-14 text-white-50 pb-1">Newslatters</a>
-                </div> -->
-            </div>
         </div>
+    </footer>
+    <div class="copyright text-center bg-dark text-white py-2">
+        <p class="font-rale font-size-14">&copy; Copyrights 2024. Design By <a href="https://github.com/abujaforhadi" class="color-second">Jafor, Ismail, Muntajima</a></p>
     </div>
-</footer>
-<div class="copyright text-center bg-dark text-white py-2">
-    <p class="font-rale font-size-14">&copy; Copyrights 2023. Desing By <a href="https://github.com/abujaforhadi" class="color-second">Jafor & Ismail</a></p>
-</div>
+
+    <!-- Scroll Up Button -->
+    <button id="scrollUp" class="scroll-up-btn">&#8679;</button>
+
+    <script>
+        // Show or hide the scroll-up button based on scroll position
+        window.onscroll = function() {
+            var scrollUpBtn = document.getElementById('scrollUp');
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                scrollUpBtn.style.display = "block";
+            } else {
+                scrollUpBtn.style.display = "none";
+            }
+        };
+
+        // Smooth scroll to top when the button is clicked
+        document.getElementById('scrollUp').onclick = function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+    </script>
+</body>
+
 <!-- !start #footer -->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>

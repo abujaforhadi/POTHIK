@@ -41,7 +41,7 @@
                     
                     <tr class="font-rale font-size-14">
                         <td>Deal Price:</td>
-                        <td class="font-size-20 text-danger">৳<span><?php echo $item['item_price'] ?? 0; ?></span><small class="text-dark font-size-12">&nbsp;&nbsp;</small></td>
+                        <td class="font-size-20 text-danger">৳<span><?php echo $item['tour_price'] ?? 0; ?></span><small class="text-dark font-size-12">&nbsp;&nbsp;</small></td>
                     </tr>
                     
                 </table>

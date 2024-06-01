@@ -40,7 +40,7 @@ $in_cart = $Cart->getCartId($product->getData('cart'));
             <div class="grid-item border <?php echo $item['item_brand'] ?? "Brand"; ?>">
                 <div class="item py-2" style="width: 200px;">
                     <div class="product font-rale">
-                        <a href="<?php printf('%s?item_id=%s', 'product.php', $item['item_id']); ?>">
+                        <a href="<?php printf('%s?item_id=%s', 'Place.php', $item['item_id']); ?>">
                             <img src="<?php echo $item['item_image'] ?? "./assets/products/13.png"; ?>" width="400" height="400" alt="product1" class="img-fluid">
                         </a>
                         <div class="text-center">
@@ -53,7 +53,7 @@ $in_cart = $Cart->getCartId($product->getData('cart'));
                                 <span><i class="far fa-star"></i></span>
                             </div>
                             <div class="price py-2">
-                                <span><?php echo $item['item_price'] ?? 0; ?> TK </span>
+                                <span><?php echo $item['tour_price'] ?? 0; ?> TK </span>
                             </div>
                             <form method="post">
                                 <input type="hidden" name="item_id" value="<?php echo $item['item_id'] ?? '1'; ?>">

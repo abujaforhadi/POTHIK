@@ -69,4 +69,4 @@ $in_cart = $Cart->getCartId($product->getData('cart'));
     </div>
 </section>
 
-<!-- !Special Price -->
+<!--  -->

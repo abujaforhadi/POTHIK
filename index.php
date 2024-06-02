@@ -11,7 +11,7 @@ include('header.php');
 
 include('Template/_banner-area.php');
 
-include('Template/_special-event.php');
+include('Template/_place.php');
 
 include('Template/_top-visite.php');
 

@@ -1,30 +1,30 @@
 <!--   product  -->
 <?php
-    $item_id = $_GET['item_id'] ?? 1;
+    $tour_id = $_GET['tour_id'] ?? 1;
     foreach ($product->getData() as $item) :
-        if ($item['item_id'] == $item_id) :
+        if ($item['tour_id'] == $tour_id) :
 ?>
 <section id="product" class="py-3">
     <div class="container">
         <div class="row">
             <div class="col-sm-6">
-                <img src="<?php echo $item['item_image'] ?? "./assets/products/1.png" ?>" alt="product" class="img-fluid">
+                <img src="<?php echo $item['tour_image'] ?? "./assets/products/1.png" ?>" alt="product" class="img-fluid">
                 <div class="form-row pt-4 font-size-16 font-baloo">
                     
                     <div class="col">
                         <?php
-                        if (in_array($item['item_id'], $Cart->getCartId($product->getData('cart')) ?? [])){
+                        if (in_array($item['tour_id'], $Cart->getCartId($product->getData('cart')) ?? [])){
                             echo '<button type="submit" disabled class="btn btn-success font-size-16 form-control">In the Cart</button>';
                         }else{
                             echo '<button type="submit" action="./payment.php" name="top_sale_submit" class="btn btn-warning font-size-16 form-control">Book Now</button>';
                         }
-                        ?>
+                        ?> 
                     </div>
                 </div>
             </div>
             <div class="col-sm-6 py-5">
-                <h5 class="font-baloo font-size-20"><?php echo $item['item_name'] ?? "Unknown"; ?></h5>
-                <small>At  <?php echo $item['item_brand'] ?? "Brand"; ?> Division</small>
+                <h5 class="font-baloo font-size-20"><?php echo $item['tour_name'] ?? "Unknown"; ?></h5>
+                <small>At  <?php echo $item['tour_brand'] ?? "Brand"; ?> Division</small>
                 <div class="d-flex">
                     <div class="rating text-warning font-size-12">
                         <span><i class="fas fa-star"></i></span>

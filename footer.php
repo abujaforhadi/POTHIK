@@ -33,7 +33,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-12">
-                    <h4 class="font-rubik font-size-20">Travel Guider</h4>
+                    <h4 class="font-rubik font-size-20">Pothik</h4>
                 </div>
                 <div class="col-lg-4 col-12">
                     <h4 class="font-rubik font-size-20">Upcoming event</h4>

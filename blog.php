@@ -1,279 +1,196 @@
 <?php
-    ob_start();
-    // include header.php file
-    include ('header.php');
+ob_start();
+// include header.php file
+include ('header.php');
 ?>
 
 <!DOCTYPE html>
-
 <html lang="en">
-  
-  <head>
 
-    <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
- 
-
-    <style type="text/css">
-        body
-{
-  margin: 0;
-  background-image: url(https://upload.wikimedia.org/wikipedia/commons/9/92/Cox%27s_Bazar_sea_beach_01.jpg);
-  word-wrap: break-word;
-}
-
-.top-bar
-{
-  background: #252525;
-
-  color: #f5f5f5;
-
-  margin: 0;
-
-  text-align: center;
-
-  padding: 10px;
-}
-
-#topBarTitle
-{
-  font-family: "Segoe UI", sans-serif;
-
-  text-align: center;
-
-  margin: 0;
-
-  font-size: 30px;
-}
-
-#dateLabel
-{
-  font-family: "Segoe UI", sans-serif;
-
-  font-weight: bold;
-}
-
-.writing-section
-{
-  margin: 10px;
-}
-
-form
-{
-  -webkit-tap-highlight-color: transparent;
-
-  text-align: center;
-}
-
-#blogTitle
-{
-  font-family: "Roboto", sans-serif;
-
-  outline: none;
-
-  border: 1.5px solid lightgrey;
-  
-  color: #333;
-
-  font-size: 20px;
-
-  width: 37.5%;
-
-  margin-bottom: 5px;
-
-  border-radius: 5px;
-
-  padding: 5px 5px;
-}
-#name
-{
-  font-family: "Roboto", sans-serif;
-
-  outline: none;
-
-  border: 1.5px solid lightgrey;
-  
-  color: #333;
-
-  font-size: 12px;
-
-  width: 37.5%;
-
-  margin-bottom: 5px;
-
-  border-radius: 5px;
-
-  padding: 5px 5px;
-}
-
-#blogPara
-{
-  font-family: "Roboto", sans-serif;
-
-  outline: none;
-
-  border: 1.5px solid lightgrey;
-
-  color: #333;
-
-  resize: none;
-
-  font-size: 20px;
-
-  margin-top: 5px;
-
-  border-radius: 5px;
-
-  padding: 5px 5px;
-}
-
-#blogDate
-{
-  border: none;
-
-  outline: none;
-
-  font-size: 1em;
-}
-
-#saveBtn
-{
-  border: none;
-
-  background: dodgerblue;
-
-  color: #fff;
-
-  font-size: 17.5px;
-
-  padding: 5px 25px;
-
-  border-radius: 5px;
-
-  cursor: pointer;
-}
-
-.all-posts-container
-{
-/* 
-  margin-left: auto;
-
-  margin-right: auto; */
-
-  font-family: "Roboto", sans-serif;
-
-  display: flex;
-
-  flex-direction: row;
-
-  flex-wrap: wrap;
-
-  align-items: center;
-
-  justify-content: center;
-}
-
-.post-container
-{
-  background: #d3d3d3;
-
-  margin: 5px;
-
-  width: 25%;
-
-  height: 500px;
-
-  border-radius: 15px;
-}
-
-#displayTitle
-{
-  font-weight: bold;
-}
-
-#displayImage
-{
-  width: 50%;
-
-  height: auto;
-  
-  border-radius: 15px;
-}
-    </style>
-  </head>
-
-  <body>
-
-    <div class="top-bar">
-
-      <span id="topBarTitle">Blog | All Posts</span>
-
-    </div>
-
-    <br>
-
-    <div class="all-posts-container">
-
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style type="text/css">
+    body {
+      margin: 0;
+      background-color: #f0f0f0;
+      color: #333;
+      font-family: Arial, sans-serif;
+    }
+
+    .top-bar {
+      background: #6c8ba3;
+      color: #fff;
+      text-align: center;
+      padding: 20px 0;
+      box-shadow: 0 4px 2px -2px gray;
+    }
+
+    #topBarTitle {
+      font-size: 2rem;
+      margin: 0;
+      font-weight: bold;
+      font-family: 'Georgia', serif;
+      font-style: italic;
+      color: #fff;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px 0;
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: -10px;
+    }
+
+    .col {
+      flex: 1 1 calc(33.333% - 20px);
+      margin: 10px;
+      box-sizing: border-box;
+    }
+
+    .post-container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 350px;
+      height: 500px; /* Fixed height for consistency */
+      transition: transform 0.3s;
+      overflow: hidden;
+    }
+
+    .post-container:hover {
+      transform: translateY(-10px);
+    }
+
+    .post-container img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    #displayTitle {
+      font-weight: bold;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: #007bff;
+      text-align: center;
+    }
+
+    .post-details {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    #displayPara {
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
+      margin-bottom: auto;
+      color: #333;
+      text-align: justify;
+      height: 100px; /* Fixed content size for consistency */
+    }
+
+    .write-post {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .write-post a {
+      color: #fff;
+      background: #007bff;
+      padding: 10px 25px;
+      text-decoration: none;
+      border-radius: 50px;
+      transition: background 0.3s;
+    }
+
+    .write-post a:hover {
+      background: #0056b3;
+    }
+
+    @media (max-width: 768px) {
+      .col {
+        flex: 1 1 calc(50% - 20px);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .col {
+        flex: 1 1 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="top-bar">
+    <span id="topBarTitle"> Traveler's Diary </span>
+  </div>
+
+  <div class="container">
+    <div class="row">
       <?php
-
       $servername = "localhost";
-
       $username = "root";
-
       $password = "";
-
       $database = "travel";
 
       $conn = new mysqli($servername, $username, $password, $database);
 
-      if($conn->connect_error) die("Connection Error" . $conn->connect_error);
+      if ($conn->connect_error)
+        die("Connection Error" . $conn->connect_error);
 
-      $sql = "select topic_title, topic_date,name,duration,person,cost, image_filename, topic_para from blog_table;";
-
+      $sql = "SELECT topic_title, topic_date, name, duration, person, cost, image_filename, topic_para FROM blog_table;";
       $result = $conn->query($sql);
 
-      if($result->num_rows > 0)
-      {
-        while($row = $result->fetch_assoc())
-        {
-          echo "<div style='padding: 25px 25px;' class='post-container'>";
-
-          echo "<span id='displayTitle'>Place name:" . $row["topic_title"] . "</span><br>";
-
-          echo "<span id='displayDate'>Travel Date:" . $row["topic_date"] . "</span><br>";
-         
+      if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+          echo "<div class='col'>";
+          echo "<div class='post-container'>";
+          echo "<span id='displayTitle'>Place name: " . $row["topic_title"] . "</span>";
+          echo "<div class='post-details'>";
+          echo "<span id='displayDate'>Travel Date: " . $row["topic_date"] . "</span><br>";
           echo "<span id='name'>Posted by: " . $row["name"] . "</span><br>";
-          echo "<span id='name'>Duration:" . $row["duration"] . " days</span><br>";
-          echo "<span id='name'>Total Tourist:" . $row["person"] . " Person</span><br>";
-          echo "<span id='name'>Total Cost:" . $row["cost"] . " Tk</span><br>";
-
-          echo "<img style='width: 100%; height: auto' id='displayImage' src='./assets/blog/images/" . $row["image_filename"] . "'><br>"; 
-
-          echo "<p style='overflow: hidden; display: -webkit-box; -webkit-line-clamp: 10; line-clamp: 10; -webkit-box-orient: vertical;' id='displayPara'>" . $row["topic_para"] . "</p><br>";
-          
+          echo "<span id='duration'>Duration: " . $row["duration"] . " days</span><br>";
+          echo "<span id='person'>Total Tourist: " . $row["person"] . " Person</span><br>";
+          echo "<span id='cost'>Total Cost: " . $row["cost"] . " Tk</span>";
+          echo "</div>";
+          echo "<img src='./assets/blog/images/" . $row["image_filename"] . "'>";
+          echo "<p id='displayPara'>" . $row["topic_para"] . "</p>";
+          echo "</div>";
           echo "</div>";
         }
-      }
-      
-      else
-      {
+      } else {
         echo "<center><span>No Blog Posts Found</span></center>";
-      
-        // echo "<center><a style='color: dodgerblue;' href='index.html'>Write a New Post</a></center>";
       }
 
       $conn->close();
-      
       ?>
-
     </div>
+  </div>
 
-    <?php echo "<br><center><a style='color: dodgerblue; text-decoration: none; background: dodgerblue; padding: 5px 25px; color: #fff; border-radius: 50px;' href='cBlog.php'>Write a New Post</a></center><br>"; ?>
+  <div class="write-post">
+    <a href='cBlog.php'>Write a New Post</a>
+  </div>
+</body>
 
-  </body>
-  
 </html>
 <?php
 // include footer.php file

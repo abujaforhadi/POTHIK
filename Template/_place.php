@@ -40,7 +40,7 @@ $in_cart = $Cart->getCartId($product->getData('cart'));
             <div class="grid-item border <?php echo $item['tour_Division'] ?? "Brand"; ?>">
                 <div class="item py-2" style="width: 200px;">
                     <div class="product font-rale">
-                        <a href="<?php printf('%s?item_id=%s', 'Place.php', $item['tour_id']); ?>">
+                        <a href="<?php printf('%s?tour_id=%s', 'Place.php', $item['tour_id']); ?>">
                             <img src="<?php echo $item['tour_image'] ?? "./assets/products/13.png"; ?>" width="400" height="400" alt="product1" class="img-fluid">
                         </a>
                         <div class="text-center">

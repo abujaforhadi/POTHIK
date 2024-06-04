@@ -1,239 +1,229 @@
 <?php
-    ob_start();
-    // include header.php file
-    include ('header.php');
+// Start output buffering
+ob_start();
+
+// Include header.php file
+include('header.php');
+
+// Check if form data has been posted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Collect form data 
+    $blogtitle = htmlspecialchars($_POST['blogtitle']);
+    $blogdate = htmlspecialchars($_POST['blogdate']);
+    $duration = htmlspecialchars($_POST['duration']);
+    $person = htmlspecialchars($_POST['person']);
+    $cost = htmlspecialchars($_POST['cost']);
+    $blogpara = htmlspecialchars($_POST['blogpara']);
+
+    // Handle file upload
+    $upload_dir = 'assets/blog/';
+    $upload_file = $upload_dir . basename($_FILES['uploadimage']['name']);
+
+    if (move_uploaded_file($_FILES['uploadimage']['tmp_name'], $upload_file)) {
+        $image_filename = basename($_FILES['uploadimage']['name']);
+    } else {
+        $image_filename = null;
+    }
+
+    // Create connection
+    $conn = new mysqli("localhost", "root", "", "travel");
+
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    // Prepare and bind
+    $stmt = $conn->prepare("INSERT INTO blog_table (topic_title, topic_date, duration, person, cost, image_filename, topic_para) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssssss", $blogtitle, $blogdate, $duration, $person, $cost, $image_filename, $blogpara);
+
+    // Execute the statement
+    if ($stmt->execute()) {
+        $success = true;
+    } else {
+        $error = $stmt->error;
+    }
+
+    // Close connection
+    $stmt->close();
+    $conn->close();
+}
 ?>
+
 <!DOCTYPE html>
-
 <html lang="en">
-  
-  <head>
-
+<head>
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style type="text/css">
+        body {
+            margin: 0;
+            background-color: #f0f0f0;
+            color: #333;
+            font-family: Arial, sans-serif;
+        }
 
-   
+        .top-bar {
+            background: #6c8ba3;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            box-shadow: 0 4px 2px -2px gray;
+        }
 
-       <style type="text/css">
-        body
-{
-  margin: 0;
-background-image: url(https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
-  word-wrap: break-word;
-}
+        #topBarTitle {
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 2.5rem;
+            margin: 0;
+            color: white;
+        }
 
-.top-bar
-{
-  background: #252525;
+        .writing-section {
+            background: #f9f9f9;
+            margin: 40px auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            color: #333;
+        }
 
-  color: #f5f5f5;
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-  margin: 0;
+        .input-field {
+            width: 100%;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+            background: #fff;
+            color: #333;
+        }
 
-  text-align: center;
+        .input-field#blogPara {
+            resize: none;
+            height: 200px;
+        }
 
-  padding: 10px;
-}
+        #saveBtn {
+            background: #FFD700;
+            color: #333;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s, transform 0.3s;
+        }
 
-#topBarTitle
-{
-  font-family: "Segoe UI", sans-serif;
+        #saveBtn:hover {
+            background: #ffcc00;
+            transform: scale(1.05);
+        }
 
-  text-align: center;
+        .write-post a {
+            color: #fff;
+            background: #007bff;
+            padding: 10px 25px;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
 
-  margin: 0;
+        .write-post a:hover {
+            background: #0056b3;
+        }
 
-  font-size: 30px;
-}
+        .toast {
+            visibility: hidden;
+            min-width: 250px;
+            margin-left: -125px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 2px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1;
+            left: 50%;
+            bottom: 30px;
+            font-size: 17px;
+        }
 
-#dateLabel,#name
-{
-  font-family: "Segoe UI", sans-serif;
+        .toast.show {
+            visibility: visible;
+            -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
 
-  font-weight: bold;
-}
+        @-webkit-keyframes fadein {
+            from {bottom: 0; opacity: 0;}
+            to {bottom: 30px; opacity: 1;}
+        }
 
-.writing-section
-{
-  margin: 10px;
-}
+        @keyframes fadein {
+            from {bottom: 0; opacity: 0;}
+            to {bottom: 30px; opacity: 1;}
+        }
 
-form
-{
-  -webkit-tap-highlight-color: transparent;
+        @-webkit-keyframes fadeout {
+            from {bottom: 30px; opacity: 1;}
+            to {bottom: 0; opacity: 0;}
+        }
 
-  text-align: center;
-}
-
-#blogTitle
-{
-  font-family: "Roboto", sans-serif;
-
-  outline: none;
-
-  border: 1.5px solid lightgrey;
-  
-  color: #333;
-
-  font-size: 20px;
-
-  width: 37.5%;
-
-  margin-bottom: 5px;
-
-  border-radius: 5px;
-
-  padding: 5px 5px;
-}
-
-#blogPara
-{
-  font-family: "Roboto", sans-serif;
-
-  outline: none;
-
-  border: 1.5px solid lightgrey;
-
-  color: #333;
-
-  resize: none;
-
-  font-size: 20px;
-
-  margin-top: 5px;
-
-  border-radius: 5px;
-
-  padding: 5px 5px;
-}
-
-#blogDate
-{
-  border: none;
-
-  outline: none;
-
-  font-size: 1em;
-}
-
-#saveBtn
-{
-  border: none;
-
-  background: dodgerblue;
-
-  color: #fff;
-
-  font-size: 17.5px;
-
-  padding: 5px 25px;
-
-  border-radius: 5px;
-
-  cursor: pointer;
-}
-
-.all-posts-container
-{
-/* 
-  margin-left: auto;
-
-  margin-right: auto; */
-
-  font-family: "Roboto", sans-serif;
-
-  display: flex;
-
-  flex-direction: row;
-
-  flex-wrap: wrap;
-
-  align-items: center;
-
-  justify-content: center;
-}
-
-.post-container
-{
-  background: #d3d3d3;
-
-  margin: 5px;
-
-  width: 25%;
-
-  height: 500px;
-
-  border-radius: 15px;
-}
-
-#displayTitle
-{
-  font-weight: bold;
-}
-
-#displayImage
-{
-  width: 50%;
-
-  height: auto;
-  
-  border-radius: 15px;
-}
+        @keyframes fadeout {
+            from {bottom: 30px; opacity: 1;}
+            to {bottom: 0; opacity: 0;}
+        }
     </style>
-  </head>
-
-  <body>
+</head>
+<body>
 
     <div class="top-bar">
-  
-      <span id="topBarTitle">Blog | New Post</span>
-
+        <span id="topBarTitle">Create Traveler's Diary</span>
     </div>
 
     <div class="writing-section">
+        <form action="" method="POST" enctype="multipart/form-data">
+            <input id="blogTitle" class="input-field" name="blogtitle" type="text" placeholder="Blog Title..." autocomplete="off" required>
+            <input id="blogDate" class="input-field" name="blogdate" type="date" required>
+            <input class="input-field" name="duration" type="text" placeholder="Duration" autocomplete="off" required>
+            <input class="input-field" name="person" type="text" placeholder="Total Tourist" autocomplete="off" required>
+            <input class="input-field" name="cost" type="text" placeholder="Total cost" autocomplete="off" required>
+            <input type="file" name="uploadimage" required>
+            <textarea id="blogPara" class="input-field" name="blogpara" placeholder="Blog Paragraph..." autocomplete="off" required></textarea>
+            <button id="saveBtn" type="submit">Save Post</button>
+        </form>
+    </div>
 
-<form action="blog_post_process.php" method="POST" enctype="multipart/form-data">
-
-  <input id="blogTitle" name="blogtitle" type="text" placeholder="Blog Title..." autocomplete="off"required>
-  
-  <br>
-  
-  Travel Date:<input id="blogDate" name="blogdate" type="date"required></input> <br>
- <br>
- <input id="blogTitle" name="duration" type="text" placeholder="Duration" autocomplete="off"required>
-  
-  <br>
-  <input id="blogTitle" name="person" type="text" placeholder="Total Tourist" autocomplete="off"required>
-  
-  <br>
-  <input id="blogTitle" name="cost" type="text" placeholder="Total cost" autocomplete="off"required>
-  
-  <br>
-  
-  <input type="file" name="uploadimage" required>
-  
-  <br><br>
-
-  <textarea id="blogPara" name="blogpara" cols="75" rows="10" type="text" placeholder="Blog Paragraph..." autocomplete="off" required></textarea>
-
-  <br><br>
-  <button id="saveBtn" type="submit" required>Save Post</button>
-
-</form>
-
-<br>
-
-<center><a style="text-decoration: none;" href="Blog.php" id="saveBtn">Go to Home Page</a></center>
-
-</div>
+    <?php if (isset($success) && $success): ?>
+    <div id="toast" class="toast">New record created successfully!</div>
+    <script>
+        // Show toast
+        var toast = document.getElementById("toast");
+        toast.className = "toast show";
+        // Redirect after 2 seconds
+        setTimeout(function(){ window.location.href = 'index.php'; }, 2000);
+    </script>
+    <?php elseif (isset($error)): ?>
+    <div id="toast" class="toast">Error: <?= $error ?></div>
+    <script>
+        // Show toast
+        var toast = document.getElementById("toast");
+        toast.className = "toast show";
+    </script>
+    <?php endif; ?>
 
     <script src="scripts/script.js"></script>
-
-  </body>
-  
+</body>
 </html>
+
 <?php
-// include footer.php file
-include ('footer.php');
+// Include footer.php file
+include('footer.php');
 ?>

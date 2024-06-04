@@ -6,7 +6,7 @@
 
 <?php
     
-    include ('Template/_special-event.php');
+    include ('Template/_place.php');
 ?>
 <?php
 // include footer.php file

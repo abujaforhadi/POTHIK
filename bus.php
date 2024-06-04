@@ -1,8 +1,7 @@
-
 <?php
 ob_start();
 
-include('header.php');
+include ('header.php');
 
 
 
@@ -19,38 +18,54 @@ include('header.php');
     <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
     <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
     <style>
-        body{
-            min-height: 100vh;
-    
-            background-size: cover;
-            background-position: center;
-        }
-        h1 {
-            background-color: black;
-            opacity: 0.6;
-            height: 105px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            width: 100vw;
-            color: wheat;
-        }
-
         * {
             margin: 0%;
             padding: 0%;
         }
 
-        .firstform {
-            padding: 25px;
-            width: max-content;
-            margin: 100px auto;
-            font-size: 20px;
-            border: 1px solid red;
-            color: white;
-
+        .container {
+            display: flex;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
         }
+
+        .col {
+            padding: 40px;
+        }
+
+        .col img {
+            max-width: 600px;
+            height: 400px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        form select,
+        form input[type="date"],
+        form input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        form input[type="submit"] {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        form input[type="submit"]:hover {
+            background-color: #218838;
+        }
+
 
         #src_id {
             padding: 10px;
@@ -129,52 +144,52 @@ include('header.php');
 
 
 <body>
-    <center>
-        <h1>Ticket Reservations</h1>
-    </center>
+    <div class="container">
+        <div class="col">
+            <form action="" method="post">
+                <label for="src_id">Going From:</label>
+                <select name="src_name" id="src_id">
+                    <option>Select</option>
+                    <option value="Dhaka">Dhaka</option>
+                    <option value="Bogura">Bogura</option>
+                    <option value="CoxsBazar">Cox's Bazar</option>
+                    <option value="Chittagong">Chittagong</option>
+                    <option value="Sylhet">Sylhet</option>
+                    <option value="Rangpur">Rangpur</option>
+                    <option value="Rajshahi">Rajshahi</option>
+                    <option value="Rangamati">Rangamati</option>
+                    <option value="Khagrachari">Khagrachari</option>
+                    <option value="Khulna">Khulna</option>
+                </select>
 
+                <label for="to_id">Going To:</label>
+                <select name="to_name" id="to_id">
+                    <option>Select</option>
+                    <option value="Dhaka">Dhaka</option>
+                    <option value="CoxsBazar" select>Cox's Bazar</option>
+                    <option value="Chittagong">Chittagong</option>
+                    <option value="Sylhet">Sylhet</option>
+                    <option value="Rangpur">Rangpur</option>
+                    <option value="Bogura">Bogura</option>
+                    <option value="Rajshahi">Rajshahi</option>
+                    <option value="Rangamati">Rangamati</option>
+                    <option value="Khagrachari">Khagrachari</option>
+                    <option value="Khulna">Khulna</option>
+                </select>
 
-    <form action="" method="post" class="firstform">
+                <label>Journey Date:</label>
+                <input type="date" name="date_name" id="date_id" required>
 
-        from: <select name="src_name" id="src_id">
-            <option value="Dhaka">Dhaka</option>
-            <option value="Bogura">Bogura</option>
-            <option value="CoxsBazar">Cox's Bazar</option>
-            <option value="Chittagong">Chittagong</option>
-            <option value="Sylhet">Sylhet</option>
-            <option value="Rangpur">Rangpur</option>
-            <option value="Rajshahi">Rajshahi</option>
-            <option value="Rangamati">Rangamati</option>
-            <option value="Khagrachari">Khagrachari</option>
-            <option value="Khulna">Khulna</option>
-
-        </select><br>
-        to: <select name="to_name" id="to_id">
-            <option value="Dhaka">Dhaka</option>
-            <option value="CoxsBazar" select>Cox's Bazar</option>
-            <option value="Chittagong">Chittagong</option>
-            <option value="Sylhet">Sylhet</option>
-            <option value="Rangpur">Rangpur</option>
-            <option value="Bogura">Bogura</option>
-            <option value="Rajshahi">Rajshahi</option>
-            <option value="Rangamati">Rangamati</option>
-            <option value="Khagrachari">Khagrachari</option>
-            <option value="Khulna">Khulna</option>
-
-        </select><br><br>
-        Date of journey: <input type="date" name="date_name" id="date_id" required>
-        <br><br>
-        
-
-        <input name="submit" type="submit" value="GET DETAILS" class="submit">
+                <input name="submit" type="submit" value="GET DETAILS" class="submit">
+            </form>
         </div>
-
-    </form>
-
-
+        <div class="col">
+            <img src="assets/img/bus.jpg" alt="Banner">
+        </div>
+    </div>
 
     <br><br>
-    <form action="passenger info.php" method="post" class="secondform" >
+    <form action="passenger info.php" method="post" class="secondform">
         <?php
         if (isset($_POST['submit'])) {
             $frm = $_POST['src_name'];
@@ -190,7 +205,7 @@ include('header.php');
 
 
             if ($result = mysqli_query($db, $querry) or die("Could not execute querry")) {
-                print('<table style="border: 2px solid blue;">
+                print ('<table style="border: 2px solid blue;">
     <tr>
         <th>BUS NAME</th>
         <th>FARE</th>
@@ -199,14 +214,14 @@ include('header.php');
     </tr>');
 
                 while ($row = mysqli_fetch_row($result)) {
-                    print('<tr>
+                    print ('<tr>
         <td>' . $row[0] . '</td>
         <td align="center"><input type="hidden" value="' . $row[3] . '" name="fair_name">' . $row[3] . '</td>
         <td align="center">' . $row[4] . '</td>
         <td align="center"><input type="radio" name="radio_name" value="' . $row[0] . '"></td>
     </tr> ');
                 }
-                print('</table>');
+                print ('</table>');
             }
         }
         ?>
@@ -220,7 +235,7 @@ include('header.php');
     var array = ["01-10-2024", "01-12-2024"];
 
     $("input").datepicker({
-        beforeShowDay: function(date) {
+        beforeShowDay: function (date) {
             var string = jQuery.datepicker.formatDate('mm-dd-yy', date);
             return [array.indexOf(string) == -1]
         }
@@ -228,7 +243,3 @@ include('header.php');
 </script>
 
 </html>
-
-<?php
-include ('footer.php');
-?>

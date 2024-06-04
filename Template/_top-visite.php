@@ -27,7 +27,7 @@
             <?php foreach ($product_shuffle as $item) { ?>
             <div class="item py-2 p-3">
                 <div class="product font-rale">
-                    <a href="<?php printf('%s?tour_id=%s', 'product.php',  $item['tour_id']); ?>">
+                    <a href="<?php printf('%s?tour_id=%s', 'Place.php',  $item['tour_id']); ?>">
                         <img src="<?php echo $item['tour_image'] ?? "./assets/products/1.png"; ?>" alt="product1" class="img-fluid">
                     </a>
                     <div class="text-center">

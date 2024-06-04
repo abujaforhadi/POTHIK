@@ -1,30 +1,23 @@
 <?php
-
 include ('header.php');
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve the number of passengers
-    $num_passengers = $_POST['num_name'];
-    
-    // Retrieve passenger information
-    $passengers = [];
-    for ($i = 1; $i <= $num_passengers; $i++) {
-        $passengers[] = [
-            'name' => $_POST["col2_$i"],
-            'contact' => $_POST["col3_$i"],
-            'age' => $_POST["col4_$i"]
-        ];
-    }
+// Retrieve the tour_id and quantity from the URL
+$tour_id = $_GET['tour_id'];
+$qty = $_GET['qty'];
 
-    // Store passenger information in session
-    $_SESSION['passengers'] = $passengers;
-    $_SESSION['num_passengers'] = $num_passengers;
-}
+// Retrieve tour details based on tour_id
+$item = array_filter($product->getData(), function($item) use ($tour_id) {
+    return $item['tour_id'] == $tour_id;
+})[0];
 
-// Retrieve ticket price from session
-$ticket_price = $_SESSION["fph"];
-$total_price = $ticket_price * $_SESSION['num_passengers'];
+$tour_name = $item['tour_name'];
+$tour_price = $item['tour_price'];
+$total_price = $tour_price * $qty;
+
 $_SESSION['total_price'] = $total_price;
+$_SESSION['tour_name'] = $tour_name;
+$_SESSION['tour_price'] = $tour_price;
+$_SESSION['qty'] = $qty;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -108,13 +101,11 @@ $_SESSION['total_price'] = $total_price;
 <body>
     <div class="container">
         <h1>Payment Details</h1>
-        <h2>Total Price: <?php echo $total_price; ?>TK</h2>
+        <h2>Total Price: ৳<?php echo $total_price; ?></h2>
         <form id="payment_form" action="process_payment.php" method="post">
             <label for="payment_method">Payment Method:</label>
             <select id="payment_method" name="payment_method" required>
-                <option >select</option>
                 <option value="card">Credit/Debit Card</option>
-
                 <option value="mobile_banking">Mobile Banking</option>
             </select>
 
@@ -137,26 +128,20 @@ $_SESSION['total_price'] = $total_price;
             <input type="submit" value="Make Payment">
         </form>
 
-        <h2>Passenger Information</h2>
+        <h2>Tour Information</h2>
         <table>
             <tr>
-                <th>SL No.</th>
-                <th>Passenger Name</th>
-                <th>Contact Number</th>
-                <th>Age</th>
+                <th>Tour Name</th>
+                <th>Quantity</th>
+                <th>Price per Person</th>
+                <th>Total Price</th>
             </tr>
-            <?php
-            $i = 1;
-            foreach ($_SESSION['passengers'] as $passenger) {
-                echo "<tr>";
-                echo "<td>$i</td>";
-                echo "<td>{$passenger['name']}</td>";
-                echo "<td>{$passenger['contact']}</td>";
-                echo "<td>{$passenger['age']}</td>";
-                echo "</tr>";
-                $i++;
-            }
-            ?>
+            <tr>
+                <td><?php echo $tour_name; ?></td>
+                <td><?php echo $qty; ?></td>
+                <td>৳<?php echo $tour_price; ?></td>
+                <td>৳<?php echo $total_price; ?></td>
+            </tr>
         </table>
     </div>
     <script>

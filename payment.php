@@ -1,39 +1,79 @@
+
 <?php
 
 include ('header.php');
+    // Fetch data from URL parameters
+    $tour_id = $_GET['tour_id'] ?? '';
+    $persons = $_GET['persons'] ?? '';
+    $total_price = $_GET['total_price'] ?? '';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve the number of passengers
-    $num_passengers = $_POST['num_name'];
-    
-    // Retrieve passenger information
-    $passengers = [];
-    for ($i = 1; $i <= $num_passengers; $i++) {
-        $passengers[] = [
-            'name' => $_POST["col2_$i"],
-            'contact' => $_POST["col3_$i"],
-            'age' => $_POST["col4_$i"]
-        ];
-    }
-
-    // Store passenger information in session
-    $_SESSION['passengers'] = $passengers;
-    $_SESSION['num_passengers'] = $num_passengers;
-}
-
-// Retrieve ticket price from session
-$ticket_price = $_SESSION["fph"];
-$total_price = $ticket_price * $_SESSION['num_passengers'];
-$_SESSION['total_price'] = $total_price;
+    // Assuming you have a mechanism to retrieve user information, such as from session or database
+    $user_name =  $user_data['user_name']; // Replace this with the user's name fetched from session or database
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment Page</title>
+    <title>Payment Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        p {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .details {
+            border-top: 1px solid #ddd;
+            padding-top: 15px;
+            margin-top: 15px;
+        }
+        .details p {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .details p:last-child {
+            border-bottom: none;
+        }
+        .btn-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .btn:hover {
+            background-color: #218838;
+        }
+    </style>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -104,11 +144,15 @@ $_SESSION['total_price'] = $total_price;
         }
     </style>
 </head>
-
 <body>
     <div class="container">
-        <h1>Payment Details</h1>
-        <h2>Total Price: <?php echo $total_price; ?>TK</h2>
+        <h2>Payment Details</h2>
+        
+        <div class="details">
+            <p><strong>User Name:</strong> <span><?php echo ucfirst($user_name); ?></span></p>
+            <p><strong>Total Price:</strong> <span>৳<?php echo $total_price; ?></span></p>
+            <p><strong>Number of Persons:</strong> <span><?php echo $persons; ?></span></p>
+        </div>
         <form id="payment_form" action="process_payment.php" method="post">
             <label for="payment_method">Payment Method:</label>
             <select id="payment_method" name="payment_method" required>
@@ -120,7 +164,7 @@ $_SESSION['total_price'] = $total_price;
 
             <div id="card_payment" style="display: none;">
                 <label for="card_number">Card Number:</label>
-                <input type="text" id="card_number" name="card_number">
+                <input type="text" id="card_number" name="card_number"> <br>
                 <label for="card_expiry">Expiry Date (MM/YY):</label>
                 <input type="text" id="card_expiry" name="card_expiry">
                 <label for="card_cvc">CVC:</label>
@@ -136,30 +180,9 @@ $_SESSION['total_price'] = $total_price;
 
             <input type="submit" value="Make Payment">
         </form>
-
-        <h2>Passenger Information</h2>
-        <table>
-            <tr>
-                <th>SL No.</th>
-                <th>Passenger Name</th>
-                <th>Contact Number</th>
-                <th>Age</th>
-            </tr>
-            <?php
-            $i = 1;
-            foreach ($_SESSION['passengers'] as $passenger) {
-                echo "<tr>";
-                echo "<td>$i</td>";
-                echo "<td>{$passenger['name']}</td>";
-                echo "<td>{$passenger['contact']}</td>";
-                echo "<td>{$passenger['age']}</td>";
-                echo "</tr>";
-                $i++;
-            }
-            ?>
-        </table>
     </div>
-    <script>
+</body>
+<script>
         document.getElementById('payment_method').addEventListener('change', function () {
             var paymentMethod = this.value;
             document.getElementById('card_payment').style.display = paymentMethod === 'card' ? 'block' : 'none';
@@ -174,8 +197,4 @@ $_SESSION['total_price'] = $total_price;
             }, 5000);
         });
     </script>
-</body>
 </html>
-<?php
-include ('footer.php');
-?>

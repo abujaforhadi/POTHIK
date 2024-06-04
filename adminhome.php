@@ -23,22 +23,22 @@ include("Template/_admin.php");
 $conn = mysqli_connect('localhost', 'root', '', 'travel');
 
 if(isset($_POST["submit1"])){
-    $sql = "INSERT INTO product(item_id, item_brand, item_name, item_price, item_image, item_register)
-VALUES('$_POST[item_id]','$_POST[item_brand]','$_POST[item_name]','$_POST[item_price]','$_POST[item_image]','$_POST[item_register]')";
+    $sql = "INSERT INTO product(tour_id, tour_Division, tour_name,Place_type, tour_price, tour_image, tour_register)
+VALUES('$_POST[tour_id]','$_POST[tour_Division]','$_POST[tour_name]','$_POST[Place_type]','$_POST[tour_price]','$_POST[tour_image]','$_POST[tour_register]')";
 if($conn->query($sql)===true){
     echo"Successfully insart";
 }
 }
 
 if(isset($_POST["submit2"])){
-    $sql = "DELETE FROM product WHERE item_id='$_POST[item_id]'";
+    $sql = "DELETE FROM product WHERE tour_id='$_POST[tour_id]'";
 if($conn->query($sql)===true){
     echo"Successfully delete";
 }
 }
 
 if(isset($_POST["submit3"])){
-    $sql = "UPDATE product SET  item_brand='$_POST[item_brand]', item_name='$_POST[item_name]', item_price='$_POST[item_price]', item_image='$_POST[item_image]', item_register='$_POST[item_register]' WHERE id= '$_POST[item_id]'";
+    $sql = "UPDATE product SET  tour_Division='$_POST[tour_Division]', tour_name='$_POST[tour_name]', tour_price='$_POST[tour_price]', tour_image='$_POST[tour_image]', tour_register='$_POST[tour_register]' WHERE id= '$_POST[tour_id]'";
 if($conn->query($sql)===true){
     echo"Successfully update";
 }
@@ -50,18 +50,21 @@ if($conn->query($sql)===true){
   <form method="post">
     <div style="font-size: 20px;margin: 10px;color: white;">Product</div>
     Place ID <br>
-    <input id="text" type="text" name="item_id" required><br>
+    <input id="text" type="text" name="tour_id" required><br>
     Divisions <br>
-    <input id="text" type="text" name="item_brand" ><br>
+    <input id="text" type="text" name="tour_Division" ><br>
     Place Name<br>
-    <input id="text" type="text" name="item_name" ><br>
+    <input id="text" type="text" name="tour_name" ><br>
+    Place Type<br>
+    <input id="text" type="text" name="Place_type" ><br>
     Price<br>
-    <input id="text" type="number" name="item_price" ><br>
+    
+    <input id="text" type="number" name="tour_price" ><br>
     Image<br>
-    <input id="text" type="text" name="item_image" ><br>
+    <input id="text" type="text" name="tour_image" ><br>
 
     Event Date <br>
-    <input id="text" type="date" name="item_register" value="" ><br>
+    <input id="text" type="date" name="tour_register" value="" ><br>
     <div class="btn">
       <a>
         <span></span>
@@ -99,6 +102,7 @@ if($conn->query($sql)===true){
       <th>Place_id</th>
       <th>Divisions</th>
       <th>Place_name</th>
+      <th>Place_type</th>
       <th>Price</th>
       <th>image</th>
       <th>event Date</th>
@@ -108,14 +112,14 @@ if($conn->query($sql)===true){
     $conn = mysqli_connect("localhost", "root", "", "travel");
 
 
-$sql = "SELECT item_id, item_brand, item_name, item_price, item_image, item_register FROM product";
+$sql = "SELECT `tour_id`, `tour_Division`, `tour_name`, `Place_type`, `tour_price`, `tour_image`, `tour_register` FROM `product` ";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 // output data of each row
 while($row = $result->fetch_assoc()) {
-echo "<tr><td>" . $row["item_id"]. "</td><td>" . $row["item_brand"] . "</td><td>"
-. $row["item_name"]."</td><td>". $row["item_price"]. "</td><td>". $row["item_image"]."</td><td>"
-. $row["item_register"].  "</td></tr>";
+echo "<tr><td>" . $row["tour_id"]. "</td><td>" . $row["tour_Division"] . "</td><td>"
+. $row["tour_name"]."</td><td>". $row["Place_type"]. "</td><td>".  $row["tour_price"]. "</td><td>". $row["tour_image"]."</td><td>"
+. $row["tour_register"].  "</td></tr>";
 }
 echo "</table>";
 } else { echo "0 results"; }

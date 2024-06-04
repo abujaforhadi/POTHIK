@@ -49,7 +49,7 @@ body {
 
 
 <div class="containe">
-        <form name="searchForm" action="users/search.php" method="GET" class="form" onsubmit="return validateDates();">
+        <form name="searchForm" action="search.php" method="GET" class="form" onsubmit="return validateDates();">
             <label>Location:</label>
             <input type="text" name="location" placeholder="Your Location" required>
             <label>Check-In:</label>

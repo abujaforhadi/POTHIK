@@ -1,12 +1,10 @@
 <?php
 # database
-include("../header.php");
+include ("header.php");
 
 $reservationSuccess = false;
 $reservationError = "";
 $selectedHome = null;
-
-
 
 // Check if the form data has been submitted
 if (isset($_GET['home_id'])) {
@@ -36,7 +34,7 @@ if (isset($_POST['home_id'], $_POST['checkIn'], $_POST['checkOut'])) {
     $curr_date = date("Y-m-d");
 
     if (strtotime($checkIn) < strtotime($curr_date) || strtotime($checkOut) < strtotime($curr_date)) {
-        $reservationError = "Check-in date or check-out date are lesser than current date.";
+        $reservationError = "Check-in date or check-out date cannot be earlier than today's date.";
     } else {
 
         // Check if check-in date is greater than check-out date
@@ -92,21 +90,109 @@ if (isset($_POST['home_id'], $_POST['checkIn'], $_POST['checkOut'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  
     <link rel="stylesheet" href="../assets/css/searches.css">
-   
     <link rel="stylesheet" href="../assets/css/responsive.css">
-</head>
-<body>
-    <!-- Nav Bar -->
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
 
-    <div class="containe">
+        .holiday-home {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .home-image {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 10px;
+        }
+
+        .holiday-details {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .holiday-details h2 {
+            margin-bottom: 10px;
+        }
+
+        .label {
+            font-weight: bold;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="date"] {
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .btn {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn-left {
+            order: 1;
+            background-color: red;
+        }
+
+        .btn-right {
+            order: 2;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="container">
         <?php
         if ($selectedHome) {
             echo "<div class='holiday-home'>";
             echo "<img src='{$selectedHome['image_path']}' alt='{$selectedHome['name']}' class='home-image'>";
             echo "<div class='holiday-details'>";
-            echo "<h2>{$selectedHome['name']}</h2>";
+            echo "<h2>Hotel Name: {$selectedHome['name']}</h2>";
             echo "<p class='label'>Location:</p>";
             echo "<p>{$selectedHome['location']}</p>";
 
@@ -115,32 +201,24 @@ if (isset($_POST['home_id'], $_POST['checkIn'], $_POST['checkOut'])) {
 
             echo "<p class='label'>Ratings:</p>";
             echo "<p>{$selectedHome['rating']}</p>";
-            
-
-
             echo "</div>";
             echo "</div>";
 
-
-
-            // Reservation form
-            echo "<form method='post' action=''>";
+            echo "<form method='post' action='paymenthotel.php'>";
             echo "<input type='hidden' name='home_id' value='{$selectedHome['home_id']}'>";
-            echo "<input type='hidden' name='checkIn' value='$checkIn'>";
-            echo "<input type='hidden' name='checkOut' value='$checkOut'>";
             echo "<label for='checkIn'>Check-in Date:</label>";
             echo "<input type='date' name='checkIn' required value='$checkIn'>";
             echo "<label for='checkOut'>Check-out Date:</label>";
             echo "<input type='date' name='checkOut' required value='$checkOut'>";
-            if (isset($reservationError)) {
-                echo "<p class='error' style='font-weight: bold'>$reservationError</p>";
+            if ($reservationError) {
+                echo "<p class='error'>$reservationError</p>";
+            } elseif ($reservationSuccess) {
+                echo "<p class='success'>Successfully Reserved!</p>";
             }
-            function hello() {
-                echo "Successfully Reserved!";
-            }
-
-            echo "<button onclick= hello(); type='submit' class='btn'>Reserve Now</button>";
-            echo "<button  type='reset' class='btn' >Reset</button>";
+            echo "<div class='btn-container'>";
+            echo "<button type='reset' class='btn btn-left'>Reset</button>"; // Reset button moved to the left
+            echo "<button type='submit' class='btn btn-right'>Reserve Now</button>"; // Reserve Now button moved to the right
+            echo "</div>";
             echo "</form>";
         } elseif ($reservationError) {
             echo "<p class='error'>$reservationError</p>";
@@ -149,10 +227,9 @@ if (isset($_POST['home_id'], $_POST['checkIn'], $_POST['checkOut'])) {
         }
         ?>
     </div>
-    
-  
+
     <!-- Footer -->
-    <?php include("../footer.php"); ?>
+    <?php include ("footer.php"); ?>
 </body>
 
 </html>

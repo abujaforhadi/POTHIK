@@ -1,18 +1,18 @@
-
 <?php
 
 include ('header.php');
-    // Fetch data from URL parameters
-    $tour_id = $_GET['tour_id'] ?? '';
-    $persons = $_GET['persons'] ?? '';
-    $total_price = $_GET['total_price'] ?? '';
+// Fetch data from URL parameters
+$tour_id = $_GET['tour_id'] ?? '';
+$persons = $_GET['persons'] ?? '';
+$total_price = $_GET['total_price'] ?? '';
 
-    // Assuming you have a mechanism to retrieve user information, such as from session or database
-    $user_name =  $user_data['user_name']; // Replace this with the user's name fetched from session or database
+// Assuming you have a mechanism to retrieve user information, such as from session or database
+$user_name = $user_data['user_name']; // Replace this with the user's name fetched from session or database
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,6 +24,7 @@ include ('header.php');
             padding: 0;
             background-color: #f4f4f4;
         }
+
         .container {
             max-width: 600px;
             margin: 50px auto;
@@ -32,34 +33,41 @@ include ('header.php');
             border-radius: 10px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
         }
+
         h2 {
             font-size: 28px;
             text-align: center;
             margin-bottom: 20px;
             color: #333;
         }
+
         p {
             font-size: 18px;
             margin-bottom: 10px;
         }
+
         .details {
             border-top: 1px solid #ddd;
             padding-top: 15px;
             margin-top: 15px;
         }
+
         .details p {
             display: flex;
             justify-content: space-between;
             padding: 10px 0;
             border-bottom: 1px solid #eee;
         }
+
         .details p:last-child {
             border-bottom: none;
         }
+
         .btn-container {
             text-align: center;
             margin-top: 20px;
         }
+
         .btn {
             background-color: #28a745;
             color: white;
@@ -70,6 +78,7 @@ include ('header.php');
             cursor: pointer;
             text-decoration: none;
         }
+
         .btn:hover {
             background-color: #218838;
         }
@@ -91,7 +100,8 @@ include ('header.php');
             border-radius: 10px;
         }
 
-        .container h1, .container h2 {
+        .container h1,
+        .container h2 {
             text-align: center;
             margin-bottom: 20px;
             color: #333;
@@ -130,11 +140,14 @@ include ('header.php');
             margin-top: 20px;
         }
 
-        table, th, td {
+        table,
+        th,
+        td {
             border: 1px solid #ddd;
         }
 
-        th, td {
+        th,
+        td {
             text-align: center;
             padding: 8px;
         }
@@ -144,10 +157,11 @@ include ('header.php');
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h2>Payment Details</h2>
-        
+
         <div class="details">
             <p><strong>User Name:</strong> <span><?php echo ucfirst($user_name); ?></span></p>
             <p><strong>Total Price:</strong> <span>৳<?php echo $total_price; ?></span></p>
@@ -156,7 +170,7 @@ include ('header.php');
         <form id="payment_form" action="process_payment.php" method="post">
             <label for="payment_method">Payment Method:</label>
             <select id="payment_method" name="payment_method" required>
-                <option >select</option>
+                <option>select</option>
                 <option value="card">Credit/Debit Card</option>
 
                 <option value="mobile_banking">Mobile Banking</option>
@@ -183,18 +197,19 @@ include ('header.php');
     </div>
 </body>
 <script>
-        document.getElementById('payment_method').addEventListener('change', function () {
-            var paymentMethod = this.value;
-            document.getElementById('card_payment').style.display = paymentMethod === 'card' ? 'block' : 'none';
-            document.getElementById('mobile_banking_payment').style.display = paymentMethod === 'mobile_banking' ? 'block' : 'none';
-        });
+    document.getElementById('payment_method').addEventListener('change', function () {
+        var paymentMethod = this.value;
+        document.getElementById('card_payment').style.display = paymentMethod === 'card' ? 'block' : 'none';
+        document.getElementById('mobile_banking_payment').style.display = paymentMethod === 'mobile_banking' ? 'block' : 'none';
+    });
 
-        document.getElementById('payment_form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            alert("Payment is being processed. Please wait...");
-            setTimeout(function() {
-                window.location.href = 'index.php';
-            }, 5000);
-        });
-    </script>
+    document.getElementById('payment_form').addEventListener('submit', function (event) {
+        event.preventDefault();
+        alert("Payment is being processed. Please wait...");
+        setTimeout(function () {
+            window.location.href = 'index.php';
+        }, 5000);
+    });
+</script>
+
 </html>

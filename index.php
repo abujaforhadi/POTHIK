@@ -9,7 +9,7 @@ include('header.php');
 <?php
 
 
-include('Template/_banner-area.php');
+include('Template/_Carousel.php');
 
 include('Template/_place.php');
 

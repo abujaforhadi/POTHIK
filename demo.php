@@ -1,371 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Animated Carousel</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .c-item {
+            height: 580px;
+            position: relative;
+            transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+        }
 
-<?php
-ob_start();
+        .c-img {
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.6);
+            transition: transform 1s ease-in-out;
+        }
 
-include('header.php');
+        .carousel-item-next,
+        .carousel-item-prev,
+        .carousel-item.active {
+            display: block;
+            transform: scale(0.95);
+            opacity: 0;
+        }
 
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    //something was posted
-    $user_name = $_POST['user_name'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $number = $_POST['number'];
-    $nid = $_POST['nid'];
-    $address = $_POST['address'];
-    
+        .carousel-item-next.carousel-item-start,
+        .carousel-item-prev.carousel-item-end,
+        .carousel-item.active.carousel-item-end,
+        .carousel-item.active.carousel-item-start {
+            transform: scale(1);
+            opacity: 1;
+        }
 
+        .carousel-caption {
+            top: 0;
+            position: absolute;
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.4);
+            animation: slideInFromTop 1s ease-out;
+        }
 
-    if (!empty($user_name) && !empty($password) && !is_numeric($user_name)  ) {
-
-       if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-         //save to database
-         $user_id = random_num(5);
-         $v_code=bin2hex(random_bytes(4));
- 
-         $query = "INSERT INTO `users`(`user_id`, `user_name`, `email`, `password`, `number`, `nid`, `address`, `verification_code`, `is_verify`) values ('$user_id','$user_name','$email','$password','$number','$nid','$address','$v_code','0')";
- 
-         mysqli_query($con, $query);
-             header("Location: login.php");
-             die;
-        
-       } else {
-        echo "Please enter valid Email!";
-           }
-       
-       
-        
-    } else {
-        echo "Please enter some valid information!";
-    }
-}
-if($_SERVER['REQUEST_METHOD'] == "POST")
-{
-    //something was posted
-    $user_name = $_POST['user_name'];
-    $password = $_POST['password'];
-
-    if(!empty($user_name) && !empty($password) && !is_numeric($user_name))
-    {
-
-        //read from database
-        $query = "select * from users where user_name = '$user_name' limit 1";
-        $result = mysqli_query($con, $query);
-
-        if($result)
-        {
-            if($result && mysqli_num_rows($result) > 0)
-            {
-
-                $user_data = mysqli_fetch_assoc($result);
-                
-                if($user_data['password'] === $password)
-                {
-
-                    $_SESSION['user_id'] = $user_data['user_id'];
-                    header("Location: index.php");
-                    die;
-                }
+        @keyframes slideInFromTop {
+            0% {
+                top: -50px;
+                opacity: 0;
+            }
+            100% {
+                top: 0;
+                opacity: 1;
             }
         }
-        
-        echo "wrong username or password!";
-    }else
-    {
-        echo "wrong username or password!";
-    }
-}
+    </style>
+</head>
+<body>
 
-?>
-<style>
-    
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+<!-- Owl-carousel -->
+<div id="hero-carousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
 
-* {
-	box-sizing: border-box;
-}
-
-
-
-h1 {
-	font-weight: bold;
-	margin: 0;
-}
-
-h2 {
-	text-align: center;
-}
-
-p {
-	font-size: 14px;
-	font-weight: 100;
-	line-height: 20px;
-	letter-spacing: 0.5px;
-	margin: 20px 0 30px;
-}
-
-span {
-	font-size: 12px;
-}
-
-a {
-	color: #333;
-	font-size: 14px;
-	text-decoration: none;
-	margin: 15px 0;
-}
-
-button {
-	border-radius: 20px;
-	border: 1px solid #FF4B2B;
-	background-color: #FF4B2B;
-	color: #FFFFFF;
-	font-size: 12px;
-	font-weight: bold;
-	padding: 12px 45px;
-	letter-spacing: 1px;
-	text-transform: uppercase;
-	transition: transform 80ms ease-in;
-}
-
-button:active {
-	transform: scale(0.95);
-}
-
-button:focus {
-	outline: none;
-}
-
-button.ghost {
-	background-color: transparent;
-	border-color: #FFFFFF;
-}
-
-form {
-	background-color: #FFFFFF;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-	padding: 0 50px;
-	height: 100%;
-	text-align: center;
-}
-
-input {
-	background-color: #eee;
-	border: none;
-	padding: 12px 15px;
-	margin: 8px 0;
-	width: 100%;
-}
-
-.container {
-	background-color: #fff;
-	border-radius: 10px;
-  	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
-			0 10px 10px rgba(0,0,0,0.22);
-	position: relative;
-	overflow: hidden;
-	width: 768px;
-	max-width: 100%;
-	min-height: 480px;
-}
-
-.form-container {
-	position: absolute;
-	top: 0;
-	height: 100%;
-	transition: all 0.6s ease-in-out;
-}
-
-.sign-in-container {
-	left: 0;
-	width: 50%;
-	z-index: 2;
-}
-
-.container.right-panel-active .sign-in-container {
-	transform: translateX(100%);
-}
-
-.sign-up-container {
-	left: 0;
-	width: 50%;
-	opacity: 0;
-	z-index: 1;
-}
-
-.container.right-panel-active .sign-up-container {
-	transform: translateX(100%);
-	opacity: 1;
-	z-index: 5;
-	animation: show 0.6s;
-}
-
-@keyframes show {
-	0%, 49.99% {
-		opacity: 0;
-		z-index: 1;
-	}
-	
-	50%, 100% {
-		opacity: 1;
-		z-index: 5;
-	}
-}
-
-.overlay-container {
-	position: absolute;
-	top: 0;
-	left: 50%;
-	width: 50%;
-	height: 100%;
-	overflow: hidden;
-	transition: transform 0.6s ease-in-out;
-	z-index: 100;
-}
-
-.container.right-panel-active .overlay-container{
-	transform: translateX(-100%);
-}
-
-.overlay {
-	background: #FF416C;
-	background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
-	background: linear-gradient(to right, #FF4B2B, #FF416C);
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: 0 0;
-	color: #FFFFFF;
-	position: relative;
-	left: -100%;
-	height: 100%;
-	width: 200%;
-  	transform: translateX(0);
-	transition: transform 0.6s ease-in-out;
-}
-
-.container.right-panel-active .overlay {
-  	transform: translateX(50%);
-}
-
-.overlay-panel {
-	position: absolute;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-	padding: 0 40px;
-	text-align: center;
-	top: 0;
-	height: 100%;
-	width: 50%;
-	transform: translateX(0);
-	transition: transform 0.6s ease-in-out;
-}
-
-.overlay-left {
-	transform: translateX(-20%);
-}
-
-.container.right-panel-active .overlay-left {
-	transform: translateX(0);
-}
-
-.overlay-right {
-	right: 0;
-	transform: translateX(0);
-}
-
-.container.right-panel-active .overlay-right {
-	transform: translateX(20%);
-}
-
-.social-container {
-	margin: 20px 0;
-}
-
-.social-container a {
-	border: 1px solid #DDDDDD;
-	border-radius: 50%;
-	display: inline-flex;
-	justify-content: center;
-	align-items: center;
-	margin: 0 5px;
-	height: 40px;
-	width: 40px;
-}
-
-footer {
-    background-color: #222;
-    color: #fff;
-    font-size: 14px;
-    bottom: 0;
-    position: fixed;
-    left: 0;
-    right: 0;
-    text-align: center;
-    z-index: 999;
-}
-
-footer p {
-    margin: 10px 0;
-}
-
-footer i {
-    color: red;
-}
-
-footer a {
-    color: #3c97bf;
-    text-decoration: none;
-}
-</style><br><br>
-<div class="container" id="container">
-	<div class="form-container sign-up-container">
-		<form action="POST">
-			<h5>Create Account</h5>
-			<input type="text" placeholder="Name" />
-			<input type="email" placeholder="Email" />
-			<input type="password" placeholder="Password" />
-			<button>Sign Up</button>
-		</form>
-	</div>
-	<div class="form-container sign-in-container">
-		<form action="POST">
-			<h1>Sign in</h1>
-			
-			<input type="username" placeholder="UserName" />
-			<input type="password" placeholder="Password" />
-			<button onclick="window.location.href='index.php';">Sign In</button>
-		</form>
-	</div>
-	<div class="overlay-container">
-		<div class="overlay">
-			<div class="overlay-panel overlay-left">
-				<h1>Welcome Back!</h1>
-				<p>To keep connected with us please login with your personal info</p>
-				<button class="ghost" id="signIn">Sign In</button>
-			</div>
-			<div class="overlay-panel overlay-right">
-				<h1>Hello, Friend!</h1>
-				<p>Enter your personal details and start journey with us</p>
-				<button class="ghost" id="signUp">Sign Up</button>
-			</div>
-		</div>
-	</div>
+    <div class="carousel-inner">
+        <div class="carousel-item active c-item">
+            <img src="https://tfe-bd.sgp1.digitaloceanspaces.com/uploads/1623685867.jpg" class="d-block w-100 c-img" alt="Slide 1">
+            <div class="carousel-caption top-0 mt-4">
+                <p class="mt-5 fs-3 text-uppercase">A unique tourist spot</p>
+                <h1 class="display-1 fw-bolder text-capitalize">Sajek Valley</h1>
+                <button class="btn btn-primary px-4 py-2 fs-5 mt-5">Book a tour</button>
+            </div>
+        </div>
+        <div class="carousel-item c-item">
+            <img src="https://images.hive.blog/p/3HaJVw3AYyXBD5Md5tUD9YKkzGo1eoR2RP1hYxRaFr2Jhpn5BB6r8b5qQL4R9QntRsPTZ6inEXhXLiUNrGdLGFauudupRoQvcJMAQG8?format=match&mode=fit" class="d-block w-100 c-img" alt="Slide 2">
+            <div class="carousel-caption top-0 mt-4">
+                <p class="text-uppercase fs-3 mt-5">Coral Island in the Bay of Bengal</p>
+                <p class="display-1 fw-bolder text-capitalize">Saint Martin Island</p>
+                <button class="btn btn-primary px-4 py-2 fs-5 mt-5" data-bs-toggle="modal" data-bs-target="#booking-modal">Book a tour</button>
+            </div>
+        </div>
+        <div class="carousel-item c-item">
+            <img src="https://cdn.pixabay.com/photo/2018/09/12/19/21/deer-3673017_1280.jpg" class="d-block w-100 c-img" alt="Slide 3">
+            <div class="carousel-caption top-0 mt-4">
+                <p class="text-uppercase fs-3 mt-5">World’s largest mangrove forest</p>
+                <p class="display-1 fw-bolder text-capitalize">Sundarban</p>
+                <button class="btn btn-primary px-4 py-2 fs-5 mt-5" data-bs-toggle="modal" data-bs-target="#booking-modal">Book a tour</button>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#hero-carousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#hero-carousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
 </div>
+<!-- !Owl-carousel -->
 
-<script>
-    const signUpButton = document.getElementById('signUp');
-const signInButton = document.getElementById('signIn');
-const container = document.getElementById('container');
-
-signUpButton.addEventListener('click', () => {
-	container.classList.add("right-panel-active");
-});
-
-signInButton.addEventListener('click', () => {
-	container.classList.remove("right-panel-active");
-});
-</script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -2,7 +2,7 @@
 <html>
 <head>
 <link rel="shortcut icon" href="https://p7.hiclipart.com/preview/583/301/232/flight-travel-agent-computer-icons-free-high-quality-travel-icon.jpg" type="image/x-icon">
-    <title>Travel Guider</title>
+    <title>POTHIK</title>
 </head>
 <body>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -25,7 +25,7 @@
 	<header id="header">
         <div class="strip d-flex justify-content-between px-4 py-1 bg-light">
             <p class="font-rale font-size-12 text-black-50 m-0">
-                <marquee behavior="" direction="" style="color: Green;">Welcome to Travel Guider'</marquee>
+                <marquee behavior="" direction="" style="color: Green;">Welcome to POTHIK Admin Dashboard</marquee>
             </p>
             <div class="font-rale font-size-14">
                
@@ -33,20 +33,20 @@
         </div>
 
         <nav class="navbar navbar-expand-lg navbar-dark color-second-bg">
-            <a class="navbar-brand" href="#">Travel Guider</a>
+            <a class="navbar-brand" href="adminhome.php">POTHIK</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav m-auto font-rubik">
                     <li class="nav-item active">
-                        <a class="nav-link" href="adminhome.php"><i class="fa-solid fa-location-dot"></i> Tour Places</a></a>
+                        <a class="nav-link" href="adminPlace.php"><i class="fa-solid fa-location-dot"></i> Tour Places</a></a>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="#"><i class="fa-solid fa-van-shuttle"></i>Transportation</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="_blogadmin.php"><i class="fa-solid fa-blog"></i> Blog & Reviews</a>
+                        <a class="nav-link" href=""><i class="fa-solid fa-blog"></i> Blog & Reviews</a>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="#"><i class="fa-solid fa-house-medical-flag"></i> Medical</a>

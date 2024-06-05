@@ -1,129 +1,190 @@
 <?php
 session_start();
+include ("database/connection.php");
+include ("_admin.php");
 
-include("database/connection.php");
-include("Template/_admin.php");
+// database/connection.php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "travel";
 
-?>
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-<link rel="stylesheet" href="style.css">
-<style>
-  #box1 {
-    font-size: large;
+// Check connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
 
-    background-color: gray;
-    color: white;
-    margin: auto;
-    width: 300px;
-    padding: 20px;
-    float: left;
+// Function to execute a query and return the count
+function getCount($conn, $sql)
+{
+  $result = $conn->query($sql);
+  if ($result) {
+    $row = $result->fetch_assoc();
+    return $row['total'];
+  } else {
+    return 0;
   }
-</style>
-<?php
-$conn = mysqli_connect('localhost', 'root', '', 'travel');
-
-if(isset($_POST["submit1"])){
-    $sql = "INSERT INTO product(tour_id, tour_Division, tour_name,Place_type, tour_price, tour_image, tour_register)
-VALUES('$_POST[tour_id]','$_POST[tour_Division]','$_POST[tour_name]','$_POST[Place_type]','$_POST[tour_price]','$_POST[tour_image]','$_POST[tour_register]')";
-if($conn->query($sql)===true){
-    echo"Successfully insart";
-}
 }
 
-if(isset($_POST["submit2"])){
-    $sql = "DELETE FROM product WHERE tour_id='$_POST[tour_id]'";
-if($conn->query($sql)===true){
-    echo"Successfully delete";
-}
-}
+// SQL queries to count rows for each category
+$sqlPlaces = "SELECT COUNT(*) AS total FROM product";
+$sqlTransportation = "SELECT COUNT(*) AS total FROM bus_details";
+$sqlBlogs = "SELECT COUNT(*) AS total FROM blog_table";
+$sqlResidence = "SELECT COUNT(*) AS total FROM home";
+$sqlUsers = "SELECT COUNT(*) AS total FROM users";
 
-if(isset($_POST["submit3"])){
-    $sql = "UPDATE product SET  tour_Division='$_POST[tour_Division]', tour_name='$_POST[tour_name]', tour_price='$_POST[tour_price]', tour_image='$_POST[tour_image]', tour_register='$_POST[tour_register]' WHERE id= '$_POST[tour_id]'";
-if($conn->query($sql)===true){
-    echo"Successfully update";
-}
-}
-?>
+// Execute the queries and store the counts
+$totalPlaces = getCount($conn, $sqlPlaces);
+$totalTransportation = getCount($conn, $sqlTransportation);
+$totalBlogs = getCount($conn, $sqlBlogs);
+$totalResidence = getCount($conn, $sqlResidence);
+$totalUsers = getCount($conn, $sqlUsers);
 
-<div id="box1">
-
-  <form method="post">
-    <div style="font-size: 20px;margin: 10px;color: white;">Product</div>
-    Place ID <br>
-    <input id="text" type="text" name="tour_id" required><br>
-    Divisions <br>
-    <input id="text" type="text" name="tour_Division" ><br>
-    Place Name<br>
-    <input id="text" type="text" name="tour_name" ><br>
-    Place Type<br>
-    <input id="text" type="text" name="Place_type" ><br>
-    Price<br>
-    
-    <input id="text" type="number" name="tour_price" ><br>
-    Image<br>
-    <input id="text" type="text" name="tour_image" ><br>
-
-    Event Date <br>
-    <input id="text" type="date" name="tour_register" value="" ><br>
-    <div class="btn">
-      <a>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <input type="submit" value="insert" name="submit1">
-      </a>
-    </div>
-
-    <div class="btn">
-      <a>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <input type="submit" value="Delete" name="submit2">
-      </a>
-    </div>
-    <div class="btn">
-      <a>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <input type="submit" value="Update" name="submit3">
-      </a>
-    </div>
-  </form>
-</div>
-
-<div>
-  <table border="1" cellspacing="1" cellpadding="10">
-    <tr>
-      <th>Place_id</th>
-      <th>Divisions</th>
-      <th>Place_name</th>
-      <th>Place_type</th>
-      <th>Price</th>
-      <th>image</th>
-      <th>event Date</th>
-
-    </tr>
-<?php
-    $conn = mysqli_connect("localhost", "root", "", "travel");
-
-
-$sql = "SELECT `tour_id`, `tour_Division`, `tour_name`, `Place_type`, `tour_price`, `tour_image`, `tour_register` FROM `product` ";
-$result = $conn->query($sql);
-if ($result->num_rows > 0) {
-// output data of each row
-while($row = $result->fetch_assoc()) {
-echo "<tr><td>" . $row["tour_id"]. "</td><td>" . $row["tour_Division"] . "</td><td>"
-. $row["tour_name"]."</td><td>". $row["Place_type"]. "</td><td>".  $row["tour_price"]. "</td><td>". $row["tour_image"]."</td><td>"
-. $row["tour_register"].  "</td></tr>";
-}
-echo "</table>";
-} else { echo "0 results"; }
+// Close the connection
 $conn->close();
 ?>
-  </table>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <style>
+   
+
+    .navs {
+      background-color: #333;
+      color: #fff;
+      padding: 1rem 2rem;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+    }
+
+    .navs h1 {
+      margin: 0;
+      font-size: 2rem;
+      letter-spacing: 1.5px;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 6rem 1rem 3rem;
+      gap: 2rem;
+    }
+
+    .card {
+      background-color: #fff;
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      width: 260px;
+      text-align: center;
+      padding: 2rem 1rem;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .card h2 {
+      margin: 0;
+      font-size: 1.7rem;
+      color: #333;
+      transition: color 0.3s;
+    }
+
+    .card a {
+      text-decoration: none;
+     
+      display: block;
+      margin-top: 1.5rem;
+      font-weight: bold;
+      font-size: 1.1rem;
+      transition: color 0.3s;
+    }
+
+    .card a:hover {
+      color:#9eb3be;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -50%;
+      width: 100%;
+      height: 100%;
+      background:#a0beda;
+      z-index: 0;
+      transform: skewX(-30deg);
+      transition: transform 0.5s;
+    }
+
+    .card:hover::before {
+      transform: skewX(-30deg) translateX(200%);
+    }
+
+    .card-content {
+      position: relative;
+      z-index: 1;
+    }
+  </style>
+</head>
+
+<body>
+  
+  <div class="container">
+    <div class="card">
+      <div class="card-content">
+        <h2>Tour Places</h2>
+        <p>Total Places: <?php echo $totalPlaces; ?></p>
+        <a href="adminPlace.php">Manage Places</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-content">
+        <h2>Transportation</h2>
+        <p>Total Buses: <?php echo $totalTransportation; ?></p>
+        <a href="adminBus.php">Manage Transportation</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-content">
+        <h2>Blog & Reviews</h2>
+        <p>Total Blogs: <?php echo $totalBlogs; ?></p>
+        <a href="adminBlog.php">Manage Blogs</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-content">
+        <h2>Residence</h2>
+        <p>Total Residences: <?php echo $totalResidence; ?></p>
+        <a href="adminHotel.php">Manage Residence</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-content">
+        <h2>User</h2>
+        <p>Total Users: <?php echo $totalUsers; ?></p>
+        <a href="adminBlog.php">Manage Blogs</a>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

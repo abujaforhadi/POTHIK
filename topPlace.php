@@ -6,7 +6,7 @@
 
 <?php
     
-    include ('Template/_place.php');
+    include ('Template/suggestion.php');
 ?>
 <?php
 // include footer.php file

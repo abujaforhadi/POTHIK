@@ -66,7 +66,7 @@ $user_data = check_login($con);
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav m-auto font-rubik">
             <li class="nav-item active">
-                <a class="nav-link" href="./topPlace.php"><i class="fa-solid fa-location-dot"></i> Tour Places</a>
+                <a class="nav-link" href="./topPlace.php"><i class="fa-solid fa-location-dot"></i> Suggested places</a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="./bus.php"><i class="fa-solid fa-van-shuttle"></i> Transportation</a>

@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <link rel="shortcut icon"
         href="https://p7.hiclipart.com/preview/583/301/232/flight-travel-agent-computer-icons-free-high-quality-travel-icon.jpg"
         type="image/x-icon">
-    <title>POTHIK</title>
+    <title>POTHIK -LogIn</title>
 </head>
 
 <body>
@@ -92,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         </div>
 
         <nav class="navbar navbar-expand-lg navbar-dark color-second-bg">
-            <a class="navbar-brand" href="#">POTHIK</a>
+        <a class="navbar-brand" href="./index.php"><img src="assets/icons/pothik 2.png" alt="" width="" height="40px" srcset=""></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -140,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                 <span></span>
                                 <span></span>
                                 <span></span>
-                                <input type="submit" value="Login">
+                                <input type="submit" id="submit" value="Login">
                             </a>
                         </div><br>
                         <div style="font-size: 15px; text-align: center; color: blue;">Don't have an account?</div>

@@ -109,7 +109,7 @@ include ('header.php');
             width: max-content;
             margin: auto;
             font-size: 20px;
-            border: 1px solid red;
+            
             margin-bottom: 25px;
             position: relative;
             top: -58px;
@@ -178,7 +178,7 @@ include ('header.php');
                 </select>
 
                 <label>Journey Date:</label>
-                <input type="date" name="date_name" id="date_id" required>
+                <input name="date_name" id="date_id" required>
 
                 <input name="submit" type="submit" value="GET DETAILS" class="submit">
             </form>

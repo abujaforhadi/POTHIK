@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         </div>
 
         <nav class="navbar navbar-expand-lg navbar-dark color-second-bg">
-            <a class="navbar-brand" href="index.php">POTHIK</a>
+        <a class="navbar-brand" href="./index.php"><img src="assets/icons/pothik 2.png" alt="" width="" height="40px" srcset=""></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -109,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         <input id="text" type="text" name="user_name" placeholder="User name" required><br><br>
                         <input id="text" type="email" name="email" placeholder="Email" required><br><br>
                         <input id="text" type="password" name="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required><br><br>
-                        <input id="text" type="text" name="number" placeholder="Phone number" pattern="[01][0-9]{9}" title="Start with 01" required><br><br>
+                        <input id="text" type="text" name="number" placeholder="Phone number" pattern="[01][0-9]{10}" title="Start with 01" required><br><br>
                         <select id="" name="Fplace" required>
                             <option value="" disabled selected>Select your favorite place</option>
                             <option value="Forest">Forest</option>
@@ -125,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                 <span></span>
                                 <span></span>
                                 <span></span>
-                                <input type="submit" value="Signup">
+                                <input type="submit" id="submit" value="Signup">
                             </a>
                         </div>
                         <br>

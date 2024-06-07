@@ -57,7 +57,7 @@ $user_data = check_login($con);
 
         <!-- Primary Navigation -->
         <nav class="navbar navbar-expand-lg navbar-dark color-second-bg">
-    <a class="navbar-brand" href="./index.php">POTHIK</a>
+        <a class="navbar-brand" href="./index.php"><img src="assets/icons/pothik 2.png" alt="" width="" height="40px" srcset=""></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon">
             <i class="fas fa-bars"></i>
@@ -81,7 +81,7 @@ $user_data = check_login($con);
                 <a class="nav-link" href="./home.php"><i class="fa-solid fa-hotel"></i> Residence</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="./logout.php"><i class="fa-solid fa-user-plus"></i> <?php echo $user_data['user_name']; ?> (Logout)</a>
+                <a class="nav-link text-capitalize" href="./logout.php"><i class="fa-solid fa-user-plus " ></i> <?php echo $user_data['user_name']; ?> (Logout)</a>
             </li>
         </ul>
     </div>

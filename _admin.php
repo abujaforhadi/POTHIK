@@ -33,7 +33,7 @@
         </div>
 
         <nav class="navbar navbar-expand-lg navbar-dark color-second-bg">
-            <a class="navbar-brand" href="adminhome.php">POTHIK</a>
+        <a class="navbar-brand" href="adminhome.php"><img src="assets/icons/pothik 2.png" alt="" width="" height="40px" srcset=""></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -43,16 +43,14 @@
                         <a class="nav-link" href="adminPlace.php"><i class="fa-solid fa-location-dot"></i> Tour Places</a></a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="#"><i class="fa-solid fa-van-shuttle"></i>Transportation</a>
+                        <a class="nav-link" href="adminBus.php"><i class="fa-solid fa-van-shuttle"></i>Transportation</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href=""><i class="fa-solid fa-blog"></i> Blog & Reviews</a>
+                        <a class="nav-link" href="adminBlog.php"><i class="fa-solid fa-blog"></i> Blog & Reviews</a>
                     </li>
+                    
                     <li class="nav-item active">
-                        <a class="nav-link" href="#"><i class="fa-solid fa-house-medical-flag"></i> Medical</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#"><i class="fa-solid fa-hotel"></i> Residence</a>
+                        <a class="nav-link" href="adminhotel.php"><i class="fa-solid fa-hotel"></i> Residence</a>
                     </li>
                     
                     

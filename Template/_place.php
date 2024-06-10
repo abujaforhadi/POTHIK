@@ -123,7 +123,6 @@ $in_cart = $Cart->getCartId($product->getData('cart'));
 </style>
 <section id="special-price">
     <div class="container">
-        <h4 class="font-rubik font-size-20">Top Tourist Places</h4>
         <hr>
         <div id="filters" class="button-group text-right font-baloo font-size-16">
             <button class="btn is-checked" data-filter="*">Top Places</button>

@@ -6,48 +6,48 @@
     <!-- Custom CSS -->
     <style>
         /* Footer Styles */
-        #footer {
+        #foot {
             background-color: #282c34;
             color: #ccc;
             padding: 60px 0;
         }
-        #footer a {
+        #foot a {
             color: #ccc;
             text-decoration: none;
             transition: color 0.3s;
         }
-        #footer a:hover {
+        #foot a:hover {
             color: #61dafb;
         }
-        #footer .navbar-brand img {
+        #foot .navbar-brand img {
             height: 50px;
         }
-        #footer h4 {
+        #foot h4 {
             font-size: 20px;
             margin-bottom: 20px;
             color: #61dafb;
         }
-        #footer .form-control {
+        #foot .form-control {
             border: none;
             border-radius: 0;
             box-shadow: none;
             margin-bottom: 10px;
         }
-        #footer .btn-primary {
+        #foot .btn-primary {
             background-color: #61dafb;
             border: none;
         }
-        #footer .btn-primary:hover {
+        #foot .btn-primary:hover {
             background-color: #21a1f1;
         }
-        #footer .social-icons a {
+        #foot .social-icons a {
             display: inline-block;
             margin-right: 15px;
             font-size: 20px;
             color: #61dafb;
             transition: transform 0.3s;
         }
-        #footer .social-icons a:hover {
+        #foot .social-icons a:hover {
             transform: scale(1.2);
         }
         .copyright {
@@ -64,7 +64,7 @@
             display: none;
             width: 50px;
             height: 50px;
-            background-color: #ff4081;
+            background-color: skyblue;
             color: white;
             border: none;
             border-radius: 50%;
@@ -79,7 +79,7 @@
         }
 
         /* Animation for footer links */
-        .footer-links a {
+        .foot-links a {
             position: relative;
             display: inline-block;
             text-decoration: none;
@@ -87,7 +87,7 @@
             margin-bottom: 10px;
             transition: color 0.3s;
         }
-        .footer-links a::after {
+        .foot-links a::after {
             content: '';
             display: block;
             width: 0;
@@ -95,7 +95,7 @@
             background: #61dafb;
             transition: width 0.3s;
         }
-        .footer-links a:hover::after {
+        .foot-links a:hover::after {
             width: 100%;
             // transition: width 0.3s;
         }
@@ -104,7 +104,7 @@
 <body>
     <!-- Your existing content -->
 
-    <footer id="footer">
+    <footer id="foot">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-12">
@@ -125,7 +125,7 @@
                 </div>
                 <div class="col-lg-3 col-12">
                     <h4>Information</h4>
-                    <div class="footer-links">
+                    <div class="foot-links">
                         <a href="#">About Us</a><br>
                         <a href="#">Privacy Policy</a><br>
                         <a href="#">Terms & Conditions</a>
@@ -135,9 +135,9 @@
                     <h4>Follow Us</h4>
                     <div class="social-icons">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="https://github.com/abujaforhadi/"><i class="fab fa-github"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.linkedin.com/in/abujaforhadi/"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
             </div>

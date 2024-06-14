@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['insert'])) {
     $image_path = $_POST['image_path'];
     $price = $_POST['price'];
 
-    $sql_insert = "INSERT INTO home (name, location, availability_status, description, rating, image_path, price)
+    $sql_insert = "INSERT INTO hotel (name, location, availability_status, description, rating, image_path, price)
                    VALUES ('$name', '$location', '$availability_status', '$description', '$rating', '$image_path', '$price')";
 
     if ($conn->query($sql_insert) === TRUE) {
@@ -31,10 +31,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['insert'])) {
 
 // Handle form submission for updating availability status
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
-    $home_id = $_POST['home_id'];
+    $hotel_id = $_POST['hotel_id'];
     $availability_status = $_POST['availability_status'];
 
-    $sql_update = "UPDATE home SET availability_status='$availability_status' WHERE home_id=$home_id";
+    $sql_update = "UPDATE hotel SET availability_status='$availability_status' WHERE hotel_id=$hotel_id";
 
     if ($conn->query($sql_update) === TRUE) {
         echo "Record updated successfully";
@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
     }
 }
 
-$sql = "SELECT home_id, name, location, availability_status, description, rating, image_path, price FROM home";
+$sql = "SELECT hotel_id, name, location, availability_status, description, rating, image_path, price FROM hotel";
 $result = $conn->query($sql);
 ?>
 
@@ -53,7 +53,7 @@ $result = $conn->query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Listings</title>
+    <title>hotel Listings</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -154,7 +154,7 @@ $result = $conn->query($sql);
     </style>
     <script>
         function deleteRow(row) {
-            var table = document.getElementById("homeTable");
+            var table = document.getElementById("hotelTable");
             table.deleteRow(row.parentNode.parentNode.rowIndex);
         }
     </script>
@@ -164,7 +164,7 @@ $result = $conn->query($sql);
 
     <div class="container">
         <div class="forms">
-            <h3>Insert New Home</h3>
+            <h3>Insert New hotel</h3>
             <form method="POST" action="">
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" required>
@@ -193,10 +193,10 @@ $result = $conn->query($sql);
                 <input type="submit" name="insert" value="Insert">
             </form>
 
-            <h3>Update Home Availability Status</h3>
+            <h3>Update hotel Availability Status</h3>
             <form method="POST" action="">
-                <label for="home_id">Home ID:</label>
-                <input type="number" id="home_id" name="home_id" required>
+                <label for="hotel_id">hotel ID:</label>
+                <input type="number" id="hotel_id" name="hotel_id" required>
                 
                 <label for="availability_status">Availability Status:</label>
                 <select id="availability_status" name="availability_status" required>
@@ -209,10 +209,10 @@ $result = $conn->query($sql);
         </div>
 
         <div class="table-container">
-            <h2>Home Listings</h2>
-            <table id="homeTable">
+            <h2>hotel Listings</h2>
+            <table id="hotelTable">
                 <tr>
-                    <th>Home ID</th>
+                    <th>hotel ID</th>
                     <th>Name</th>
                     <th>Location</th>
                     <th>Availability Status</th>
@@ -232,7 +232,7 @@ $result = $conn->query($sql);
                         }
 
                         echo "<tr>";
-                        echo "<td>" . $row["home_id"] . "</td>";
+                        echo "<td>" . $row["hotel_id"] . "</td>";
                         echo "<td>" . $row["name"] . "</td>";
                         echo "<td>" . $row["location"] . "</td>";
                         echo "<td>" . $row["availability_status"] . "</td>";

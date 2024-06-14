@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $tour_register = $conn->real_escape_string($_POST["tour_register"]);
 
   if (isset($_POST["submit1"])) {
-    $stmt = $conn->prepare("INSERT INTO product (tour_id, tour_Division, tour_name, Place_type, tour_price, tour_image, tour_register) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO place (tour_id, tour_Division, tour_name, Place_type, tour_price, tour_image, tour_register) VALUES (?, ?, ?, ?, ?, ?, ?)");
     $stmt->bind_param("ssssiss", $tour_id, $tour_Division, $tour_name, $Place_type, $tour_price, $tour_image, $tour_register);
     $stmt->execute();
     $stmt->close();
@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
   if (isset($_POST["submit2"])) {
-    $stmt = $conn->prepare("DELETE FROM product WHERE tour_id = ?");
+    $stmt = $conn->prepare("DELETE FROM place WHERE tour_id = ?");
     $stmt->bind_param("s", $tour_id);
     $stmt->execute();
     $stmt->close();
@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
   if (isset($_POST["submit3"])) {
-    $stmt = $conn->prepare("UPDATE product SET tour_Division = ?, tour_name = ?, Place_type = ?, tour_price = ?, tour_image = ?, tour_register = ? WHERE tour_id = ?");
+    $stmt = $conn->prepare("UPDATE place SET tour_Division = ?, tour_name = ?, Place_type = ?, tour_price = ?, tour_image = ?, tour_register = ? WHERE tour_id = ?");
     $stmt->bind_param("sssisds", $tour_Division, $tour_name, $Place_type, $tour_price, $tour_image, $tour_register, $tour_id);
     $stmt->execute();
     $stmt->close();
@@ -185,7 +185,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <th>Event Date</th>
         </tr>
         <?php
-        $sql = "SELECT `tour_id`, `tour_Division`, `tour_name`, `Place_type`, `tour_price`, `tour_image`, `tour_register` FROM `product`";
+        $sql = "SELECT `tour_id`, `tour_Division`, `tour_name`, `Place_type`, `tour_price`, `tour_image`, `tour_register` FROM `place`";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {

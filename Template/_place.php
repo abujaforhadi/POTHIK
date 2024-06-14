@@ -1,7 +1,7 @@
-<!-- Special Price -->
 <?php
 $brand = array_map(function ($pro) {
-    return $pro['tour_Division']; }, $product_shuffle);
+    return $pro['tour_Division'];
+}, $product_shuffle);
 $unique = array_unique($brand);
 sort($unique);
 shuffle($product_shuffle);
@@ -15,8 +15,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 }
 
 $in_cart = $Cart->getCartId($product->getData('cart'));
-
 ?>
+
 <style>
     .container {
         max-width: 1200px;
@@ -77,7 +77,7 @@ $in_cart = $Cart->getCartId($product->getData('cart'));
         border: none;
         padding: 10px 15px;
         cursor: pointer;
-        transition: background-color 0.3s;
+        transition: background-color 0.3s, color 0.3s;
     }
 
     .btn:hover {
@@ -92,12 +92,12 @@ $in_cart = $Cart->getCartId($product->getData('cart'));
         margin: 0 5px;
         padding: 10px 20px;
         cursor: pointer;
-        transition: background-color 0.3s;
+        transition: background-color 0.3s, color 0.3s;
     }
 
     .button-group .btn.is-checked {
-        background-color: #f8c146;
-        color: #fff;
+        background-color: white; /* Change the background color for the active button */
+        color: black; /* Change the text color for the active button */
     }
 
     @media (max-width: 1200px) {
@@ -121,6 +121,7 @@ $in_cart = $Cart->getCartId($product->getData('cart'));
         }
     }
 </style>
+
 <section id="special-price">
     <div class="container">
         <hr>
@@ -138,8 +139,7 @@ $in_cart = $Cart->getCartId($product->getData('cart'));
                     <div class="item">
                         <div class="product font-rale">
                             <a href="<?php printf('%s?tour_id=%s', 'Place.php', $item['tour_id']); ?>">
-                                <img src="<?php echo $item['tour_image'] ?? "./assets/products/13.png"; ?>" alt="product1"
-                                    class="img-fluid">
+                                <img src="<?php echo $item['tour_image'] ?? "./assets/products/13.png"; ?>" alt="product1" class="img-fluid">
                             </a>
                             <div class="text-center">
                                 <h6><?php echo $item['tour_name'] ?? "Unknown"; ?></h6>
@@ -156,7 +156,6 @@ $in_cart = $Cart->getCartId($product->getData('cart'));
                                 <form method="post">
                                     <input type="hidden" name="tour_id" value="<?php echo $item['tour_id'] ?? '1'; ?>">
                                     <input type="hidden" name="user_id" value="<?php echo 1; ?>">
-
                                 </form>
                             </div>
                         </div>

@@ -30,10 +30,10 @@ function getCount($conn, $sql)
 }
 
 // SQL queries to count rows for each category
-$sqlPlaces = "SELECT COUNT(*) AS total FROM product";
+$sqlPlaces = "SELECT COUNT(*) AS total FROM place";
 $sqlTransportation = "SELECT COUNT(*) AS total FROM bus_details";
 $sqlBlogs = "SELECT COUNT(*) AS total FROM blog_table";
-$sqlResidence = "SELECT COUNT(*) AS total FROM home";
+$sqlResidence = "SELECT COUNT(*) AS total FROM hotel";
 $sqlUsers = "SELECT COUNT(*) AS total FROM users";
 
 // Execute the queries and store the counts

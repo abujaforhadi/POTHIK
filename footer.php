@@ -105,7 +105,7 @@
     <!-- Your existing content -->
 
     <footer id="foot">
-        <div class="container">
+        <div class="con">
             <div class="row">
                 <div class="col-lg-3 col-12">
                     <a class="navbar-brand" href="./index.php">
@@ -119,7 +119,7 @@
                             <input type="email" class="form-control" placeholder="Email *" required>
                         </div>
                         <div class="col">
-                            <button type="submit" class="btn btn-primary mb-2">Subscribe</button>
+                            <button type="subm" class="btn btn-primary mb-2">Subscribe</button>
                         </div>
                     </form>
                 </div>

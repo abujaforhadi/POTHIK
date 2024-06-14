@@ -23,7 +23,7 @@ include ('header.php');
             padding: 0%;
         }
 
-        .container {
+        .containerrr {
             display: flex;
             background-color: white;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -109,7 +109,7 @@ include ('header.php');
             width: max-content;
             margin: auto;
             font-size: 20px;
-            
+
             margin-bottom: 25px;
             position: relative;
             top: -58px;
@@ -144,7 +144,7 @@ include ('header.php');
 
 
 <body>
-    <div class="container">
+    <div class="containerrr">
         <div class="col">
             <form action="" method="post">
                 <label for="src_id">Going From:</label>
@@ -178,7 +178,7 @@ include ('header.php');
                 </select>
 
                 <label>Journey Date:</label>
-                <input name="date_name" id="date_id" required>
+                <input name="date_name" type="date" id="date_id" required>
 
                 <input name="submit" type="submit" value="GET DETAILS" class="submit">
             </form>
@@ -246,5 +246,5 @@ include ('header.php');
 
 <?php
 
-include('./footer.php');
+include ('./footer.php');
 ?>

@@ -170,7 +170,7 @@ $conn->close();
 <body>
 <section id="suggested-places">
     <div class="containerrr">
-        <h4 class="font-rubik font-size-20">Just For You, <strong class="text-capitalize"><?php echo htmlspecialchars($user_data['user_name']); ?></strong></h4>
+        <h4 class="font-rubik font-size-20">Recommended Places for <p class="text-capitalize"><?php echo htmlspecialchars($user_data['user_name']); ?></p></h4>
         <hr>
         <div class="grid">
             <?php foreach ($product_shuffle as $item) { ?>

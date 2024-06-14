@@ -7,18 +7,18 @@ $reservationError = "";
 $selectedHome = null;
 
 // Check if the form data has been submitted
-if (isset($_GET['home_id'])) {
+if (isset($_GET['hotel_id'])) {
     $user_id = $_SESSION['user_id'];
-    $homeId = $_GET['home_id'];
+    $homeId = $_GET['hotel_id'];
 
     // Fetch selected home's information
-    $query = "SELECT * FROM home WHERE home_id = $homeId";
+    $query = "SELECT * FROM hotel WHERE hotel_id = $homeId";
     $result = $con->query($query);
 
     if ($result && $result->num_rows > 0) {
         $selectedHome = $result->fetch_assoc();
     } else {
-        $reservationError = "Selected home not found.";
+        $reservationError = "Selected hotel not found.";
     }
 }
 
@@ -27,8 +27,8 @@ $checkIn = isset($_GET['checkIn']) ? $_GET['checkIn'] : "";
 $checkOut = isset($_GET['checkOut']) ? $_GET['checkOut'] : "";
 
 // Check if the reservation form has been submitted
-if (isset($_POST['home_id'], $_POST['checkIn'], $_POST['checkOut'])) {
-    $homeId = $_POST['home_id'];
+if (isset($_POST['hotel_id'], $_POST['checkIn'], $_POST['checkOut'])) {
+    $homeId = $_POST['hotel_id'];
     $checkIn = $_POST['checkIn'];
     $checkOut = $_POST['checkOut'];
     $curr_date = date("Y-m-d");
@@ -41,8 +41,8 @@ if (isset($_POST['home_id'], $_POST['checkIn'], $_POST['checkOut'])) {
         if (strtotime($checkIn) > strtotime($checkOut)) {
             $reservationError = "Check-in date cannot be greater than the check-out date.";
         } else {
-            // Calculate total price based on selected home's price and booking duration
-            $query = "SELECT price FROM home WHERE home_id = $homeId";
+            // Calculate total price based on selected hotel's price and booking duration
+            $query = "SELECT price FROM hotel WHERE hotel_id = $homeId";
             $result = $con->query($query);
 
             if ($result && $result->num_rows > 0) {
@@ -52,7 +52,7 @@ if (isset($_POST['home_id'], $_POST['checkIn'], $_POST['checkOut'])) {
                 $totalPrice = ($bookingDuration / (60 * 60 * 24)) * $price;
 
                 // Insert reservation into the database
-                $insertQuery = "INSERT INTO reservations (user_id, home_id, check_in_date, check_out_date, total_price) 
+                $insertQuery = "INSERT INTO reservations (user_id, hotel_id, check_in_date, check_out_date, total_price) 
                             VALUES ($user_id, $homeId, '$checkIn', '$checkOut', $totalPrice)";
                 $insertResult = $con->query($insertQuery);
 
@@ -61,7 +61,7 @@ if (isset($_POST['home_id'], $_POST['checkIn'], $_POST['checkOut'])) {
                     $reservationSuccess = true;
 
                     // Update the availability_status to "not_available"
-                    $updateAvailabilityQuery = "UPDATE home SET availability_status = 'not_available' WHERE home_id = $homeId";
+                    $updateAvailabilityQuery = "UPDATE hotel SET availability_status = 'not_available' WHERE hotel_id = $homeId";
                     $updateAvailabilityResult = $con->query($updateAvailabilityQuery);
 
                     if (!$updateAvailabilityResult) {
@@ -74,7 +74,7 @@ if (isset($_POST['home_id'], $_POST['checkIn'], $_POST['checkOut'])) {
                     $reservationError = "Error creating reservation: " . $con->error;
                 }
             } else {
-                $reservationError = "Error fetching home price: " . $con->error;
+                $reservationError = "Error fetching hotel price: " . $con->error;
             }
         }
     }
@@ -205,7 +205,7 @@ if (isset($_POST['home_id'], $_POST['checkIn'], $_POST['checkOut'])) {
             echo "</div>";
 
             echo "<form method='post' action='paymenthotel.php'>";
-            echo "<input type='hidden' name='home_id' value='{$selectedHome['home_id']}'>";
+            echo "<input type='hidden' name='hotel_id' value='{$selectedHome['hotel_id']}'>";
             echo "<label for='checkIn'>Check-in Date:</label>";
             echo "<input type='date' name='checkIn' required value='$checkIn'>";
             echo "<label for='checkOut'>Check-out Date:</label>";
@@ -223,7 +223,7 @@ if (isset($_POST['home_id'], $_POST['checkIn'], $_POST['checkOut'])) {
         } elseif ($reservationError) {
             echo "<p class='error'>$reservationError</p>";
         } else {
-            echo "<p>No home selected.</p>";
+            echo "<p>No hotel selected.</p>";
         }
         ?>
     </div>

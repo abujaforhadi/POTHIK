@@ -64,21 +64,21 @@ h2 {
 include("header.php");
 
 // Check if the reservation form has been submitted
-if (isset($_POST['home_id'], $_POST['checkIn'], $_POST['checkOut'])) {
+if (isset($_POST['hotel_id'], $_POST['checkIn'], $_POST['checkOut'])) {
     // Retrieve reservation details from POST data
-    $homeId = $_POST['home_id'];
+    $hotelId = $_POST['hotel_id'];
     $checkIn = $_POST['checkIn'];
     $checkOut = $_POST['checkOut'];
 
-    // Fetch selected home's information
-    $query = "SELECT * FROM home WHERE home_id = $homeId";
+    // Fetch selected hotel's information
+    $query = "SELECT * FROM hotel WHERE hotel_id = $hotelId";
     $result = $con->query($query);
 
     if ($result && $result->num_rows > 0) {
         $selectedHome = $result->fetch_assoc();
 
-        // Calculate total price based on selected home's price and booking duration
-        $query = "SELECT price FROM home WHERE home_id = $homeId";
+        // Calculate total price based on selected hotel's price and booking duration
+        $query = "SELECT price FROM hotel WHERE hotel_id = $hotelId";
         $result = $con->query($query);
 
         if ($result && $result->num_rows > 0) {
@@ -99,7 +99,7 @@ if (isset($_POST['home_id'], $_POST['checkIn'], $_POST['checkOut'])) {
             // Payment form
             echo "<form id='payment_form' action='process_payment.php' method='post' class='payment-form'>";
             echo "<input type='hidden' name='total_price' value='$totalPrice'>";
-            echo "<input type='hidden' name='home_id' value='$homeId'>";
+            echo "<input type='hidden' name='hotel_id' value='$hotelId'>";
             echo "<input type='hidden' name='checkIn' value='$checkIn'>";
             echo "<input type='hidden' name='checkOut' value='$checkOut'>";
 
@@ -133,10 +133,10 @@ if (isset($_POST['home_id'], $_POST['checkIn'], $_POST['checkOut'])) {
 
             echo "</div>";
         } else {
-            echo "Error fetching home price: " . $con->error;
+            echo "Error fetching hotel price: " . $con->error;
         }
     } else {
-        echo "Selected home not found.";
+        echo "Selected hotel not found.";
     }
 }
 include("footer.php");

@@ -13,7 +13,7 @@ if (isset($_GET['location'], $_GET['checkIn'], $_GET['checkOut'])) {
     $checkOut = $_GET['checkOut'];
 
     // Construct the query
-    $query = "SELECT * FROM home WHERE location LIKE '%$location%' AND availability_status = 'available'";
+    $query = "SELECT * FROM hotel WHERE location LIKE '%$location%' AND availability_status = 'available'";
     $result = $con->query($query);
 
     if (!$result) {
@@ -22,14 +22,14 @@ if (isset($_GET['location'], $_GET['checkIn'], $_GET['checkOut'])) {
         // Fetch search results
         while ($row = $result->fetch_assoc()) {
             // Check availability for the given check-in and check-out dates
-            $homeId = $row['home_id'];
-            $availabilityQuery = "SELECT COUNT(*) as count FROM reservations WHERE home_id = $homeId AND check_in_date <= '$checkOut' AND check_out_date >= '$checkIn'";
+            $homeId = $row['hotel_id'];
+            $availabilityQuery = "SELECT COUNT(*) as count FROM reservations WHERE hotel_id = $homeId AND check_in_date <= '$checkOut' AND check_out_date >= '$checkIn'";
             $availabilityResult = $con->query($availabilityQuery);
 
             if ($availabilityResult) {
                 $availabilityRow = $availabilityResult->fetch_assoc();
                 if ($availabilityRow['count'] == 0) {
-                    // Home is available for the selected dates
+                    // hotel is available for the selected dates
                     $searchResults[] = $row;
                 }
                 $availabilityResult->free();
@@ -116,7 +116,7 @@ if (isset($_GET['location'], $_GET['checkIn'], $_GET['checkOut'])) {
                 echo "<p class='label'>Rating:</p>";
                 echo "<p>{$row['rating']}</p>";
                 echo "<div class='buttons'>";
-                echo "<a href='reserve.php?home_id={$row['home_id']}&checkIn=$checkIn&checkOut=$checkOut' class='btn'>Book Now</a>";
+                echo "<a href='reserve.php?hotel_id={$row['hotel_id']}&checkIn=$checkIn&checkOut=$checkOut' class='btn'>Book Now</a>";
                 echo "</div>";
                 echo "</div>";
                 echo "</div>";

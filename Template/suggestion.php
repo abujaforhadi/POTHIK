@@ -29,8 +29,8 @@ $user_query->close();
 
 // Prepare the SQL statement for fetching products
 $sql = "SELECT `tour_id`, `tour_Division`, `tour_name`, `tour_price`, `tour_image`
-        FROM product 
-        JOIN users ON product.Place_type = users.Fplace 
+        FROM place 
+        JOIN users ON place.Place_type = users.Fplace 
         WHERE users.user_id = ?";
 
 $stmt = $conn->prepare($sql);

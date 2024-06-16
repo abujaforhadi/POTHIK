@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <link rel="stylesheet" href="style1.css">
     <style type="text/css">
         body {
-            min-height: 100vh;
+            
             background: url(https://wallpaperaccess.com/full/2102379.jpg);
             background-size: cover;
             background-position: center;
@@ -135,7 +135,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <div class="col-md-4">
                 <div id="box" class="form-container">
                     <form method="post">
-                        <div style="font-size: 20px; margin: 10px; color: blue;">Login</div>
+                        <div style="font-size: 20px; padding-top: 100px; margin: 20px; color: blue;">Login</div>
                         <?php if (isset($error_message)): ?>
                             <div class="alert alert-danger"><?php echo $error_message; ?></div>
                         <?php endif; ?>

@@ -200,7 +200,7 @@ $result = $conn->query($sql);
                 
                 <label for="availability_status">Availability Status:</label>
                 <select id="availability_status" name="availability_status" required>
-                    <option value="Available">Available</option>
+                    <option value="available">Available</option>
                     <option value="Not Available">Not Available</option>
                 </select>
                 

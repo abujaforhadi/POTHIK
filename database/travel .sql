@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 15, 2024 at 05:01 PM
+-- Generation Time: Jun 22, 2024 at 02:19 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -266,8 +266,8 @@ CREATE TABLE `hotel` (
 
 INSERT INTO `hotel` (`hotel_id`, `name`, `location`, `availability_status`, `description`, `rating`, `image_path`, `price`) VALUES
 (1, 'Hotel Afford Inn', 'Dhaka', 'available', 'Situated in Dhaka, within 1 km of Dhaka Airport Railway Station and 1.9 km of Uttara University, Hotel Afford Inn features accommodation with a shared lounge and free WiFi throughout the property a...', 4.0, 'https://cf.bstatic.com/xdata/images/hotel/max1280x900/499234136.jpg?k=c422f957cad5644e6a69fc5891f15ef325f7a120c9e2d171437ecfd18ccba12d&o=&hp=1', 1500.00),
-(2, 'Hotel Omni Residency Dhaka', 'Dhaka', 'Not Available', 'Situated in Dhaka, 400 metres from Primeasia University, Hotel Omni Residency Dhaka features accommodation with a fitness centre, free private parking, a shared lounge and a terrace.', 4.2, 'https://cf.bstatic.com/xdata/images/hotel/square600/249780871.webp?k=14be59f8b3b6854e2be5c0013c3e586464f132b78d9f4eea71df553af76ff819&o=', 2500.00),
-(3, 'Seagull Hotel Ltd', 'Cox\'s Bazar', 'available', 'However, hidden deep in the house is the ultimate in luxury entertainment: a bowling alley! With two lanes, it\'s the perfect place to get competitive and even has a comfortable lounge space and TV screens so you can keep track of who\'s winning. At £2,052 ($2,608) a night, with a minimum stay of four nights, it\'ll be an expensive game of bowling. Facing the beachfront, Seagull Hotel Ltd offers 5-star accommodation in Cox\'s Bazar and has an outdoor swimming pool, garden and shared lounge.', 4.3, 'https://cf.bstatic.com/xdata/images/hotel/square600/490187215.webp?k=d5adb9348953e2990164408dc9b358b857636554a704891dab85d0595e135d58&o=', 2500.00),
+(2, 'Hotel Omni Residency Dhaka', 'Dhaka', 'Available', 'Situated in Dhaka, 400 metres from Primeasia University, Hotel Omni Residency Dhaka features accommodation with a fitness centre, free private parking, a shared lounge and a terrace.', 4.2, 'https://cf.bstatic.com/xdata/images/hotel/square600/249780871.webp?k=14be59f8b3b6854e2be5c0013c3e586464f132b78d9f4eea71df553af76ff819&o=', 2500.00),
+(3, 'Seagull Hotel Ltd', 'Cox\'s Bazar', 'Available', 'However, hidden deep in the house is the ultimate in luxury entertainment: a bowling alley! With two lanes, it\'s the perfect place to get competitive and even has a comfortable lounge space and TV screens so you can keep track of who\'s winning. At £2,052 ($2,608) a night, with a minimum stay of four nights, it\'ll be an expensive game of bowling. Facing the beachfront, Seagull Hotel Ltd offers 5-star accommodation in Cox\'s Bazar and has an outdoor swimming pool, garden and shared lounge.', 4.3, 'https://cf.bstatic.com/xdata/images/hotel/square600/490187215.webp?k=d5adb9348953e2990164408dc9b358b857636554a704891dab85d0595e135d58&o=', 2500.00),
 (4, 'Hotel Omni Residency Dhaka', 'Dhaka', 'Available', 'Situated in Dhaka, 400 metres from Primeasia University, Hotel Omni Residency Dhaka features accommodation with a fitness centre, free private parking, a shared lounge and a terrace.', 4.6, 'https://cf.bstatic.com/xdata/images/hotel/square600/249780871.webp?k=14be59f8b3b6854e2be5c0013c3e586464f132b78d9f4eea71df553af76ff819&o=', 2500.00),
 (5, 'Dhaka Regency Hotel & Resort', 'Dhaka', 'available', 'Airport Road Nikunja 2, Dhaka City 1229 Bangladesh. The new-generation business-class hotel closest to the airport! In 15-stories high with over 250,000 sq. ft. of space, The hotel offers 220 luxuriously furnished Guest Rooms and Suites, Multi Cuisine Restaurants, authentic Thai Spa center, Health Club, live entertainment Bar, a Mediterranean Lounge and country’s most beautiful Roof Top Restaurant with Swimming Pool and World Class Venue facilities. ', 4.0, 'https://www.dhakaregency.com/images/home-slider/5.jpg', 4500.00),
 (6, 'Hotel Tropical Daisy', 'Dhaka', 'available', '35/A 31/B Road Gulshan-2, Dhaka, Dhaka City 1212 Bangladesh. Situated in the heart of the buzzing capital of Bangladesh, the hotel offers all the amenities of a five-star hotel but for a fraction of the price. The interiors of the hotel as well as its services have been developed with the exclusive idea of making the guests’ stay in Dhaka as enjoyable and productive as possible.', 5.0, 'https://th.bing.com/th/id/OIP.1jai00P_PaZYMJf247VXJgHaDt?rs=1&pid=ImgDetMain', 5500.00),
@@ -359,8 +359,7 @@ INSERT INTO `place` (`tour_id`, `tour_Division`, `tour_name`, `Place_type`, `tou
 (34, 'Khulna', 'Shilaidaha Kuthibari', 'Historical', '2670', './assets/products/k4.jpg', '2020-03-28'),
 (35, 'Khulna', 'Sat Gumbad Mosque', 'Historical', '2800', './assets/products/k5.jpg', '2023-12-03'),
 (36, 'Mymensingh', 'Muktagachha Jomidar Bari', 'PicnicSpot', '1750', 'https://i0.wp.com/www.alonelytraveler.com/wp-content/uploads/2021/12/muktagachha-jomidar-bari1.jpg?w=800&ssl=1', '2023-12-17'),
-(58, 'Dhaka', 'Sonargaon', 'PicnicSpot', '750', './assets/products/d1.jpg', NULL),
-(59, 'Dhaka', 'Sonargaon', 'PicnicSpot', '750', './assets/products/d1.jpg', NULL);
+(58, 'Dhaka', 'Sonargaon', 'PicnicSpot', '750', './assets/products/d1.jpg', NULL);
 
 -- --------------------------------------------------------
 
@@ -376,15 +375,6 @@ CREATE TABLE `reservations` (
   `check_out_date` date NOT NULL,
   `total_price` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `reservations`
---
-
-INSERT INTO `reservations` (`reservation_id`, `user_id`, `hotel_id`, `check_in_date`, `check_out_date`, `total_price`) VALUES
-(6, 39525, 2, '2024-01-06', '2024-01-08', 5000.00),
-(7, 39525, 4, '2024-01-09', '2024-01-12', 7500.00),
-(8, 95118, 4, '2024-06-06', '2024-06-26', 50000.00);
 
 -- --------------------------------------------------------
 

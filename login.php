@@ -135,7 +135,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <div class="col-md-4">
                 <div id="box" class="form-container">
                     <form method="post">
-                        <div style="font-size: 20px; padding-top: 100px; margin: 20px; color: blue;">Login</div>
+                        <div style="font-size: 20px; padding-top: 100px; margin: 20px;">Login</div>
                         <?php if (isset($error_message)): ?>
                             <div class="alert alert-danger"><?php echo $error_message; ?></div>
                         <?php endif; ?>

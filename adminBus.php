@@ -12,6 +12,7 @@ if ($conn->connect_error) {
 // Handle form submissions for insert, update, delete
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
+    $bus_id = $_POST['bus_id'] ?? null;
     $bus_name = $_POST['bus_name'] ?? null;
     $source = $_POST['source'] ?? null;
     $destination = $_POST['destination'] ?? null;
@@ -19,17 +20,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $seats_available = $_POST['seats_available'] ?? null;
 
     if (isset($_POST['insert'])) {
-        $sql = "INSERT INTO bus_details (bus_name, source, destination, fare, seats_available) VALUES ('$bus_name', '$source', '$destination', '$fare', '$seats_available')";
+        $sql = "INSERT INTO bus_details (bus_name, source, destination, fare, seats_available, Bus_id) VALUES ('$bus_name', '$source', '$destination', '$fare', '$seats_available', '$bus_id')";
         if (!$conn->query($sql)) {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
-    } elseif (isset($_POST['update']) && $bus_name) {
-        $sql = "UPDATE bus_details SET bus_name='$bus_name', source='$source', destination='$destination', fare='$fare', seats_available='$seats_available' WHERE bus_name='$bus_name'";
+    } elseif (isset($_POST['update']) && $bus_id) {
+        $sql = "UPDATE bus_details SET bus_name='$bus_name', source='$source', destination='$destination', fare='$fare', seats_available='$seats_available' WHERE Bus_id='$bus_id'";
         if (!$conn->query($sql)) {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
-    } elseif (isset($_POST['delete']) && $bus_name) {
-        $sql = "DELETE FROM bus_details WHERE id='$bus_name'";
+    } elseif (isset($_POST['delete']) && $bus_id) {
+        $sql = "DELETE FROM bus_details WHERE Bus_id='$bus_id'";
         if (!$conn->query($sql)) {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
@@ -37,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 // Fetch data from the bus_details table
-$sql = "SELECT `bus_name`, `source`, `destination`, `fare`, `seats_available` FROM `bus_details`";
+$sql = "SELECT `bus_name`, `source`, `destination`, `fare`, `seats_available`, `Bus_id` FROM `bus_details`";
 $result = $conn->query($sql);
 
 if ($result === false) {
@@ -135,15 +136,14 @@ if ($result === false) {
             <form method="post" action="">
                 <input type="hidden" name="<?= isset($_POST['edit']) ? 'update' : 'insert' ?>" value="1">
                 <?php if (isset($_POST['edit'])): ?>
-                    <input type="hidden" name="bus_name" value="<?= $_POST['bus_name'] ?>">
+                    <input type="hidden" name="bus_id" value="<?= $_POST['bus_id'] ?>">
                 <?php endif; ?>
+                Bus ID: <input type="text" name="bus_id" value="<?= $_POST['bus_id'] ?? '' ?>" required><br>
                 Bus Name: <input type="text" name="bus_name" value="<?= $_POST['bus_name'] ?? '' ?>" required><br>
                 Source: <input type="text" name="source" value="<?= $_POST['source'] ?? '' ?>" required><br>
-                Destination: <input type="text" name="destination" value="<?= $_POST['destination'] ?? '' ?>"
-                    required><br>
+                Destination: <input type="text" name="destination" value="<?= $_POST['destination'] ?? '' ?>" required><br>
                 Fare: <input type="number" name="fare" value="<?= $_POST['fare'] ?? '' ?>" required><br>
-                Seats Available: <input type="number" name="seats_available"
-                    value="<?= $_POST['seats_available'] ?? '' ?>" required><br>
+                Seats Available: <input type="number" name="seats_available" value="<?= $_POST['seats_available'] ?? '' ?>" required><br>
                 <input type="submit" value="<?= isset($_POST['edit']) ? 'Update' : 'Insert' ?>">
             </form>
         </div>
@@ -154,6 +154,7 @@ if ($result === false) {
             </h2>
             <table>
                 <tr>
+                    <th>Bus ID</th>
                     <th>Bus Name</th>
                     <th>Source</th>
                     <th>Destination</th>
@@ -164,6 +165,7 @@ if ($result === false) {
                 <?php if ($result->num_rows > 0): ?>
                     <?php while ($row = $result->fetch_assoc()): ?>
                         <tr>
+                            <td><?= $row["Bus_id"] ?></td>
                             <td><?= $row["bus_name"] ?></td>
                             <td><?= $row["source"] ?></td>
                             <td><?= $row["destination"] ?></td>
@@ -171,6 +173,7 @@ if ($result === false) {
                             <td><?= $row["seats_available"] ?></td>
                             <td>
                                 <form method="post" action="">
+                                    <input type="hidden" name="bus_id" value="<?= $row["Bus_id"] ?>">
                                     <input type="hidden" name="bus_name" value="<?= $row["bus_name"] ?>">
                                     <input type="hidden" name="source" value="<?= $row["source"] ?>">
                                     <input type="hidden" name="destination" value="<?= $row["destination"] ?>">
@@ -184,7 +187,7 @@ if ($result === false) {
                     <?php endwhile; ?>
                 <?php else: ?>
                     <tr>
-                        <td colspan="6">No results found</td>
+                        <td colspan="7">No results found</td>
                     </tr>
                 <?php endif; ?>
             </table>

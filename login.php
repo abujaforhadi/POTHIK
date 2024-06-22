@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <style type="text/css">
         body {
             
-            background: url(https://wallpaperaccess.com/full/2102379.jpg);
+            background: url("./assets/img/2102379.webp");
             background-size: cover;
             background-position: center;
         }

@@ -4,8 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Animated Carousel</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
   <style>
     .c-item {
       height: 580px;
@@ -93,7 +91,7 @@
     <!-- Slides -->
     <div class="carousel-inner">
       <div class="carousel-item active c-item">
-        <img src="https://tfe-bd.sgp1.digitaloceanspaces.com/uploads/1623685867.jpg" class="d-block w-100 c-img" alt="Sajek Valley">
+        <img src="https://static.meghpolli.com/meghpolli/static/assets/img/gallary_3.jpg" class="d-block w-100 c-img" alt="Sajek Valley">
         <div class="carousel-caption">
           <h1>Sajek Valley</h1>
           <p>A unique tourist spot</p>

@@ -110,8 +110,7 @@ if (isset($_GET['location'], $_GET['checkIn'], $_GET['checkOut'])) {
                 echo "<h2>{$row['name']}</h2>";
                 echo "<p class='label'>Location:</p>";
                 echo "<p>{$row['location']}</p>";
-                echo "<p class='label'>Price:</p>";
-                echo "<p>{$row['price']} TK</p>";
+                
                 echo "<p class='label'>Rating:</p>";
                 echo "<p>{$row['rating']}</p>";
                 echo "<div class='buttons'>";

@@ -35,11 +35,11 @@ $checkIn = isset($_GET['checkIn']) ? $_GET['checkIn'] : "";
 $checkOut = isset($_GET['checkOut']) ? $_GET['checkOut'] : "";
 
 // Check if the reservation form has been submitted
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['hotel_id'], $_POST['checkIn'], $_POST['checkOut'], $_POST['tp'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['hotel_id'], $_POST['checkIn'], $_POST['checkOut'], $_POST['total_price'])) {
     $homeId = intval($_POST['hotel_id']);
     $checkIn = $_POST['checkIn'];
     $checkOut = $_POST['checkOut'];
-    $tp = $_POST['tp'];
+    $total_price = $_POST['total_price'];
     $curr_date = date("Y-m-d");
 
     if (strtotime($checkIn) < strtotime($curr_date) || strtotime($checkOut) < strtotime($curr_date)) {
@@ -57,19 +57,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['hotel_id'], $_POST['c
             $row = $result->fetch_assoc();
            
             $bookingDuration = (strtotime($checkOut) - strtotime($checkIn)) / (60 * 60 * 24);
-            $basePrice = $row['price'];
-            if ($bedType === 'double') {
-                $totalPrice = $bookingDuration * ($basePrice * 1.3);
-            } else {
-                $totalPrice = $bookingDuration * $basePrice;
-            }
-           
+            $totalPrice = $bookingDuration * $total_price;
 
             // Insert reservation
             $insertQuery = "INSERT INTO reservations (user_id, hotel_id, check_in_date, check_out_date, total_price) 
                             VALUES (?, ?, ?, ?, ?)";
             $stmt = $con->prepare($insertQuery);
-            $stmt->bind_param("iissd", $user_id, $homeId, $checkIn, $checkOut, $tp);
+            $stmt->bind_param("iissd", $user_id, $homeId, $checkIn, $checkOut, $totalPrice);
             $insertResult = $stmt->execute();
 
             if ($insertResult) {
@@ -204,15 +198,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['hotel_id'], $_POST['c
 
             echo "<form method='post' action=''>";
             echo "<input type='hidden' name='hotel_id' value='{$selectedHome['hotel_id']}'>";
-            echo "<label for='checkIn'>Check-in Date: <input type='date' name='checkIn' required value='$checkIn'>   Check-out Date: <input type='date' name='checkOut' required value='$checkOut'></label>";
-            echo "<label for='checkOut'></label>";
-            echo "<label><input type='radio' name='bed_type' value='single' checked onclick='calculateTotalPrice()'> Single Bed</label>";
-            echo "<label><input type='radio' name='bed_type' value='double' onclick='calculateTotalPrice()'> Double Bed (+30%)</label>";
-
-            // Total price display
-            echo "<label for='tp'> Total Price: <input type='text' name='tp' id='tp' value='' readonly></label>";
-
-           
+            echo "<label for='checkIn'>Check-in Date: <input type='date' name='checkIn' required value='$checkIn'></label>";
+            echo "<label for='checkOut'>Check-out Date: <input type='date' name='checkOut' required value='$checkOut'></label>";
+            echo "<label for='total_price'>
+            </label>";
             
             
         
@@ -236,30 +225,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['hotel_id'], $_POST['c
     <!-- Footer -->
     <?php include ("footer.php"); ?>
 </body>
-<script>
-        // JavaScript to calculate total price based on bed type
-        function calculateTotalPrice() {
-            const pricePerNight = document.getElementById('price').value;
-            const checkInDate = document.getElementsByName('checkIn')[0].value;
-            const checkOutDate = document.getElementsByName('checkOut')[0].value;
-
-            if (checkInDate && checkOutDate) {
-                const checkIn = new Date(checkInDate);
-                const checkOut = new Date(checkOutDate);
-                const bookingDuration = (checkOut - checkIn) / (1000 * 60 * 60 * 24); // Convert milliseconds to days
-
-                // Calculate total price based on bed type
-                const bedType = document.querySelector('input[name="bed_type"]:checked').value;
-                let totalPrice;
-                if (bedType === 'double') {
-                    totalPrice = bookingDuration * pricePerNight * 1.3;
-                } else {
-                    totalPrice = bookingDuration * pricePerNight;
-                }
-
-                // Update the total price display
-                document.getElementById('tp').value = totalPrice.toFixed(2);
-            }
-        }
-    </script>
 </html>

@@ -1,4 +1,5 @@
 <?php
+// bus_details
 include ('header.php');
 session_start();
 
@@ -111,7 +112,7 @@ $_SESSION['total_price'] = $total_price;
 
 <body>
     <div class="container">
-        <h1>Payment Details</h1>
+        <h1>Payment Details</h1> 
         <h2>Total Price: <?php echo $total_price; ?>TK</h2>
         <form id="payment_form" action="generate_pdf.php" method="post">
             <label for="payment_method">Payment Method:</label>

@@ -8,7 +8,6 @@ include("../header.php");
 <?php
 
 
-# database
 
 
 // Check if the user is logged in

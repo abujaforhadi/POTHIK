@@ -24,32 +24,24 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                         <div class="text-center">
                             <h6><?php echo  $item['tour_name'] ?? "Unknown";  ?></h6>
                             <div class="rating text-warning font-size-12">
-                                <span><i class="fas fa-star"></i></span>
-                                <span><i class="fas fa-star"></i></span>
-                                <span><i class="fas fa-star"></i></span>
-                                <span><i class="fas fa-star"></i></span>
-                                <span><i class="far fa-star"></i></span>
-                            </div>
-                            <div class="price py-2">
-                                <span>৳<?php echo $item['tour_price'] ?? '0' ; ?></span>
-                            </div>
+                        <?php echo generateStarRating($item['rating'] ?? 0); ?>
+                    </div>
+                           
                             <form method="post">
                                 <input type="hidden" name="tour_id" value="<?php echo $item['tour_id'] ?? '1'; ?>">
                                 <input type="hidden" name="user_id" value="<?php echo 1; ?>">
                                 <?php
                                 if (in_array($item['tour_id'], $Cart->getCartId($product->getData('cart')) ?? [])){
-                                    echo '<button type="submit" disabled class="btn btn-success font-size-12">In the Cart</button>';
                                 }else{
-                                    echo '<button type="submit" name="top_sale_submit" class="btn btn-warning font-size-12">Book Now</button>';
                                 }
                                 ?>
                             </form>
                         </div>
                     </div>
                 </div>
-            <?php } // closing foreach function ?>
+            <?php }  ?>
         </div>
-        <!-- !owl carousel -->
+        
 
     </div>
 </section>

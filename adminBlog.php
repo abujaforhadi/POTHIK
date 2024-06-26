@@ -13,10 +13,8 @@ if ($conn->connect_error) {
 $sql = "SELECT topic_title, topic_date, name, duration, person, cost, image_filename, topic_para FROM blog_table";
 $result = $conn->query($sql);
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,8 +25,7 @@ $result = $conn->query($sql);
             border-collapse: collapse;
         }
 
-        th,
-        td {
+        th, td {
             border: 1px solid #ddd;
             padding: 8px;
         }
@@ -51,51 +48,65 @@ $result = $conn->query($sql);
         }
     </style>
     <script>
-        function deleteRow(row) {
-            var table = document.getElementById("blogTable");
-            table.deleteRow(row.parentNode.parentNode.rowIndex);
+        function deleteRow(button, topicTitle) {
+            var row = button.parentNode.parentNode;
+            var topicTitle = row.cells[0].innerText;
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "delete_blog.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    if (xhr.responseText === "success") {
+                        var table = document.getElementById("blogTable");
+                        table.deleteRow(row.rowIndex);
+                    } else {
+                        alert("Failed to delete the row.");
+                    }
+                }
+            };
+            xhr.send("topic_title=" + encodeURIComponent(topicTitle));
         }
     </script>
 </head>
-
 <body>
 
-    <h2>Blog Table</h2>
+<h2>Blog Table</h2>
 
-    <table id="blogTable">
-        <tr>
-            <th>Topic Title</th>
-            <th>Topic Date</th>
-            <th>Name</th>
-            <th>Duration</th>
-            <th>Person</th>
-            <th>Cost</th>
-            <th>Image</th>
-            <th>Description</th>
-            <th>Action</th>
-        </tr>
-        <?php
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                echo "<tr>";
-                echo "<td>" . $row["topic_title"] . "</td>";
-                echo "<td>" . $row["topic_date"] . "</td>";
-                echo "<td>" . $row["name"] . "</td>";
-                echo "<td>" . $row["duration"] . "</td>";
-                echo "<td>" . $row["person"] . "</td>";
-                echo "<td>" . $row["cost"] . "</td>";
-                echo "<td><img src='./assets/blog/images/" . $row["image_filename"] . "' alt='Image' width='50'></td>";
-                echo "<td>" . $row["topic_para"] . "</td>";
-                echo "<td><button onclick='deleteRow(this)'>Delete</button></td>";
-                echo "</tr>";
-            }
-        } else {
-            echo "<tr><td colspan='9'>No records found</td></tr>";
+<table id="blogTable">
+    <tr>
+        <th>Topic Title</th>
+        <th>Topic Date</th>
+        <th>Name</th>
+        <th>Duration</th>
+        <th>Person</th>
+        <th>Cost</th>
+        <th>Image</th>
+        <th>Description</th>
+        <th>Action</th>
+    </tr>
+    <?php
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            echo "<tr>";
+            echo "<td>" . $row["topic_title"] . "</td>";
+            echo "<td>" . $row["topic_date"] . "</td>";
+            echo "<td>" . $row["name"] . "</td>";
+            echo "<td>" . $row["duration"] . "</td>";
+            echo "<td>" . $row["person"] . "</td>";
+            echo "<td>" . $row["cost"] . "</td>";
+            echo "<td><img src='./assets/blog/images/" . $row["image_filename"] . "' alt='Image' width='50'></td>";
+            echo "<td>" . $row["topic_para"] . "</td>";
+            echo "<td><button onclick='deleteRow(this, \"" . $row["topic_title"] . "\")'>Delete</button></td>";
+            echo "</tr>";
         }
-        $conn->close();
-        ?>
-    </table>
+    } else {
+        echo "<tr><td colspan='9'>No records found</td></tr>";
+    }
+    $conn->close();
+    ?>
+</table>
 
 </body>
-
 </html>

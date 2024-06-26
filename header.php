@@ -189,7 +189,7 @@ $user_data = check_login($con);
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav m-auto font-rubik">
                     <li class="nav-item active">
-                        <a class="nav-link hover-effect" href="./topPlace.php"><i class="fa-solid fa-location-dot"></i>
+                        <a class="nav-link hover-effect" href="./sugPlace.php"><i class="fa-solid fa-location-dot"></i>
                             Suggested places</a>
                     </li>
                     <li class="nav-item active">

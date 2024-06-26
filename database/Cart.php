@@ -31,12 +31,12 @@ class Cart
         }
     }
 
-    // to get user_id and item_id and insert into cart table
+    // to get user_id and tour_id and insert into cart table
     public  function addToCart($userid, $itemid){
         if (isset($userid) && isset($itemid)){
             $params = array(
                 "user_id" => $userid,
-                "item_id" => $itemid
+                "tour_id" => $itemid
             );
 
             // insert data into cart
@@ -49,9 +49,9 @@ class Cart
     }
 
     // delete cart item using cart item id
-    public function deleteCart($item_id = null, $table = 'cart'){
-        if($item_id != null){
-            $result = $this->db->con->query("DELETE FROM {$table} WHERE item_id={$item_id}");
+    public function deleteCart($tour_id = null, $table = 'cart'){
+        if($tour_id != null){
+            $result = $this->db->con->query("DELETE FROM {$table} WHERE tour_id={$tour_id}");
             if($result){
                 header("Location:" . $_SERVER['PHP_SELF']);
             }
@@ -71,7 +71,7 @@ class Cart
     }
 
     // get item_it of shopping cart list
-    public function getCartId($cartArray = null, $key = "item_id"){
+    public function getCartId($cartArray = null, $key = "tour_id"){
         if ($cartArray != null){
             $cart_id = array_map(function ($value) use($key){
                 return $value[$key];
@@ -81,10 +81,10 @@ class Cart
     }
 
     // Save for later
-    public function saveForLater($item_id = null, $saveTable = "wishlist", $fromTable = "cart"){
-        if ($item_id != null){
-            $query = "INSERT INTO {$saveTable} SELECT * FROM {$fromTable} WHERE item_id={$item_id};";
-            $query .= "DELETE FROM {$fromTable} WHERE item_id={$item_id};";
+    public function saveForLater($tour_id = null, $saveTable = "wishlist", $fromTable = "cart"){
+        if ($tour_id != null){
+            $query = "INSERT INTO {$saveTable} SELECT * FROM {$fromTable} WHERE tour_id={$tour_id};";
+            $query .= "DELETE FROM {$fromTable} WHERE tour_id={$tour_id};";
 
             // execute multiple query
             $result = $this->db->con->multi_query($query);

@@ -1,9 +1,41 @@
 <?php
-// Start output buffering
-ob_start();
-
-// Include header.php file
 include('header.php');
+
+// Database connection
+$conn = new mysqli('localhost', 'root', '', 'travel');
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Check if user is logged in
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+
+    // Fetch user details based on user_id
+    $sql = "SELECT `user_name` FROM `users` WHERE `user_id` = ?";
+    $stmt = $conn->prepare($sql);
+
+    if ($stmt) {
+        $stmt->bind_param("i", $user_id); // Assuming user_id is an integer
+        $stmt->execute();
+        $stmt->bind_result($user_name);
+        $stmt->fetch();
+
+        // Assign user_name to $name variable
+        $name = $user_name;
+
+        $stmt->close();
+    } else {
+        // Handle SQL statement preparation error
+        $error = $conn->error;
+    }
+
+} else {
+    // Redirect or display error message if user is not logged in
+    die("User is not logged in.");
+}
 
 // Check if form data has been posted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -25,29 +57,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $image_filename = null;
     }
 
-    // Create connection
-    $conn = new mysqli("localhost", "root", "", "travel");
+    // Prepare and bind insert statement for blog post
+    $insert_stmt = $conn->prepare("INSERT INTO blog_table (topic_title, topic_date, name, duration, person, cost, image_filename, topic_para) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+    if ($insert_stmt) {
+        $insert_stmt->bind_param("ssssssss", $blogtitle, $blogdate, $name, $duration, $person, $cost, $image_filename, $blogpara);
 
-    // Prepare and bind
-    $stmt = $conn->prepare("INSERT INTO blog_table (topic_title, topic_date, duration, person, cost, image_filename, topic_para) VALUES (?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssssss", $blogtitle, $blogdate, $duration, $person, $cost, $image_filename, $blogpara);
+        // Execute the statement
+        if ($insert_stmt->execute()) {
+            $success = true;
+        } else {
+            $error = $insert_stmt->error;
+        }
 
-    // Execute the statement
-    if ($stmt->execute()) {
-        $success = true;
+        // Close insert statement
+        $insert_stmt->close();
     } else {
-        $error = $stmt->error;
+        // Handle insert statement preparation error
+        $error = $conn->error;
     }
-
-    // Close connection
-    $stmt->close();
-    $conn->close();
 }
+
+// Close connection
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -55,6 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Traveler's Diary</title>
     <style type="text/css">
         body {
             margin: 0;
@@ -183,7 +216,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </style>
 </head>
 <body>
-
     <div class="top-bar">
         <span id="topBarTitle">Create Traveler's Diary</span>
     </div>
@@ -202,28 +234,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 
     <?php if (isset($success) && $success): ?>
-    <div id="toast" class="toast">New record created successfully!</div>
+    <div class="toast">New record created successfully!</div>
     <script>
         // Show toast
-        var toast = document.getElementById("toast");
-        toast.className = "toast show";
-        // Redirect after 2 seconds
-        setTimeout(function(){ window.location.href = 'index.php'; }, 2000);
+        document.querySelector('.toast').style.visibility = 'visible';
+        // Redirect after 2 seconds (optional)
+        setTimeout(function() {
+            window.location.href = 'index.php';
+        }, 2000);
     </script>
     <?php elseif (isset($error)): ?>
-    <div id="toast" class="toast">Error: <?= $error ?></div>
+    <div class="toast">Error: <?= $error ?></div>
     <script>
         // Show toast
-        var toast = document.getElementById("toast");
-        toast.className = "toast show";
+        document.querySelector('.toast').style.visibility = 'visible';
     </script>
     <?php endif; ?>
 
+    <!-- Your JavaScript files and scripts -->
     <script src="scripts/script.js"></script>
+
 </body>
 </html>
 
-<?php
-// Include footer.php file
-include('footer.php');
-?>

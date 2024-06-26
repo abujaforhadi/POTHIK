@@ -1,6 +1,6 @@
 <?php
 ob_start();
-// include header.php file
+
 include ('header.php');
 ?>
 
@@ -66,7 +66,7 @@ include ('header.php');
       width: 100%;
       max-width: 350px;
       height: 500px; /* Fixed height for consistency */
-      transition: transform 0.3s;
+      transition: transform 0.3s, height 0.3s;
       overflow: hidden;
     }
 
@@ -96,15 +96,13 @@ include ('header.php');
       text-align: center;
     }
 
-    #displayPara {
+    .post-content {
+      position: relative;
       overflow: hidden;
-      display: -webkit-box;
-      -webkit-line-clamp: 5;
-      -webkit-box-orient: vertical;
-      margin-bottom: auto;
-      color: #333;
-      text-align: justify;
-      height: 100px; /* Fixed content size for consistency */
+    }
+
+    .full-content {
+      display: none;
     }
 
     .write-post {
@@ -162,9 +160,11 @@ include ('header.php');
 
       if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
+          $para_snippet = implode(' ', array_slice(explode(' ', $row["topic_para"]), 0, 20)) . '...';
+
           echo "<div class='col'>";
-          echo "<div class='post-container'>";
-          echo "<span id='displayTitle'>Place name: " . $row["topic_title"] . "</span>";
+          echo "<div class='post-container' id='post-container-" . $row["topic_title"] . "'>";
+          echo "<span id='displayTitle'>Place : " . $row["topic_title"] . "</span>";
           echo "<div class='post-details'>";
           echo "<span id='displayDate'>Travel Date: " . $row["topic_date"] . "</span><br>";
           echo "<span id='name'>Posted by: " . $row["name"] . "</span><br>";
@@ -173,7 +173,10 @@ include ('header.php');
           echo "<span id='cost'>Total Cost: " . $row["cost"] . " Tk</span>";
           echo "</div>";
           echo "<img src='./assets/blog/images/" . $row["image_filename"] . "'>";
-          echo "<p id='displayPara'>" . $row["topic_para"] . "</p>";
+          echo "<div class='post-content' id='post-content-" . $row["topic_title"] . "' onclick='seeMore(\"" . $row["topic_title"] . "\")'>";
+          echo "<p id='displayPara-" . $row["topic_title"] . "'>" . $para_snippet . "<span class='see-more'> See More</span></p>";
+          echo "<p id='fullPara-" . $row["topic_title"] . "' class='full-content'>" . $row["topic_para"] . "</p>";
+          echo "</div>";
           echo "</div>";
           echo "</div>";
         }
@@ -189,10 +192,29 @@ include ('header.php');
   <div class="write-post">
     <a href='cBlog.php'>Write a New Post</a>
   </div>
+
+  <script>
+    function seeMore(title) {
+      var postContainer = document.getElementById('post-container-' + title);
+      var snippet = document.getElementById('displayPara-' + title);
+      var fullContent = document.getElementById('fullPara-' + title);
+      var seeMoreText = snippet.querySelector('.see-more');
+      if (fullContent.style.display === 'none' || fullContent.style.display === '') {
+        snippet.style.display = 'none';
+        fullContent.style.display = 'block';
+        postContainer.style.height = 'auto';
+      } else {
+        snippet.style.display = 'block';
+        fullContent.style.display = 'none';
+        postContainer.style.height = '500px';
+        seeMoreText.style.display = 'inline';
+      }
+    }
+  </script>
 </body>
 
 </html>
 <?php
-// include footer.php file
+
 include ('footer.php');
 ?>

@@ -12,7 +12,7 @@ class Product
     }
 
     // fetch product data using getData Method
-    public function getData($table = 'products'){
+    public function getData($table = 'place'){
         $result = $this->db->con->query("SELECT * FROM {$table}");
 
         $resultArray = array();
@@ -26,9 +26,9 @@ class Product
     }
 
     // get product using item id
-    public function getProduct($item_id = null, $table= 'products'){
-        if (isset($item_id)){
-            $result = $this->db->con->query("SELECT * FROM {$table} WHERE item_id={$item_id}");
+    public function getProduct($tour_id = null, $table= 'place'){
+        if (isset($tour_id)){
+            $result = $this->db->con->query("SELECT * FROM {$table} WHERE tour_id={$tour_id}");
 
             $resultArray = array();
 

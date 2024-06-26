@@ -1,8 +1,29 @@
-<!--   product  -->
 <?php
-    $tour_id = $_GET['tour_id'] ?? 1;
-    foreach ($product->getData() as $item) :
-        if ($item['tour_id'] == $tour_id) :
+function generateStarRating($rating) {
+    $fullStar = '<span><i class="fas fa-star"></i></span>';
+    $halfStar = '<span><i class="fas fa-star-half-alt"></i></span>';
+    $emptyStar = '<span><i class="far fa-star"></i></span>';
+
+    $stars = '';
+
+    for ($i = 1; $i <= 5; $i++) {
+        if ($rating >= 1) {
+            $stars .= $fullStar;
+            $rating--;
+        } elseif ($rating >= 0.5) {
+            $stars .= $halfStar;
+            $rating -= 0.5;
+        } else {
+            $stars .= $emptyStar;
+        }
+    }
+
+    return $stars;
+}
+
+$tour_id = $_GET['tour_id'] ?? 1;
+foreach ($product->getData() as $item) :
+    if ($item['tour_id'] == $tour_id) :
 ?>
 <section id="product" class="py-3">
     <div class="container">
@@ -26,11 +47,7 @@
                 <small>At <?php echo $item['tour_Division'] ?? "Brand"; ?> Division</small>
                 <div class="d-flex">
                     <div class="rating text-warning font-size-12">
-                        <span><i class="fas fa-star"></i></span>
-                        <span><i class="fas fa-star"></i></span>
-                        <span><i class="fas fa-star"></i></span>
-                        <span><i class="fas fa-star"></i></span>
-                        <span><i class="far fa-star"></i></span>
+                        <?php echo generateStarRating($item['rating'] ?? 0); ?>
                     </div>
                     <a href="#" class="px-2 font-rale font-size-14">20k ratings | 10+k answered questions</a>
                 </div>
@@ -39,11 +56,11 @@
                 <table class="my-3">
                     <tr class="font-rale font-size-14">
                         <td>Price:</td>
-                        <td class="font-size-20 text-danger">৳<span id="deal_price"><?php echo $item['tour_price'] ?? 0; ?></span><small>/Person</small></td>
+                        <td class="font-size-20 text-danger"><span id="deal_price"><?php echo $item['tour_price'] ?? 0; ?></span><small>TK/per Person</small></td>
                     </tr>
                     <tr class="font-rale font-size-14">
                         <td>Total Price:</td>
-                        <td class="font-size-20 text-danger">৳<span id="total_price"><?php echo $item['tour_price'] ?? 0; ?></span></td>
+                        <td class="font-size-20 text-danger"><span id="total_price"><?php echo $item['tour_price'] ?? 0; ?>TK</span></td>
                     </tr>
                 </table>
                 <hr>
@@ -102,6 +119,6 @@
     });
 </script>
 <?php
-        endif;
-    endforeach;
+    endif;
+endforeach;
 ?>

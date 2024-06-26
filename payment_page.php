@@ -1,11 +1,11 @@
 <?php
-
 include ('header.php');
+session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve the number of passengers
     $num_passengers = $_POST['num_name'];
-    
+
     // Retrieve passenger information
     $passengers = [];
     for ($i = 1; $i <= $num_passengers; $i++) {
@@ -51,7 +51,8 @@ $_SESSION['total_price'] = $total_price;
             border-radius: 10px;
         }
 
-        .container h1, .container h2 {
+        .container h1,
+        .container h2 {
             text-align: center;
             margin-bottom: 20px;
             color: #333;
@@ -90,11 +91,14 @@ $_SESSION['total_price'] = $total_price;
             margin-top: 20px;
         }
 
-        table, th, td {
+        table,
+        th,
+        td {
             border: 1px solid #ddd;
         }
 
-        th, td {
+        th,
+        td {
             text-align: center;
             padding: 8px;
         }
@@ -109,27 +113,26 @@ $_SESSION['total_price'] = $total_price;
     <div class="container">
         <h1>Payment Details</h1>
         <h2>Total Price: <?php echo $total_price; ?>TK</h2>
-        <form id="payment_form" action="process_payment.php" method="post">
+        <form id="payment_form" action="generate_pdf.php" method="post">
             <label for="payment_method">Payment Method:</label>
             <select id="payment_method" name="payment_method" required>
-                <option >select</option>
+                <option value="" disabled selected>Select</option>
                 <option value="card">Credit/Debit Card</option>
-
                 <option value="mobile_banking">Mobile Banking</option>
             </select>
 
             <div id="card_payment" style="display: none;">
                 <label for="card_number">Card Number:</label>
-                <input type="text" id="card_number" name="card_number">
+                <input type="number" id="card_number" name="card_number">
                 <label for="card_expiry">Expiry Date (MM/YY):</label>
                 <input type="text" id="card_expiry" name="card_expiry">
                 <label for="card_cvc">CVC:</label>
-                <input type="text" id="card_cvc" name="card_cvc">
+                <input type="number" id="card_cvc" name="card_cvc">
             </div>
 
             <div id="mobile_banking_payment" style="display: none;">
                 <label for="mobile_banking_number">Mobile Banking Number:</label>
-                <input type="text" id="mobile_banking_number" name="mobile_banking_number">
+                <input type="number" id="mobile_banking_number" name="mobile_banking_number">
                 <label for="transaction_id">Transaction ID:</label>
                 <input type="text" id="transaction_id" name="transaction_id">
             </div>
@@ -165,16 +168,9 @@ $_SESSION['total_price'] = $total_price;
             document.getElementById('card_payment').style.display = paymentMethod === 'card' ? 'block' : 'none';
             document.getElementById('mobile_banking_payment').style.display = paymentMethod === 'mobile_banking' ? 'block' : 'none';
         });
-
-        document.getElementById('payment_form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            alert("Payment is being processed. Please wait...");
-            setTimeout(function() {
-                window.location.href = 'index.php';
-            }, 5000);
-        });
     </script>
 </body>
+
 </html>
 <?php
 include ('footer.php');

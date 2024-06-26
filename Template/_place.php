@@ -5,7 +5,27 @@ $brand = array_map(function ($pro) {
 $unique = array_unique($brand);
 sort($unique);
 shuffle($product_shuffle);
+function generateStarRating($rating) {
+    $fullStar = '<span><i class="fas fa-star"></i></span>';
+    $halfStar = '<span><i class="fas fa-star-half-alt"></i></span>';
+    $emptyStar = '<span><i class="far fa-star"></i></span>';
 
+    $stars = '';
+
+    for ($i = 1; $i <= 5; $i++) {
+        if ($rating >= 1) {
+            $stars .= $fullStar;
+            $rating--;
+        } elseif ($rating >= 0.5) {
+            $stars .= $halfStar;
+            $rating -= 0.5;
+        } else {
+            $stars .= $emptyStar;
+        }
+    }
+
+    return $stars;
+}
 // request method post
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if (isset($_POST['special_price_submit'])) {
@@ -96,8 +116,10 @@ $in_cart = $Cart->getCartId($product->getData('cart'));
     }
 
     .button-group .btn.is-checked {
-        background-color: white; /* Change the background color for the active button */
-        color: black; /* Change the text color for the active button */
+        background-color: white;
+        /* Change the background color for the active button */
+        color: black;
+        /* Change the text color for the active button */
     }
 
     @media (max-width: 1200px) {
@@ -139,20 +161,17 @@ $in_cart = $Cart->getCartId($product->getData('cart'));
                     <div class="item">
                         <div class="product font-rale">
                             <a href="<?php printf('%s?tour_id=%s', 'Place.php', $item['tour_id']); ?>">
-                                <img src="<?php echo $item['tour_image'] ?? "./assets/products/13.png"; ?>" alt="product1" class="img-fluid">
+                                <img src="<?php echo $item['tour_image'] ?? "./assets/products/13.png"; ?>" alt="product1"
+                                    class="img-fluid">
                             </a>
                             <div class="text-center">
                                 <h6><?php echo $item['tour_name'] ?? "Unknown"; ?></h6>
                                 <div class="rating text-warning font-size-12">
-                                    <span><i class="fas fa-star"></i></span>
-                                    <span><i class="fas fa-star"></i></span>
-                                    <span><i class="fas fa-star"></i></span>
-                                    <span><i class="fas fa-star"></i></span>
-                                    <span><i class="far fa-star"></i></span>
+                                    <?php echo generateStarRating($item['rating'] ?? 0); ?>
                                 </div>
-                                <div class="price py-2">
+                                <!-- <div class="price py-2">
                                     <span><?php echo $item['tour_price'] ?? 0; ?> TK </span>
-                                </div>
+                                </div> -->
                                 <form method="post">
                                     <input type="hidden" name="tour_id" value="<?php echo $item['tour_id'] ?? '1'; ?>">
                                     <input type="hidden" name="user_id" value="<?php echo 1; ?>">

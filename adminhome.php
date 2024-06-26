@@ -181,7 +181,7 @@ $conn->close();
       <div class="card-content">
         <h2>User</h2>
         <p>Total Users: <?php echo $totalUsers; ?></p>
-        <a href="#">Manage Blogs</a>
+        <a href="userAdmin.php">Manage Blogs</a>
       </div>
     </div>
   </div>

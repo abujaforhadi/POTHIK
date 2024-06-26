@@ -7,11 +7,32 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Check if user is logged in
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
 } else {
     die("User is not logged in.");
+}
+
+function generateStarRating($rating) {
+    $fullStar = '<span><i class="fas fa-star"></i></span>';
+    $halfStar = '<span><i class="fas fa-star-half-alt"></i></span>';
+    $emptyStar = '<span><i class="far fa-star"></i></span>';
+
+    $stars = '';
+
+    for ($i = 1; $i <= 5; $i++) {
+        if ($rating >= 1) {
+            $stars .= $fullStar;
+            $rating--;
+        } elseif ($rating >= 0.5) {
+            $stars .= $halfStar;
+            $rating -= 0.5;
+        } else {
+            $stars .= $emptyStar;
+        }
+    }
+
+    return $stars;
 }
 
 // Retrieve user data (e.g., username)
@@ -28,7 +49,7 @@ if ($user_result->num_rows > 0) {
 $user_query->close();
 
 // Prepare the SQL statement for fetching products
-$sql = "SELECT `tour_id`, `tour_Division`, `tour_name`, `tour_price`, `tour_image`
+$sql = "SELECT `tour_id`, `tour_Division`, `tour_name`, `tour_price`, `tour_image`, `rating`
         FROM place 
         JOIN users ON place.Place_type = users.Fplace 
         WHERE users.user_id = ?";
@@ -58,10 +79,11 @@ $conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -73,8 +95,6 @@ $conn->close();
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
-            
-            
         }
 
         h4 {
@@ -101,7 +121,6 @@ $conn->close();
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
-            padding: 200;
             justify-content: space-between;
         }
 
@@ -167,42 +186,39 @@ $conn->close();
         }
     </style>
 </head>
+
 <body>
-<section id="suggested-places">
-    <div class="containerrr">
-        <h4 class="font-rubik font-size-20">Recommended Places for <p class="text-capitalize"><?php echo htmlspecialchars($user_data['user_name']); ?></p></h4>
-        <hr>
-        <div class="grid">
-            <?php foreach ($product_shuffle as $item) { ?>
-                <div class="grid-item border <?php echo htmlspecialchars($item['tour_Division']); ?>">
-                    <div class="item">
-                        <div class="product font-rale">
-                            <a href="<?php printf('%s?tour_id=%s', 'Place.php', htmlspecialchars($item['tour_id'])); ?>">
-                                <img src="<?php echo htmlspecialchars($item['tour_image']) ?? "./assets/products/13.png"; ?>" alt="product1" class="img-fluid">
-                            </a>
-                            <div class="text-center">
-                                <h6><?php echo htmlspecialchars($item['tour_name']) ?? "Unknown"; ?></h6>
-                                <div class="rating text-warning font-size-12">
-                                    <span><i class="fas fa-star"></i></span>
-                                    <span><i class="fas fa-star"></i></span>
-                                    <span><i class="fas fa-star"></i></span>
-                                    <span><i class="fas fa-star"></i></span>
-                                    <span><i class="far fa-star"></i></span>
+    <section id="suggested-places">
+        <div class="containerrr">
+            <h4 class="font-rubik font-size-20">Recommended Places for 
+                <p class="text-capitalize"><?php echo htmlspecialchars($user_data['user_name']); ?></p>
+            </h4>
+            <hr>
+            <div class="grid">
+                <?php foreach ($product_shuffle as $item) { ?>
+                    <div class="grid-item border <?php echo htmlspecialchars($item['tour_Division']); ?>">
+                        <div class="item">
+                            <div class="product font-rale">
+                                <a href="<?php printf('%s?tour_id=%s', 'Place.php', htmlspecialchars($item['tour_id'])); ?>">
+                                    <img src="<?php echo htmlspecialchars($item['tour_image']) ?? "./assets/products/13.png"; ?>" alt="product1" class="img-fluid">
+                                </a>
+                                <div class="text-center">
+                                    <h6><?php echo htmlspecialchars($item['tour_name']) ?? "Unknown"; ?></h6>
+                                    <div class="rating text-warning font-size-12">
+                                        <?php echo generateStarRating($item['rating'] ?? 0); ?>
+                                    </div>
+                                    <form method="post">
+                                        <input type="hidden" name="tour_id" value="<?php echo htmlspecialchars($item['tour_id']); ?>">
+                                        <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($user_id); ?>">
+                                    </form>
                                 </div>
-                                <div class="price py-2">
-                                    <span><?php echo htmlspecialchars($item['tour_price']) ?? 0; ?> TK</span>
-                                </div>
-                                <form method="post">
-                                    <input type="hidden" name="tour_id" value="<?php echo htmlspecialchars($item['tour_id']); ?>">
-                                    <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($user_id); ?>">
-                                </form>
                             </div>
                         </div>
                     </div>
-                </div>
-            <?php } ?>
+                <?php } ?>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 </body>
+
 </html>

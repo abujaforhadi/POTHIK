@@ -206,8 +206,13 @@ $user_data = check_login($con);
                             Residence</a>
                     </li>
                     <li class="nav-item active">
+                        <a class="nav-link text-capitalize hover-effect" href="./profile.php">
+                            <i class="fa-solid fa-user-plus"></i> <?php echo $user_data['user_name']; ?>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
                         <a class="nav-link text-capitalize hover-effect" href="./logout.php">
-                            <i class="fa-solid fa-user-plus"></i> <?php echo $user_data['user_name']; ?> (Logout)
+                        <i class="fa-solid fa-right-from-bracket"></i> (Logout)
                         </a>
                     </li>
                 </ul>

@@ -1,3 +1,6 @@
+<?php
+include("header.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -68,16 +71,29 @@
 </head>
 <body>
 <?php
-include("header.php");
 
 // Check if the reservation form has been submitted
 if (isset($_GET['reservation_id'])) {
     $reservationId = intval($_GET['reservation_id']); // Sanitize input
 
     // Fetch reservation details
-    $query = "SELECT reservations.*, hotel.name, hotel.price FROM reservations 
-              JOIN hotel ON reservations.hotel_id = hotel.hotel_id 
-              WHERE reservations.reservation_id = ?";
+    $query = "SELECT 
+    reservations.*, 
+    hotel.name, 
+    hotel.price,
+    users.user_name
+FROM 
+    reservations
+JOIN 
+    hotel 
+ON 
+    reservations.hotel_id = hotel.hotel_id
+JOIN 
+    users 
+ON 
+    reservations.user_id = users.user_id
+WHERE 
+    reservations.reservation_id = ?;";
     $stmt = $con->prepare($query);
     $stmt->bind_param("i", $reservationId);
     $stmt->execute();
@@ -89,19 +105,21 @@ if (isset($_GET['reservation_id'])) {
         $totalPrice = $reservation['total_price'];
         $checkIn = $reservation['check_in_date'];
         $checkOut = $reservation['check_out_date'];
+        $user_name = $reservation['user_name'];
 
         // Display payment details
-        echo "<div class='containe'>";
+        echo "<div class='containe text-capitalize'>";
         echo "<h2>Payment Details</h2>";
         echo "<div class='details'>";
+        echo "<p><b>Customer Name:</b> $user_name</p>";
         echo "<p><b>Hotel Name:</b> $hotelName</p>";
         echo "<p><b>Check-in Date:</b> $checkIn</p>";
         echo "<p><b>Check-out Date:</b> $checkOut</p>";
-        echo "<p><b>Total Price:</b> ৳$totalPrice</p>";
+        echo "<p><b>Total Price:</b> $totalPrice TK</p>";
         echo "</div>";
 
         // Payment form
-        echo "<form id='payment_form' action='process_payment.php' method='post' class='payment-form'>";
+        echo "<form id='payment_form' action='gpdf_pdf.php' method='post' class='payment-form'>";
         echo "<input type='hidden' name='reservation_id' value='$reservationId'>";
         echo "<input type='hidden' name='total_price' value='$totalPrice'>";
 
@@ -154,11 +172,7 @@ include("footer.php");
     });
 
     document.getElementById('payment_form').addEventListener('submit', function(event) {
-        event.preventDefault();
-        alert("Payment is being processed. Please wait...");
-        setTimeout(function() {
-            window.location.href = 'index.php';
-        }, 5000);
+        // Remove event.preventDefault(); to allow form submission
     });
 </script>
 </body>

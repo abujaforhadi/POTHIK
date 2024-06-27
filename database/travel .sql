@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 26, 2024 at 10:03 PM
+-- Generation Time: Jun 27, 2024 at 10:37 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -70,7 +70,7 @@ INSERT INTO `blog_table` (`topic_title`, `topic_date`, `name`, `duration`, `pers
 ('Jaflong', '2024-05-15', 'Muntajima ', 2, 10, 10000, 'sy.jpg', 'Jaflong is one of beautiful place in Bangladesh,water &amp; stone looks very nice, i visited that place many times, last i visited 22 October 2022 with friend,that was excellent moments,i love jaflong and i wanna go again &amp; again'),
 ('Kaptai Lake', '2023-12-23', 'Jafor', 3, 3, 5200, 'kap.jpg', 'One of the best artificial manmade lake in Bangladesh at Rangamati. Hire a boat'),
 ('Padma Bridge ', '2023-12-22', 'Sojib', 1, 15, 5000, 'podma.jpeg', 'The largest bridge South Asia is located in Munshiganj, Dhaka, Bangladesh.'),
-('Patenga Beach', '2023-12-25', 'Admin', 1, 10, 10000, 'pot.jpg', 'It’s a very scenic beach the end of Chattogram city. Very good road communication.'),
+('Patenga Beach', '2023-12-25', 'jafor', 1, 10, 10000, 'pot.jpg', 'It’s a very scenic beach the end of Chattogram city. Very good road communication.'),
 ('Sajek Valley', '2023-12-22', 'Hadi', 2, 5, 25100, 'sajek.jpg', 'Sajek isunion at Baghaichari Upazila in Rangamati.\nyou have to came Kahgrachori first and than you have to hire jeep to go there'),
 ('Sundarbans', '2023-12-13', 'Joy', 4, 3, 21000, 'Sundarban-Safari-990x490.jpg', 'Sundarbans, The largest mangrove forest in the world which is the home of the most beautiful tiger in the world - the Royal Bengal Tiger - lies on the delta of the Ganges, Brahmaputra, and Meghna rivers on the Bay of Bengal. ');
 
@@ -264,13 +264,13 @@ CREATE TABLE `hotel` (
 --
 
 INSERT INTO `hotel` (`hotel_id`, `name`, `location`, `availability_status`, `description`, `rating`, `image_path`, `price`) VALUES
-(1, 'Hotel Afford Inn', 'Dhaka', 'not_available', 'Situated in Dhaka, within 1 km of Dhaka Airport Railway Station and 1.9 km of Uttara University, Hotel Afford Inn features accommodation with a shared lounge and free WiFi throughout the property a...', 4.0, 'https://cf.bstatic.com/xdata/images/hotel/max1280x900/499234136.jpg?k=c422f957cad5644e6a69fc5891f15ef325f7a120c9e2d171437ecfd18ccba12d&o=&hp=1', 1500.00),
+(1, 'Hotel Afford Inn', 'Dhaka', 'available', 'Situated in Dhaka, within 1 km of Dhaka Airport Railway Station and 1.9 km of Uttara University, Hotel Afford Inn features accommodation with a shared lounge and free WiFi throughout the property a...', 4.0, 'https://cf.bstatic.com/xdata/images/hotel/max1280x900/499234136.jpg?k=c422f957cad5644e6a69fc5891f15ef325f7a120c9e2d171437ecfd18ccba12d&o=&hp=1', 1500.00),
 (3, 'Seagull Hotel Ltd', 'Cox\'s Bazar', 'available', 'However, hidden deep in the house is the ultimate in luxury entertainment: a bowling alley! With two lanes, it\'s the perfect place to get competitive and even has a comfortable lounge space and TV screens so you can keep track of who\'s winning. At £2,052 ($2,608) a night, with a minimum stay of four nights, it\'ll be an expensive game of bowling. Facing the beachfront, Seagull Hotel Ltd offers 5-star accommodation in Cox\'s Bazar and has an outdoor swimming pool, garden and shared lounge.', 4.3, 'https://cf.bstatic.com/xdata/images/hotel/square600/490187215.webp?k=d5adb9348953e2990164408dc9b358b857636554a704891dab85d0595e135d58&o=', 2500.00),
-(4, 'Hotel Omni Residency Dhaka', 'Dhaka', 'not_available', 'Situated in Dhaka, 400 metres from Primeasia University, Hotel Omni Residency Dhaka features accommodation with a fitness centre, free private parking, a shared lounge and a terrace.', 4.6, 'https://cf.bstatic.com/xdata/images/hotel/square600/249780871.webp?k=14be59f8b3b6854e2be5c0013c3e586464f132b78d9f4eea71df553af76ff819&o=', 2500.00),
-(5, 'Dhaka Regency Hotel & Resort', 'Dhaka', 'not_available', 'Airport Road Nikunja 2, Dhaka City 1229 Bangladesh. The new-generation business-class hotel closest to the airport! In 15-stories high with over 250,000 sq. ft. of space, The hotel offers 220 luxuriously furnished Guest Rooms and Suites, Multi Cuisine Restaurants, authentic Thai Spa center, Health Club, live entertainment Bar, a Mediterranean Lounge and country’s most beautiful Roof Top Restaurant with Swimming Pool and World Class Venue facilities. ', 4.0, 'https://www.dhakaregency.com/images/home-slider/5.jpg', 4500.00),
-(6, 'Hotel Tropical Daisy', 'Dhaka', 'not_available', '35/A 31/B Road Gulshan-2, Dhaka, Dhaka City 1212 Bangladesh. Situated in the heart of the buzzing capital of Bangladesh, the hotel offers all the amenities of a five-star hotel but for a fraction of the price. The interiors of the hotel as well as its services have been developed with the exclusive idea of making the guests’ stay in Dhaka as enjoyable and productive as possible.', 5.0, 'https://th.bing.com/th/id/OIP.1jai00P_PaZYMJf247VXJgHaDt?rs=1&pid=ImgDetMain', 5500.00),
-(7, 'Hotel Sarina Dhaka', 'Dhaka', 'not_available', '17 Plot #27 Road Banani C/A, Dhaka City 1213 Bangladesh. Located at Banani adjacent to diplomatic enclave and the fast growing commercial area of Gulshan, Baridhara and Banani. Its 15 minutes drive from the Hazrat Shahjalal International Airport. Hotel Sarina Dhaka offers everything that a Business Traveler needs with an exclusive touch of personalized service.', 4.5, 'https://media-cdn.tripadvisor.com/media/photo-s/29/b2/b0/0e/hotel-exterior.jpg', 4000.00),
-(8, 'Pan Pacific Sonargaon ', 'Dhaka', 'not_available', '107 Kazi Nazrul Islam Avenue GPO Box 3595, Dhaka City 1215 Bangladesh. Pan Pacific Sonargaon Dhaka welcomes you with a warm heart to enjoy the typical five-star facilities available; from first class surroundings to world-class hospitality in true Pan Pacific style, right from the airport.', 4.0, 'https://images.trvl-media.com/hotels/1000000/10000/500/476/1c7a0afb_z.jpg', 4200.00),
+(4, 'Hotel Omni Residency Dhaka', 'Dhaka', 'available', 'Situated in Dhaka, 400 metres from Primeasia University, Hotel Omni Residency Dhaka features accommodation with a fitness centre, free private parking, a shared lounge and a terrace.', 4.6, 'https://cf.bstatic.com/xdata/images/hotel/square600/249780871.webp?k=14be59f8b3b6854e2be5c0013c3e586464f132b78d9f4eea71df553af76ff819&o=', 2500.00),
+(5, 'Dhaka Regency Hotel & Resort', 'Dhaka', 'available', 'Airport Road Nikunja 2, Dhaka City 1229 Bangladesh. The new-generation business-class hotel closest to the airport! In 15-stories high with over 250,000 sq. ft. of space, The hotel offers 220 luxuriously furnished Guest Rooms and Suites, Multi Cuisine Restaurants, authentic Thai Spa center, Health Club, live entertainment Bar, a Mediterranean Lounge and country’s most beautiful Roof Top Restaurant with Swimming Pool and World Class Venue facilities. ', 4.0, 'https://www.dhakaregency.com/images/home-slider/5.jpg', 4500.00),
+(6, 'Hotel Tropical Daisy', 'Dhaka', 'available', '35/A 31/B Road Gulshan-2, Dhaka, Dhaka City 1212 Bangladesh. Situated in the heart of the buzzing capital of Bangladesh, the hotel offers all the amenities of a five-star hotel but for a fraction of the price. The interiors of the hotel as well as its services have been developed with the exclusive idea of making the guests’ stay in Dhaka as enjoyable and productive as possible.', 5.0, 'https://th.bing.com/th/id/OIP.1jai00P_PaZYMJf247VXJgHaDt?rs=1&pid=ImgDetMain', 5500.00),
+(7, 'Hotel Sarina Dhaka', 'Dhaka', 'available', '17 Plot #27 Road Banani C/A, Dhaka City 1213 Bangladesh. Located at Banani adjacent to diplomatic enclave and the fast growing commercial area of Gulshan, Baridhara and Banani. Its 15 minutes drive from the Hazrat Shahjalal International Airport. Hotel Sarina Dhaka offers everything that a Business Traveler needs with an exclusive touch of personalized service.', 4.5, 'https://media-cdn.tripadvisor.com/media/photo-s/29/b2/b0/0e/hotel-exterior.jpg', 4000.00),
+(8, 'Pan Pacific Sonargaon ', 'Dhaka', 'available', '107 Kazi Nazrul Islam Avenue GPO Box 3595, Dhaka City 1215 Bangladesh. Pan Pacific Sonargaon Dhaka welcomes you with a warm heart to enjoy the typical five-star facilities available; from first class surroundings to world-class hospitality in true Pan Pacific style, right from the airport.', 4.0, 'https://images.trvl-media.com/hotels/1000000/10000/500/476/1c7a0afb_z.jpg', 4200.00),
 (9, 'InterContinental Dhaka, an IHG Hotel', 'Dhaka', 'available', '1 Minto Road G, Dhaka City 1000 Bangladesh, Located in the prestigious downtown business district, InterContinental Dhaka is the foremost name in luxury. The hotel boasts a Millennium modern outlook with a touch of local culture. It features 226 luxury rooms and suites, a selection of restaurants offering exquisite gastronomic experiences. Host your events in our state-of-the-art meeting spaces. Our outdoor Temperature-Controlled Swimming Pool, Fitness Centre and The Spa are the perfect destinations for unwinding during your travel.', 5.0, 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/36/38/12/landscape.jpg?w=700&h=-1&s=1', 6800.00),
 (10, 'The Westin Dhaka', 'Dhaka', 'available', 'Main Gulshan Avenue Plot 1 cwn , Road 45, Gulshan 2, Dhaka, Dhaka City 1212 Bangladesh, Relax, revive, and experience renewal at The Westin Dhaka - the five-star hotel in Gulshan, Dhaka, Bangladesh. Nestled in the new business district, we are steps from renowned shopping malls, foreign missions, restaurant, art, private clubs, and multinationals. Refreshing and contemporary, our 241 spacious guest rooms and suites offer modern amenities.', 4.5, 'https://www.hotel-board.com/picture/the-westin-dhaka-hotel-16101083.jpg', 6000.00),
 (11, 'Praasad Paradise', 'Cox\'s Bazar', 'available', 'Plot-9 New Beach Road Hotel Motel Zone, Cox\'s Bazar 4700 Bangladesh. Praasad Paradise is a beach front hotel resort providing an ideal mix of value, comfort and convenience, it offers a budget friendly setting with an array of amenities designed for travelers like you. As your “home away from home,” the tower and lodge rooms offer a flat screen TV, air conditioning, and a seating area, and getting online is easy, with free wifi available.', 4.0, 'https://th.bing.com/th/id/R.6a2928967283e2d404bcfdfa39404c4d?rik=%2bodf1kKVcODjoA&pid=ImgRaw&r=0', 3800.00),
@@ -382,12 +382,17 @@ CREATE TABLE `reservations` (
 
 INSERT INTO `reservations` (`reservation_id`, `user_id`, `hotel_id`, `check_in_date`, `check_out_date`, `total_price`) VALUES
 (39, 95118, 8, '2024-06-28', '2024-06-29', 4200.00),
-(40, 95118, 8, '2024-06-28', '2024-06-29', 4200.00),
+(40, 7020, 8, '2024-06-28', '2024-06-29', 4200.00),
 (41, 95118, 8, '2024-06-28', '2024-06-30', 8400.00),
-(42, 95118, 8, '2024-06-28', '2024-06-30', 8400.00),
-(43, 95118, 8, '2024-06-28', '2024-06-30', 8400.00),
+(42, 95118, 24, '2024-06-28', '2024-06-30', 8400.00),
+(43, 7020, 8, '2024-06-28', '2024-06-30', 8400.00),
 (44, 95118, 8, '2024-06-28', '2024-06-30', 10920.00),
-(45, 95118, 8, '2024-06-28', '2024-07-04', 32760.00);
+(45, 95118, 8, '2024-06-28', '2024-07-04', 32760.00),
+(46, 96467, 10, '2024-06-26', '2024-06-29', 23400.00),
+(47, 763, 9, '2024-06-28', '2024-06-29', 8840.00),
+(48, 95118, 9, '2024-06-28', '2024-07-02', 35360.00),
+(49, 95118, 9, '2024-06-28', '2024-07-02', 35360.00),
+(50, 763, 9, '2024-06-28', '2024-07-02', 27200.00);
 
 -- --------------------------------------------------------
 
@@ -414,7 +419,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`user_id`, `user_name`, `email`, `password`, `number`, `Fplace`, `address`, `verification_code`, `is_verify`) VALUES
 (55, 'Rakib', 'rakib@gmail.com', 'Rakib@321321', '01767956831', 'Hill', 'Dinajpur', 'b2898ddd', 0),
 (737, 'Sofiq', 'abujaforhadi@yahoo.com', 'Jafor@556644', '01713793413', 'SeaBeach', 'West Shewrapara', '325d252b', 0),
-(763, 'Abujafor', 'jafor.203002048@green.ac.bd', '$2y$10$0Ej3RCHxEgODf44klnyYUuoft5VtHJHkUz8xVyIHbtb', '01767606839', 'PicnicSpot', 'Rangpur', '973d42fc', 0),
+(763, 'ismail', 'jafor.203002048@green.ac.bd', '123', '01767606839', 'PicnicSpot', 'Rangpur', '973d42fc', 0),
 (1955, 'Rohim', 'rohim123@gmail.com', 'R0him@321', '01303456789', 'Hill', 'Dhaka', '67467b84', 0),
 (2311, 'HAdi', 'rihim1aaj@gmail.com', '$2y$10$6H9VXVYQ2FRen8Yjy7jcuudxDb0hpfiYPlXQcONlzrg', '0159358941', 'Forest', 'Gaibandha', 'a71fd411', 0),
 (2429, 'Muntajima1', 'muntajima1@gmail.com', '$2y$10$17EQQ8TuCzx2VFt1ojPMOO0os5Krz57agGNbjR6n50N', '0159358942', 'Picnic Spot', 'Dhaka', '5c66f018', 0),
@@ -426,7 +431,8 @@ INSERT INTO `users` (`user_id`, `user_name`, `email`, `password`, `number`, `Fpl
 (58747, 'ABUJAFO', 'abdulhadi.me.2010@gmail.com', '$2y$10$XJJN/bb8zf81Q/MRqUg0zuS0DKyATtxbhD60uCdKs7U', '0176760683', 'SeaBeach', 'Dhaka', '2d905ba1', 0),
 (70696, 'ABU', 'abu@gmail.com', '$2y$10$mkkczXgsjhgagyuyYvFHu2B01V4Qj9ctbqk', '0159358966', 'Mountain', 'Sandorbon', '0ed22149', 0),
 (86122, 'jafor556622', 'abdulhadi.m11e.2010@gmail.com', 'Jafor@332211', '01776606839', 'PicnicSpot', 'AAAA', '48ab2822', 0),
-(95118, 'jafor', 'abujahadi1@gmail.com', '123', '', 'Forest', 'Mirpur', '839003e3ca2f194081968fc9c8de7a', 1);
+(95118, 'jafor', 'abujahadi1@gmail.com', '123', '01767766339', 'Historical', 'Mirpur', '839003e3ca2f194081968fc9c8de7a', 1),
+(96467, 'AbuJaforHadi', 'abujaforhadi22@gmail.com', 'J@f0r@332211', '01767606839', 'PicnicSpot', 'Rangpur', '84d6278f', 0);
 
 -- --------------------------------------------------------
 
@@ -528,7 +534,7 @@ ALTER TABLE `place`
 -- AUTO_INCREMENT for table `reservations`
 --
 ALTER TABLE `reservations`
-  MODIFY `reservation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `reservation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- Constraints for dumped tables

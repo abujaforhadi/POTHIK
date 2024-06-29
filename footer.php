@@ -18,7 +18,7 @@
         #foot .navbar-brand img {
             height: 50px;
             display: block;
-            margin-bottom: 10px; /* Add space between logo and text */
+            margin-bottom: 10px;
         }
         #foot h4{
             font-size: 20px;

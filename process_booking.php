@@ -12,7 +12,6 @@ $adults = $_POST['adults'];
 $children = $_POST['children'];
 $total_price = $_POST['total_price'];
 
-// Assuming you have a table named 'bookings' with columns 'booking_id', 'user_id', 'tour_id', 'adults', 'children', and 'total_price'
 $sql = "INSERT INTO booking_tour (user_id, tour_id, adults, children, total_price) VALUES (?, ?, ?, ?, ?)";
 $stmt = $con->prepare($sql);
 
@@ -31,7 +30,6 @@ $booking_id = $stmt->insert_id;
 $stmt->close();
 $con->close();
 
-// Redirect to confirmation page with booking_id
 header("Location: confirmation.php?booking_id=" . $booking_id);
 exit();
 ?>

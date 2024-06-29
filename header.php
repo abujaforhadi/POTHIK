@@ -46,14 +46,11 @@ $user_data = check_login($con);
     <!-- Custom CSS file -->
     <link rel="stylesheet" href="style.css">
     <style>
-        /* General styles */
         body {
             font-family: 'Rubik', sans-serif;
             padding-top: 90px;
-            /* Add padding to avoid content hiding under fixed header */
         }
 
-        /* Fixed header styles */
         .fixed-top {
             position: fixed;
             top: 0;
@@ -61,7 +58,7 @@ $user_data = check_login($con);
             z-index: 1030;
         }
 
-        /* Hover effect for links */
+      
         .hover-effect {
             position: relative;
             color: white;
@@ -89,7 +86,7 @@ $user_data = check_login($con);
             transform: translateY(-2px);
         }
 
-        /* Style for navbar */
+        
         .navbar {
             transition: background-color 0.5s ease, box-shadow 0.5s ease;
         }
@@ -98,7 +95,7 @@ $user_data = check_login($con);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        /* Animated logo */
+     
         .animated-logo {
             animation: logo-pulse 3s infinite;
         }
@@ -115,7 +112,7 @@ $user_data = check_login($con);
             }
         }
 
-        /* Toggler button animation */
+       
         .navbar-toggler-icon {
             transition: transform 0.3s ease;
         }
@@ -124,7 +121,7 @@ $user_data = check_login($con);
             transform: rotate(90deg);
         }
 
-        /* Collapse animation */
+      
         .collapse {
             animation: slide-in 0.5s ease;
         }
@@ -141,7 +138,6 @@ $user_data = check_login($con);
             }
         }
 
-        /* Welcome text animation */
         .welcome-text {
             animation: text-fade-in 2s ease;
         }
@@ -188,6 +184,11 @@ $user_data = check_login($con);
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav m-auto font-rubik">
+                <li class="nav-item active">
+                        <a class="nav-link text-capitalize hover-effect" href="./profile.php">
+                        <i class="fa-solid fa-user"></i> <?php echo $user_data['user_name']; ?>
+                        </a>
+                    </li>
                     <li class="nav-item active">
                         <a class="nav-link hover-effect" href="./sugPlace.php"><i class="fa-solid fa-location-dot"></i>
                             Suggested places</a>
@@ -205,14 +206,10 @@ $user_data = check_login($con);
                         <a class="nav-link hover-effect" href="./home.php"><i class="fa-solid fa-hotel"></i>
                             Residence</a>
                     </li>
-                    <li class="nav-item active">
-                        <a class="nav-link text-capitalize hover-effect" href="./profile.php">
-                            <i class="fa-solid fa-user-plus"></i> <?php echo $user_data['user_name']; ?>
-                        </a>
-                    </li>
+                    
                     <li class="nav-item active">
                         <a class="nav-link text-capitalize hover-effect" href="./logout.php">
-                        <i class="fa-solid fa-right-from-bracket"></i> (Logout)
+                        <i class="fa-solid fa-right-from-bracket"></i>
                         </a>
                     </li>
                 </ul>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 27, 2024 at 10:37 AM
+-- Generation Time: Jun 29, 2024 at 01:14 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -94,9 +94,28 @@ CREATE TABLE `booking_bus` (
 
 CREATE TABLE `booking_tour` (
   `booking_id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `tour_id` int(11) DEFAULT NULL
+  `user_id` int(11) NOT NULL,
+  `tour_id` int(11) NOT NULL,
+  `adults` int(11) NOT NULL,
+  `children` int(11) NOT NULL,
+  `total_price` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `booking_tour`
+--
+
+INSERT INTO `booking_tour` (`booking_id`, `user_id`, `tour_id`, `adults`, `children`, `total_price`) VALUES
+(3, 95118, 2, 1, 0, 2500),
+(4, 95118, 2, 1, 0, 2500),
+(5, 95118, 3, 1, 0, 7500),
+(6, 95118, 35, 3, 1, 52500),
+(7, 95118, 35, 1, 0, 15000),
+(8, 95118, 35, 1, 0, 15000),
+(9, 95118, 35, 1, 0, 15000),
+(10, 95118, 35, 1, 0, 15000),
+(11, 95118, 4, 1, 0, 9500),
+(12, 95118, 4, 1, 0, 9500);
 
 -- --------------------------------------------------------
 
@@ -336,7 +355,7 @@ INSERT INTO `place` (`tour_id`, `tour_Division`, `tour_name`, `Place_type`, `tou
 (6, 'Dhaka', 'Jatiyo Sriti Shoudho', 'Historical', '2100', './assets/products/d5.jpg', '2022-12-17', 4.5, '1 Days | Dhaka City Jatiyo Sriti Shoudho Tour Packages'),
 (7, 'Dhaka', 'Ahsan Manzil', 'Historical', '2100', './assets/products/d4.jpg', '2022-12-17', 4, '1 Days | Heritage Tour / History Tour / Archalogy Tour.'),
 (8, 'Chittagong', 'Cox\'s Bazar Beach', 'SeaBeach', '8500', './assets/products/c1.jpg', '2022-12-17', 5, ' 4 Nights / 3 Days | Visit Inani Beach, Himchhari Falls, coxs bazar sea beach Enjoy Martins Island - watch the memorable sunset'),
-(9, 'Chittagong', 'Boga Lake', 'Hill', '7500', './assets/products/c3.jpg', '2022-09-09', 4.5, '3 Days/ 2 Nights | Visit Boga Lake, Nilachal Tour.'),
+(9, 'Chittagong', 'Boga Lake', 'Lake', '7500', './assets/products/c3.jpg', '2022-09-09', 4.5, '3 Days/ 2 Nights | Visit Boga Lake, Nilachal Tour.'),
 (10, 'Chittagong', 'Nilachal', 'Hill', '7500', './assets/products/c4.jpg', '2020-03-28', 4, '3 Days/ 2 Nights | Visit Boga Lake, Nilachal Tour.'),
 (11, 'Chittagong', 'Saint Martin Island', 'SeaBeach', '9800', './assets/products/c2.jpg', '2020-03-28', 5, ' 4 Nights / 3 Days | St. Martins Island, Saint Martin Coral Island, Chhera Dwip'),
 (12, 'Rangpur', 'Kantajew Temple', 'Historical', '8500', './assets/products/ro1.jpg', '2023-01-03', 4.8, '3 Days / 2 Nights | Ramsagar, Kantajew Temple / History Tour / Archalogy Tour'),
@@ -431,7 +450,7 @@ INSERT INTO `users` (`user_id`, `user_name`, `email`, `password`, `number`, `Fpl
 (58747, 'ABUJAFO', 'abdulhadi.me.2010@gmail.com', '$2y$10$XJJN/bb8zf81Q/MRqUg0zuS0DKyATtxbhD60uCdKs7U', '0176760683', 'SeaBeach', 'Dhaka', '2d905ba1', 0),
 (70696, 'ABU', 'abu@gmail.com', '$2y$10$mkkczXgsjhgagyuyYvFHu2B01V4Qj9ctbqk', '0159358966', 'Mountain', 'Sandorbon', '0ed22149', 0),
 (86122, 'jafor556622', 'abdulhadi.m11e.2010@gmail.com', 'Jafor@332211', '01776606839', 'PicnicSpot', 'AAAA', '48ab2822', 0),
-(95118, 'jafor', 'abujahadi1@gmail.com', '123', '01767766339', 'Historical', 'Mirpur', '839003e3ca2f194081968fc9c8de7a', 1),
+(95118, 'jafor', 'abujahadi1@gmail.com', '123', '01767766339', 'Hill', 'Mirpur', '839003e3ca2f194081968fc9c8de7a', 1),
 (96467, 'AbuJaforHadi', 'abujaforhadi22@gmail.com', 'J@f0r@332211', '01767606839', 'PicnicSpot', 'Rangpur', '84d6278f', 0);
 
 -- --------------------------------------------------------
@@ -468,16 +487,16 @@ ALTER TABLE `blog_table`
 --
 ALTER TABLE `booking_bus`
   ADD PRIMARY KEY (`bookingBus_id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `Bus_id` (`Bus_id`);
+  ADD KEY `booking_bus_ibfk_1` (`user_id`),
+  ADD KEY `booking_bus_ibfk_2` (`Bus_id`);
 
 --
 -- Indexes for table `booking_tour`
 --
 ALTER TABLE `booking_tour`
   ADD PRIMARY KEY (`booking_id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `tour_id` (`tour_id`);
+  ADD KEY `tour_id` (`tour_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `bus_details`
@@ -519,6 +538,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `booking_tour`
+--
+ALTER TABLE `booking_tour`
+  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
 -- AUTO_INCREMENT for table `hotel`
 --
 ALTER TABLE `hotel`
@@ -551,8 +576,8 @@ ALTER TABLE `booking_bus`
 -- Constraints for table `booking_tour`
 --
 ALTER TABLE `booking_tour`
-  ADD CONSTRAINT `booking_tour_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
-  ADD CONSTRAINT `booking_tour_ibfk_2` FOREIGN KEY (`tour_id`) REFERENCES `place` (`tour_id`);
+  ADD CONSTRAINT `booking_tour_ibfk_1` FOREIGN KEY (`tour_id`) REFERENCES `place` (`tour_id`),
+  ADD CONSTRAINT `booking_tour_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
 --
 -- Constraints for table `reservations`

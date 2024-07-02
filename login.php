@@ -196,7 +196,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <div class="container">
         <div class="login-form form-container">
             <form method="post">
-            <div class=" font-weight-bold pb-4 text-primary" style="font-size: 20px; text-align: center;">Login</div>
+            <div class=" font-weight-bold pb-4 text-primary" style="font-size: 20px; text-align: center;">Sign In</div>
             <?php if (isset($error_message)): ?>
                     <div class="alert alert-danger"><?php echo $error_message; ?></div>
                 <?php endif; ?>

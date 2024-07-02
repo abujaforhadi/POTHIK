@@ -58,13 +58,15 @@ WHERE
         
         // Set some content to print
         $html = "
-        <h1>Payment Receipt</h1>
+        <h1 >Payment Receipt</h1>
         <p><b>Customer Name:</b> $user_name</p>
         <p><b>Hotel Name:</b> $hotelName</p>
         <p><b>Check-in Date:</b> $checkIn</p>
         <p><b>Check-out Date:</b> $checkOut</p>
-        <p><b>Total Price:</b> $totalPrice</p>tk
+        <p><b>Total Price:</b> $totalPrice tk</p>
         ";
+        $html .= '
+<p><strong>Date:</strong> ' . date('Y-m-d H:i:s') . '</p>';
         
         // Print text using writeHTMLCell()
         $pdf->writeHTML($html, true, false, true, false, '');

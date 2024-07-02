@@ -3,10 +3,9 @@ session_start();
 require_once('tcpdf/tcpdf.php');
 require('./database/connection.php');
 
-
 // Retrieve data from session
-$passengers = $_SESSION['passengers'] ?? [];
-$total_price = $_SESSION['total_price'] ?? 0; // Assuming total_price is a numeric value
+$user_name = $_SESSION['user_name'] ?? 'Guest';
+$total_price = $_SESSION['total_price'] ?? '0';
 $payment_method = $_POST['payment_method'] ?? '';
 $card_number = $_POST['card_number'] ?? '';
 $card_expiry = $_POST['card_expiry'] ?? '';
@@ -14,11 +13,8 @@ $card_cvc = $_POST['card_cvc'] ?? '';
 $mobile_banking_number = $_POST['mobile_banking_number'] ?? '';
 $transaction_id = $_POST['transaction_id'] ?? '';
 
-
-// Assuming you have a mechanism to retrieve user information
-$user_name = $_SESSION['user_name'] ?? '$user_name';
 // Create new PDF document
-$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false); // Correct syntax
+$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
 // Set document information
 $pdf->SetCreator(PDF_CREATOR);
@@ -65,6 +61,9 @@ if ($payment_method === 'card') {
     <p><strong>Mobile Banking Number:</strong> ' . htmlspecialchars($mobile_banking_number) . '</p>
     <p><strong>Transaction ID:</strong> ' . htmlspecialchars($transaction_id) . '</p>';
 }
+
+$html .= '
+<p><strong>Date:</strong> ' . date('Y-m-d H:i:s') . '</p>';
 
 // Output the HTML content
 $pdf->writeHTML($html, true, false, true, false, '');

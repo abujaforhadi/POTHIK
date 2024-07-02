@@ -186,7 +186,7 @@ $user_data = check_login($con);
                 <ul class="navbar-nav m-auto font-rubik">
                 <li class="nav-item active">
                         <a class="nav-link text-capitalize hover-effect" href="./profile.php">
-                        <i class="fa-solid fa-user"></i> <?php echo $user_data['user_name']; ?>
+                        <i class="fa-solid fa-user"></i> profile
                         </a>
                     </li>
                     <li class="nav-item active">

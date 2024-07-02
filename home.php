@@ -24,7 +24,7 @@ include('header.php');
 }
 body {
     min-height: 100vh;
-    background: url(https://digital.ihg.com/is/image/ihg/intercontinental-dhaka-6829083857-4x3) ;
+    background-image: url('assets/img/intercontinental-dhaka-6829083857-4x3.avif');
     background-size: cover;
     background-position: center;
 }

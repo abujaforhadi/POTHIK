@@ -52,10 +52,8 @@ $conn->close();
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+  <title>Admin Dashboard</title>
   <style>
-   
-
     .navs {
       background-color: #333;
       color: #fff;
@@ -78,7 +76,7 @@ $conn->close();
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      padding: 6rem 1rem 3rem;
+      padding: 4rem 1rem 3rem;
       gap: 2rem;
     }
 
@@ -110,7 +108,6 @@ $conn->close();
 
     .card a {
       text-decoration: none;
-     
       display: block;
       margin-top: 1.5rem;
       font-weight: bold;
@@ -119,7 +116,7 @@ $conn->close();
     }
 
     .card a:hover {
-      color:#9eb3be;
+      color: #9eb3be;
     }
 
     .card::before {
@@ -129,7 +126,7 @@ $conn->close();
       left: -50%;
       width: 100%;
       height: 100%;
-      background:#a0beda;
+      background: #a0beda;
       z-index: 0;
       transform: skewX(-30deg);
       transition: transform 0.5s;
@@ -143,11 +140,26 @@ $conn->close();
       position: relative;
       z-index: 1;
     }
+
+    #chartContainer {
+      width: 20%;
+      margin: 0 auto;
+      padding: 2rem 0;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 300px;
+    }
   </style>
 </head>
 
 <body>
-  
+  <div class="text-center">
+    <h1>Admin Dashboard</h1>
+  </div>
+
   <div class="container">
     <div class="card">
       <div class="card-content">
@@ -181,10 +193,59 @@ $conn->close();
       <div class="card-content">
         <h2>User</h2>
         <p>Total Users: <?php echo $totalUsers; ?></p>
-        <a href="userAdmin.php">Manage Blogs</a>
+        <a href="userAdmin.php">Manage Users</a>
       </div>
     </div>
   </div>
+
+  <div id="chartContainer">
+    <canvas id="myChart"></canvas>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: ['Tour Places', 'Transportation', 'Blog & Reviews', 'Residence', 'User'],
+        datasets: [{
+          label: 'Total Count',
+          data: [<?php echo $totalPlaces; ?>, <?php echo $totalTransportation; ?>, <?php echo $totalBlogs; ?>, <?php echo $totalResidence; ?>, <?php echo $totalUsers; ?>],
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)'
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          tooltip: {
+            callbacks: {
+              label: function(tooltipItem) {
+                return tooltipItem.label + ': ' + tooltipItem.raw;
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
 </body>
 
 </html>

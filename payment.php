@@ -1,6 +1,5 @@
 <?php
-
- include ('header.php');
+include ('header.php');
 $user_data = check_login($con);
 
 // Fetch data from URL parameters
@@ -10,6 +9,11 @@ $total_price = $_GET['total_price'] ?? '';
 
 // Assuming you have a mechanism to retrieve user information, such as from session or database
 $user_name = $user_data['user_name']; // Replace this with the user's name fetched from session or database
+
+// Start session and set session variables
+session_start();
+$_SESSION['user_name'] = $user_name;
+$_SESSION['total_price'] = $total_price;
 ?>
 <!DOCTYPE html>
 <html lang="en">

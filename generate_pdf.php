@@ -122,6 +122,8 @@ foreach ($passengers as $passenger) {
 }
 
 $html .= '</table>';
+$html .= '
+<p><strong>Date:</strong> ' . date('Y-m-d H:i:s') . '</p>';
 
 // Print text using writeHTMLCell()
 $pdf->writeHTML($html, true, false, true, false, '');

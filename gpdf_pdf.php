@@ -84,4 +84,7 @@ WHERE
     ob_end_clean(); // Clean the output buffer
     echo "Invalid request.";
 }
+header('Location: download_pdf.php');
+exit();
+
 ?>

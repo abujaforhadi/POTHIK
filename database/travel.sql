@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 29, 2024 at 01:14 PM
+-- Generation Time: Jul 11, 2024 at 02:05 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -289,7 +289,7 @@ INSERT INTO `hotel` (`hotel_id`, `name`, `location`, `availability_status`, `des
 (5, 'Dhaka Regency Hotel & Resort', 'Dhaka', 'available', 'Airport Road Nikunja 2, Dhaka City 1229 Bangladesh. The new-generation business-class hotel closest to the airport! In 15-stories high with over 250,000 sq. ft. of space, The hotel offers 220 luxuriously furnished Guest Rooms and Suites, Multi Cuisine Restaurants, authentic Thai Spa center, Health Club, live entertainment Bar, a Mediterranean Lounge and country’s most beautiful Roof Top Restaurant with Swimming Pool and World Class Venue facilities. ', 4.0, 'https://www.dhakaregency.com/images/home-slider/5.jpg', 4500.00),
 (6, 'Hotel Tropical Daisy', 'Dhaka', 'available', '35/A 31/B Road Gulshan-2, Dhaka, Dhaka City 1212 Bangladesh. Situated in the heart of the buzzing capital of Bangladesh, the hotel offers all the amenities of a five-star hotel but for a fraction of the price. The interiors of the hotel as well as its services have been developed with the exclusive idea of making the guests’ stay in Dhaka as enjoyable and productive as possible.', 5.0, 'https://th.bing.com/th/id/OIP.1jai00P_PaZYMJf247VXJgHaDt?rs=1&pid=ImgDetMain', 5500.00),
 (7, 'Hotel Sarina Dhaka', 'Dhaka', 'available', '17 Plot #27 Road Banani C/A, Dhaka City 1213 Bangladesh. Located at Banani adjacent to diplomatic enclave and the fast growing commercial area of Gulshan, Baridhara and Banani. Its 15 minutes drive from the Hazrat Shahjalal International Airport. Hotel Sarina Dhaka offers everything that a Business Traveler needs with an exclusive touch of personalized service.', 4.5, 'https://media-cdn.tripadvisor.com/media/photo-s/29/b2/b0/0e/hotel-exterior.jpg', 4000.00),
-(8, 'Pan Pacific Sonargaon ', 'Dhaka', 'available', '107 Kazi Nazrul Islam Avenue GPO Box 3595, Dhaka City 1215 Bangladesh. Pan Pacific Sonargaon Dhaka welcomes you with a warm heart to enjoy the typical five-star facilities available; from first class surroundings to world-class hospitality in true Pan Pacific style, right from the airport.', 4.0, 'https://images.trvl-media.com/hotels/1000000/10000/500/476/1c7a0afb_z.jpg', 4200.00),
+(8, 'Pan Pacific Sonargaon ', 'Dhaka', 'not_available', '107 Kazi Nazrul Islam Avenue GPO Box 3595, Dhaka City 1215 Bangladesh. Pan Pacific Sonargaon Dhaka welcomes you with a warm heart to enjoy the typical five-star facilities available; from first class surroundings to world-class hospitality in true Pan Pacific style, right from the airport.', 4.0, 'https://images.trvl-media.com/hotels/1000000/10000/500/476/1c7a0afb_z.jpg', 4200.00),
 (9, 'InterContinental Dhaka, an IHG Hotel', 'Dhaka', 'available', '1 Minto Road G, Dhaka City 1000 Bangladesh, Located in the prestigious downtown business district, InterContinental Dhaka is the foremost name in luxury. The hotel boasts a Millennium modern outlook with a touch of local culture. It features 226 luxury rooms and suites, a selection of restaurants offering exquisite gastronomic experiences. Host your events in our state-of-the-art meeting spaces. Our outdoor Temperature-Controlled Swimming Pool, Fitness Centre and The Spa are the perfect destinations for unwinding during your travel.', 5.0, 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/36/38/12/landscape.jpg?w=700&h=-1&s=1', 6800.00),
 (10, 'The Westin Dhaka', 'Dhaka', 'available', 'Main Gulshan Avenue Plot 1 cwn , Road 45, Gulshan 2, Dhaka, Dhaka City 1212 Bangladesh, Relax, revive, and experience renewal at The Westin Dhaka - the five-star hotel in Gulshan, Dhaka, Bangladesh. Nestled in the new business district, we are steps from renowned shopping malls, foreign missions, restaurant, art, private clubs, and multinationals. Refreshing and contemporary, our 241 spacious guest rooms and suites offer modern amenities.', 4.5, 'https://www.hotel-board.com/picture/the-westin-dhaka-hotel-16101083.jpg', 6000.00),
 (11, 'Praasad Paradise', 'Cox\'s Bazar', 'available', 'Plot-9 New Beach Road Hotel Motel Zone, Cox\'s Bazar 4700 Bangladesh. Praasad Paradise is a beach front hotel resort providing an ideal mix of value, comfort and convenience, it offers a budget friendly setting with an array of amenities designed for travelers like you. As your “home away from home,” the tower and lodge rooms offer a flat screen TV, air conditioning, and a seating area, and getting online is easy, with free wifi available.', 4.0, 'https://th.bing.com/th/id/R.6a2928967283e2d404bcfdfa39404c4d?rik=%2bodf1kKVcODjoA&pid=ImgRaw&r=0', 3800.00),
@@ -362,7 +362,7 @@ INSERT INTO `place` (`tour_id`, `tour_Division`, `tour_name`, `Place_type`, `tou
 (14, 'Chittagong', 'Sajek Valley', 'Hill', '6900', 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/bd/d1/fc/sajek.jpg?w=800&h=-1&s=1', '2022-12-17', 5, ''),
 (15, 'Rangpur', 'Ramsagar', 'PicnicSpot', '5500', './assets/products/ro2.jpg', '2023-01-03', 3.5, '1 Days| Ramsagar, Kantajew Temple / History Tour / Archalogy Tour'),
 (16, 'Chittagong', 'kaptai lake', 'Lake', '6500', './assets/products/c6.jpg', '2022-12-22', 4.5, '1 Days | kaptai Lake Tour'),
-(17, 'Chittagong', 'Patenga Beach', 'SeaBeach', '7300', './assets/products/c7.jpg', '2022-12-17', 3.5, '2 Days / 1 Nights | Patenga Sea Beach Tour'),
+(17, 'Chittagong', 'Patenga Beach', 'SeaBeach', '7300', './assets/products/c7.jpg', '2022-12-17', 4, '2 Days / 1 Nights | Patenga Sea Beach Tour'),
 (20, 'Rangpur', 'Vinno Jogot', 'PicnicSpot', '4500', './assets/products/ro3.jpg', '2022-12-17', 3.5, '1 Days | Vinno Jogot Tour'),
 (21, 'Rangpur', 'Shopnopuri', 'PicnicSpot', '4500', './assets/products/ro4.jpg', '2022-12-17', 4, '1 Days | Shopnopuri Tour'),
 (22, 'Sylhet', 'Bisnakandi', 'Hill', '7800', './assets/products/s1.jpg', '2022-12-17', 4.5, '2 Days / 1 Nights | Bisnakandi, Jafflong Tour'),
@@ -411,7 +411,39 @@ INSERT INTO `reservations` (`reservation_id`, `user_id`, `hotel_id`, `check_in_d
 (47, 763, 9, '2024-06-28', '2024-06-29', 8840.00),
 (48, 95118, 9, '2024-06-28', '2024-07-02', 35360.00),
 (49, 95118, 9, '2024-06-28', '2024-07-02', 35360.00),
-(50, 763, 9, '2024-06-28', '2024-07-02', 27200.00);
+(50, 763, 9, '2024-06-28', '2024-07-02', 27200.00),
+(51, 95118, 4, '2024-06-29', '2024-07-07', 26000.00),
+(52, 95118, 3, '2024-07-03', '2024-07-06', 9750.00),
+(53, 95118, 12, '2024-07-04', '2024-07-12', 41600.00),
+(54, 26351, 4, '2024-07-12', '2024-07-14', 6500.00),
+(55, 95118, 8, '2024-07-12', '2024-07-14', 10920.00);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reviews`
+--
+
+CREATE TABLE `reviews` (
+  `id` int(11) NOT NULL,
+  `tour_id` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `comment` text NOT NULL,
+  `rating` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `reviews`
+--
+
+INSERT INTO `reviews` (`id`, `tour_id`, `username`, `comment`, `rating`, `created_at`) VALUES
+(1, 0, '0', '111', 5, '2024-07-02 19:57:22'),
+(2, 0, '0', '111', 5, '2024-07-02 19:58:31'),
+(3, 0, '0', '111', 5, '2024-07-02 19:58:51'),
+(4, 0, '0', '111', 5, '2024-07-02 19:58:57'),
+(5, 0, 'jafor', '111', 5, '2024-07-02 20:00:32'),
+(6, 0, 'jafor', '111', 5, '2024-07-02 20:00:36');
 
 -- --------------------------------------------------------
 
@@ -447,10 +479,12 @@ INSERT INTO `users` (`user_id`, `user_name`, `email`, `password`, `number`, `Fpl
 (7020, 'Muntajima', 'muntajima@gmail.com', '$2y$10$mkkczX6DfUQJYTumz.vmLOWEzvFHu2B01V4Qj9ctbqk', '0159358942', 'Mountain', 'Dhaka', '0ed22149', 0),
 (7472, 'Korim1235', 'kori1@k.com', 'J@f0r@123', '01517805017', 'Hill', 'Gaibandha', 'f0977f21', 0),
 (16315, 'rohim32', 'sphillips@gmail.com', '$6132jca)czX6DfUQJYTumz.vmLOWEzvFHu2B01V4Qj9ctbqk', '01648569632', 'Historical', 'Dhaka', '4a8de781', 0),
+(26351, 'AbuJafor', 'jafor.20300048@green.ac.bd', 'Jafor@123', '01767956836', 'Mountain', 'Dhaka,Bangladesh', '8df23dcc', 0),
 (58747, 'ABUJAFO', 'abdulhadi.me.2010@gmail.com', '$2y$10$XJJN/bb8zf81Q/MRqUg0zuS0DKyATtxbhD60uCdKs7U', '0176760683', 'SeaBeach', 'Dhaka', '2d905ba1', 0),
 (70696, 'ABU', 'abu@gmail.com', '$2y$10$mkkczXgsjhgagyuyYvFHu2B01V4Qj9ctbqk', '0159358966', 'Mountain', 'Sandorbon', '0ed22149', 0),
 (86122, 'jafor556622', 'abdulhadi.m11e.2010@gmail.com', 'Jafor@332211', '01776606839', 'PicnicSpot', 'AAAA', '48ab2822', 0),
-(95118, 'jafor', 'abujahadi1@gmail.com', '123', '01767766339', 'Hill', 'Mirpur', '839003e3ca2f194081968fc9c8de7a', 1),
+(89076, 'Demo', 'abujaforhadi+2@om.com', 'J@f0r123', '01761606839', 'Forest', 'Gaibandha', 'b887620c', 0),
+(95118, 'jafor', 'abujahadi1@gmail.com', '123', '01767766339', 'SeaBeach', 'Mirpur', '839003e3ca2f194081968fc9c8de7a', 1),
 (96467, 'AbuJaforHadi', 'abujaforhadi22@gmail.com', 'J@f0r@332211', '01767606839', 'PicnicSpot', 'Rangpur', '84d6278f', 0);
 
 -- --------------------------------------------------------
@@ -525,6 +559,12 @@ ALTER TABLE `reservations`
   ADD KEY `foreign_key_home_id` (`hotel_id`);
 
 --
+-- Indexes for table `reviews`
+--
+ALTER TABLE `reviews`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -559,7 +599,13 @@ ALTER TABLE `place`
 -- AUTO_INCREMENT for table `reservations`
 --
 ALTER TABLE `reservations`
-  MODIFY `reservation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `reservation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+
+--
+-- AUTO_INCREMENT for table `reviews`
+--
+ALTER TABLE `reviews`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables

@@ -131,6 +131,7 @@ $pdf->writeHTML($html, true, false, true, false, '');
 // Close and output PDF document
 $pdf->Output('payment_details.pdf', 'D'); // D for download, I for inline
 
-exit;
+header('Location: download_pdf.php');
+exit();
 
 ?>

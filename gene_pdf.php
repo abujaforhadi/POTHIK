@@ -54,8 +54,7 @@ $html = '
 if ($payment_method === 'card') {
     $html .= '
     <p><strong>Card Number:</strong> ' . htmlspecialchars($card_number) . '</p>
-    <p><strong>Expiry Date:</strong> ' . htmlspecialchars($card_expiry) . '</p>
-    <p><strong>CVC:</strong> ' . htmlspecialchars($card_cvc) . '</p>';
+    <p><strong>Expiry Date:</strong> ' . htmlspecialchars($card_expiry) .  '</p>';
 } elseif ($payment_method === 'mobile_banking') {
     $html .= '
     <p><strong>Mobile Banking Number:</strong> ' . htmlspecialchars($mobile_banking_number) . '</p>
@@ -72,5 +71,7 @@ $pdf->writeHTML($html, true, false, true, false, '');
 $pdf->Output('payment_details.pdf', 'D'); // 'D' parameter forces download
 
 // Exit script
-exit;
+header('Location: download_pdf.php');
+exit();
+
 ?>

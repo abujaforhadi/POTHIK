@@ -10,11 +10,11 @@ $reservationError = "";
 $selectedHome = null;
 $user_id = $_SESSION['user_id'];
 
-// Check if the form data has been submitted
-if (isset($_GET['hotel_id'])) {
-    $homeId = intval($_GET['hotel_id']); // Sanitize input
 
-    // Fetch selected home's information
+if (isset($_GET['hotel_id'])) {
+    $homeId = intval($_GET['hotel_id']); 
+
+   
     $query = "SELECT * FROM hotel WHERE hotel_id = ?";
     $stmt = $con->prepare($query);
     $stmt->bind_param("i", $homeId);

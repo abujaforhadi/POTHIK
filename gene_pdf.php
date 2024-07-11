@@ -3,7 +3,7 @@ session_start();
 require_once('tcpdf/tcpdf.php');
 require('./database/connection.php');
 
-// Retrieve data from session
+
 $user_name = $_SESSION['user_name'] ?? 'Guest';
 $total_price = $_SESSION['total_price'] ?? '0';
 $payment_method = $_POST['payment_method'] ?? '';
@@ -13,27 +13,26 @@ $card_cvc = $_POST['card_cvc'] ?? '';
 $mobile_banking_number = $_POST['mobile_banking_number'] ?? '';
 $transaction_id = $_POST['transaction_id'] ?? '';
 
-// Create new PDF document
 $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
-// Set document information
+
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('Your Name');
 $pdf->SetTitle('Payment Details');
 $pdf->SetSubject('Payment Details');
 $pdf->SetKeywords('Payment, Details, PDF');
 
-// Set default header data
+
 $logo_path = 'assets/icons/pothik 2.png';
 $pdf->SetHeaderData($logo_path, 30, 'Pothik', 'Money Receipt', [0, 64, 255], [0, 64, 128]);
 
-// Set default font subsetting mode
+
 $pdf->setFontSubsetting(true);
 
-// Add a page
+
 $pdf->AddPage();
 
-// Set content
+
 $html = '
 <style>
     h1 {

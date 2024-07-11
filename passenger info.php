@@ -140,7 +140,7 @@ include ('header.php');
             $h = $_POST['radio_name'];
             $e = $_POST['fair_name'];
 
-            // Format the date to "June 6, 2024"
+           
             $date = new DateTime($c);
             $formattedDate = $date->format('F j, Y');
 

@@ -1,13 +1,13 @@
 <?php
-// bus_details
+
 include ('header.php');
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve the number of passengers
+   
     $num_passengers = $_POST['num_name'];
 
-    // Retrieve passenger information
+    
     $passengers = [];
     for ($i = 1; $i <= $num_passengers; $i++) {
         $passengers[] = [
@@ -17,12 +17,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ];
     }
 
-    // Store passenger information in session
+   
     $_SESSION['passengers'] = $passengers;
     $_SESSION['num_passengers'] = $num_passengers;
 }
 
-// Retrieve ticket price from session
+
 $ticket_price = $_SESSION["fph"];
 $total_price = $ticket_price * $_SESSION['num_passengers'];
 $_SESSION['total_price'] = $total_price;

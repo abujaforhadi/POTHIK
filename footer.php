@@ -162,7 +162,7 @@
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     
     <script>
-        // Show or hide the scroll-up button based on scroll position
+        
         window.onscroll = function() {
             var scrollUpBtn = document.getElementById('scrollUp');
             if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
@@ -172,7 +172,7 @@
             }
         };
 
-        // Smooth scroll to top when the button is clicked
+    
         document.getElementById('scrollUp').onclick = function() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         };

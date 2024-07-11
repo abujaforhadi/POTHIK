@@ -19,7 +19,6 @@ if ($payment_method === 'card') {
     $payment_success = true;
 }
 
-// Output result
 if ($payment_success) {
     echo "Payment successful!";
 } else {

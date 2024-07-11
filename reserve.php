@@ -10,11 +10,9 @@ $reservationError = "";
 $selectedHome = null;
 $user_id = $_SESSION['user_id'];
 
-// Check if the form data has been submitted
 if (isset($_GET['hotel_id'])) {
-    $homeId = intval($_GET['hotel_id']); // Sanitize input
+    $homeId = intval($_GET['hotel_id']);
 
-    // Fetch selected home's information
     $query = "SELECT * FROM hotel WHERE hotel_id = ?";
     $stmt = $con->prepare($query);
     $stmt->bind_param("i", $homeId);
@@ -30,11 +28,9 @@ if (isset($_GET['hotel_id'])) {
     $stmt->close();
 }
 
-// Fetch the check-in and check-out dates from the query parameters
 $checkIn = isset($_GET['checkIn']) ? $_GET['checkIn'] : "";
 $checkOut = isset($_GET['checkOut']) ? $_GET['checkOut'] : "";
 
-// Check if the reservation form has been submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['hotel_id'], $_POST['checkIn'], $_POST['checkOut'], $_POST['tp'])) {
     $homeId = intval($_POST['hotel_id']);
     $checkIn = $_POST['checkIn'];
@@ -65,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['hotel_id'], $_POST['c
             }
            
 
-            // Insert reservation
+   
             $insertQuery = "INSERT INTO reservations (user_id, hotel_id, check_in_date, check_out_date, total_price) 
                             VALUES (?, ?, ?, ?, ?)";
             $stmt = $con->prepare($insertQuery);
@@ -76,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['hotel_id'], $_POST['c
                 $reservationId = $stmt->insert_id;
                 $reservationSuccess = true;
 
-                // Update availability status
+                
                 $updateAvailabilityQuery = "UPDATE hotel SET availability_status = 'not_available' WHERE hotel_id = ?";
                 $stmt = $con->prepare($updateAvailabilityQuery);
                 $stmt->bind_param("i", $homeId);
@@ -85,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['hotel_id'], $_POST['c
                 if (!$updateAvailabilityResult) {
                     $reservationError = "Error updating availability status: " . $stmt->error;
                 } else {
-                    ob_end_clean(); // Clear the output buffer
+                    ob_end_clean(); 
                     header("Location: paymenthotel.php?reservation_id=" . $reservationId);
                     exit();
                 }
@@ -209,7 +205,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['hotel_id'], $_POST['c
             echo "<label><input type='radio' name='bed_type' value='single' checked onclick='calculateTotalPrice()'> Single Bed</label>";
             echo "<label><input type='radio' name='bed_type' value='double' onclick='calculateTotalPrice()'> Double Bed (+30%)</label>";
 
-            // Total price display
+            
             echo "<label for='tp'> Total Price: <input type='text' name='tp' id='tp' value='' readonly></label>";
 
            
@@ -237,7 +233,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['hotel_id'], $_POST['c
     <?php include ("footer.php"); ?>
 </body>
 <script>
-        // JavaScript to calculate total price based on bed type
+        
         function calculateTotalPrice() {
             const pricePerNight = document.getElementById('price').value;
             const checkInDate = document.getElementsByName('checkIn')[0].value;
@@ -246,9 +242,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['hotel_id'], $_POST['c
             if (checkInDate && checkOutDate) {
                 const checkIn = new Date(checkInDate);
                 const checkOut = new Date(checkOutDate);
-                const bookingDuration = (checkOut - checkIn) / (1000 * 60 * 60 * 24); // Convert milliseconds to days
+                const bookingDuration = (checkOut - checkIn) / (1000 * 60 * 60 * 24); 
 
-                // Calculate total price based on bed type
+               
                 const bedType = document.querySelector('input[name="bed_type"]:checked').value;
                 let totalPrice;
                 if (bedType === 'double') {
@@ -257,7 +253,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['hotel_id'], $_POST['c
                     totalPrice = bookingDuration * pricePerNight;
                 }
 
-                // Update the total price display
+                
                 document.getElementById('tp').value = totalPrice.toFixed(2);
             }
         }

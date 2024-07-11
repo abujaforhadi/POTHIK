@@ -2,26 +2,23 @@
 ob_start();
 include('header.php');
 
-// Initialize variables
 $searchError = "";
 $searchResults = array();
 
-// Check if the form data has been submitted
+
 if (isset($_GET['location'], $_GET['checkIn'], $_GET['checkOut'])) {
     $location = $_GET['location'];
     $checkIn = $_GET['checkIn'];
     $checkOut = $_GET['checkOut'];
 
-    // Construct the query
+ 
     $query = "SELECT * FROM hotel WHERE location LIKE '%$location%' AND availability_status = 'available'";
     $result = $con->query($query);
 
     if (!$result) {
         $searchError = "Error fetching results: " . $con->error;
     } else {
-        // Fetch search results
         while ($row = $result->fetch_assoc()) {
-            // Check availability for the given check-in and check-out dates
             $homeId = $row['hotel_id'];
             $availabilityQuery = "SELECT COUNT(*) as count FROM reservations WHERE hotel_id = $homeId AND check_in_date <= '$checkOut' AND check_out_date >= '$checkIn'";
             $availabilityResult = $con->query($availabilityQuery);
@@ -29,7 +26,6 @@ if (isset($_GET['location'], $_GET['checkIn'], $_GET['checkOut'])) {
             if ($availabilityResult) {
                 $availabilityRow = $availabilityResult->fetch_assoc();
                 if ($availabilityRow['count'] == 0) {
-                    // hotel is available for the selected dates
                     $searchResults[] = $row;
                 }
                 $availabilityResult->free();
@@ -125,8 +121,8 @@ if (isset($_GET['location'], $_GET['checkIn'], $_GET['checkOut'])) {
         ?>
     </div>
 
-    <!-- Footer -->
-    <?php include("footer.php"); ?>
+    <?php 
+    include("footer.php"); ?>
 </body>
 
 </html>

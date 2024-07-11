@@ -1,6 +1,6 @@
 <?php
 include('header.php');
-// Assuming you have a connection to your MySQL database
+
 $conn = new mysqli('localhost', 'root', '', 'travel');
 
 if ($conn->connect_error) {
@@ -23,7 +23,7 @@ $blog_result = $blog_stmt->get_result();
 $blog_data = $blog_result->fetch_assoc();
 $blog_post_count = $blog_data['blog_count'];
 
-// Count the hotel bookings for the user
+
 $reservation_stmt = $conn->prepare("SELECT COUNT(`reservation_id`) as booking_count FROM `reservations` WHERE `user_id`=?");
 $reservation_stmt->bind_param("i", $user_id);
 $reservation_stmt->execute();

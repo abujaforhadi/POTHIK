@@ -2,15 +2,12 @@
 include ('header.php');
 $user_data = check_login($con);
 
-// Fetch data from URL parameters
 $tour_id = $_GET['tour_id'] ?? '';
 $persons = $_GET['persons'] ?? '';
 $total_price = $_GET['total_price'] ?? '';
 
-// Assuming you have a mechanism to retrieve user information, such as from session or database
-$user_name = $user_data['user_name']; // Replace this with the user's name fetched from session or database
+$user_name = $user_data['user_name']; 
 
-// Start session and set session variables
 session_start();
 $_SESSION['user_name'] = $user_name;
 $_SESSION['total_price'] = $total_price;
@@ -174,8 +171,8 @@ $_SESSION['total_price'] = $total_price;
             event.preventDefault();
             alert("Payment is being processed. Please wait...");
             setTimeout(function () {
-                document.getElementById('payment_form').submit(); // Submit the form to gene_pdf.php
-            }, 1000); // Adjust delay as needed
+                document.getElementById('payment_form').submit(); 
+            }, 1000); 
         });
     });
 </script>

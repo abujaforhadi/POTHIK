@@ -1,39 +1,36 @@
 <?php
 include('header.php');
 
-// Database connection
+
 $conn = new mysqli('localhost', 'root', '', 'travel');
 
-// Check connection
+
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Check if user is logged in
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
 
-    // Fetch user details based on user_id
     $sql = "SELECT `user_name` FROM `users` WHERE `user_id` = ?";
     $stmt = $conn->prepare($sql);
 
     if ($stmt) {
-        $stmt->bind_param("i", $user_id); // Assuming user_id is an integer
+        $stmt->bind_param("i", $user_id); 
         $stmt->execute();
         $stmt->bind_result($user_name);
         $stmt->fetch();
 
-        // Assign user_name to $name variable
         $name = $user_name;
 
         $stmt->close();
     } else {
-        // Handle SQL statement preparation error
+       
         $error = $conn->error;
     }
 
 } else {
-    // Redirect or display error message if user is not logged in
+    
     die("User is not logged in.");
 }
 

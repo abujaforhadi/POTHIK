@@ -10,14 +10,14 @@ include("../header.php");
 
 
 
-// Check if the user is logged in
+
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    // User is not logged in, redirect to login page
+    
     header("Location: login.php");
     exit;
 }
 
-// Fetch reservations for the logged-in user
+
 $userId = $_SESSION['user_id'];
 $query = "SELECT reservations.*, home.name, home.image_path 
           FROM reservations 

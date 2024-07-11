@@ -157,7 +157,7 @@ $user_data = check_login($con);
 
 
     <?php
-    // require functions.php file
+
     require ('functions.php');
     ?>
 

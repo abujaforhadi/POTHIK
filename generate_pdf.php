@@ -1,8 +1,8 @@
 <?php
 session_start();
-require_once('tcpdf/tcpdf.php'); // Adjust the path according to your project structure
+require_once('tcpdf/tcpdf.php'); 
 
-// Retrieve data from session
+
 $passengers = $_SESSION['passengers'];
 $num_passengers = $_SESSION['num_passengers'];
 $total_price = $_SESSION['total_price'];
@@ -13,38 +13,36 @@ $card_cvc = $_POST['card_cvc'] ?? '';
 $mobile_banking_number = $_POST['mobile_banking_number'] ?? '';
 $transaction_id = $_POST['transaction_id'] ?? '';
 
-// Create new PDF document
 $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
-// Set document information
+
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('Pothik');
 $pdf->SetTitle('Payment Receipt');
 $pdf->SetSubject('Passenger Information and Payment Details');
 
-// Set default header data
+
 $logo_path = 'assets/icons/pothik 2.png';
 $pdf->SetHeaderData($logo_path, 30, 'Pothik', 'Money Receipt', [0, 64, 255], [0, 64, 128]);
 
-// Set header and footer fonts
 $pdf->setHeaderFont([PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN]);
 $pdf->setFooterFont([PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA]);
 
-// Set default monospaced font
+
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
-// Set margins
+
 $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
 $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
-// Set auto page breaks
+
 $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
 
-// Add a page
+
 $pdf->AddPage();
 
-// Set content with added design
+
 $html = '
 <style>
     h1 {
@@ -125,11 +123,11 @@ $html .= '</table>';
 $html .= '
 <p><strong>Date:</strong> ' . date('Y-m-d H:i:s') . '</p>';
 
-// Print text using writeHTMLCell()
+
 $pdf->writeHTML($html, true, false, true, false, '');
 
-// Close and output PDF document
-$pdf->Output('payment_details.pdf', 'D'); // D for download, I for inline
+
+$pdf->Output('payment_details.pdf', 'D'); 
 
 header('Location: download_pdf.php');
 exit();

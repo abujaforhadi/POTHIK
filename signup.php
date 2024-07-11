@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     if (!empty($user_name) && !empty($password) && !is_numeric($user_name)) {
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            // Save to database
+     
             $user_id = random_num(5);
             $v_code = bin2hex(random_bytes(4));
 

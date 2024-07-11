@@ -9,6 +9,5 @@
     include ('Template/suggestion.php');
 ?>
 <?php
-// include footer.php file
 include ('footer.php');
 ?>
